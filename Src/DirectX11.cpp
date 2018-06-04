@@ -111,3 +111,11 @@ HRESULT cDirectX11::InitBackBuffer()
 
 	return S_OK;
 }
+
+void cDirectX11::Destroy()
+{
+	SAFE_RELEASE(m_pSwapChain);
+	SAFE_RELEASE(m_pD3DDevice);
+	SAFE_RELEASE(m_pImmediateContext);
+	SAFE_RELEASE(m_pRenderTargetView);
+}

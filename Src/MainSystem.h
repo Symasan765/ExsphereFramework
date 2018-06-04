@@ -17,6 +17,7 @@ public:
 	~cMainSystem();
 
 	void SystemLoop();
+	void Destroy();
 private:
 	cMainWindow m_MainWindow;
 	cGameLoop m_MainLoop;

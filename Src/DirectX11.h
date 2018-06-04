@@ -21,11 +21,15 @@ public:
 	~cDirectX11() = default;
 
 	// éÊìæä÷êîåQ
-	inline ID3D11Device* GetDevice() { return m_pD3DDevice; };
-	inline ID3D11DeviceContext* GetContext() { return m_pImmediateContext; };
+	inline static ID3D11Device* GetDevice() { return m_pD3DDevice; };
+	inline static ID3D11DeviceContext* GetContext() { return m_pImmediateContext; };
+	inline static IDXGISwapChain* GetSwapChain() { return m_pSwapChain; };
+	inline static ID3D11RenderTargetView* GetRenderTargetView() { return m_pRenderTargetView; };
 private:
 	HRESULT InitDirect3D(HWND _hwnd);
 	HRESULT InitBackBuffer();
+
+	void Destroy();
 
 	static IDXGISwapChain* m_pSwapChain;
 	static ID3D11Device* m_pD3DDevice;
