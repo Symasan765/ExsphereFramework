@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include <crtdbg.h>
+#include "GameLoop.h"
 
 #pragma comment( lib, "d3d11.lib" )
 #if defined(DEBUG) || defined(_DEBUG)
@@ -24,6 +25,9 @@
 /// <returns></returns>
 int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
+	cMainLoop mainLoop(hInst);
+	mainLoop.ExecuteGameLoop();
 
 	return 0;
 }

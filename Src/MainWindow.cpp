@@ -11,7 +11,8 @@
 
 cMainWindow::cMainWindow(HINSTANCE _hInst)
 {
-	CreateMainWindow(_hInst);
+	m_hWindow = nullptr;
+	m_hInstance = nullptr;
 }
 
 cMainWindow::~cMainWindow()

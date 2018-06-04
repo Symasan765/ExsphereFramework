@@ -7,11 +7,11 @@
 //									èºñ{ óYîVâÓ
 =================================================*/
 #include "GameLoop.h"
-#include <Windows.h>
 
-cMainLoop::cMainLoop()
+cMainLoop::cMainLoop(HINSTANCE _hInst) : m_MainWindow(_hInst)
 {
 	ZeroMemory(&m_Msg, sizeof(m_Msg));
+	m_MainWindow.CreateMainWindow(_hInst);
 }
 
 void cMainLoop::ExecuteGameLoop()

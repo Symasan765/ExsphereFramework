@@ -21,7 +21,7 @@ namespace WindowOptions {
 	constexpr CHAR		g_szWndClass[] = "ExsphereFramework";
 
 	// ウィンドウスタイル
-	DWORD dwStyle = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_DLGFRAME;
+	constexpr DWORD dwStyle = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_DLGFRAME;
 
 	// 解像度
 	constexpr int g_WindowSizeX = 1920;
@@ -35,9 +35,9 @@ public:
 
 	inline HWND GetHWND() { return m_hWindow; };
 	inline HINSTANCE GetHInstance() { return m_hInstance; };
-private:
-	HRESULT CreateMainWindow(HINSTANCE _hInst);
 
+	HRESULT CreateMainWindow(HINSTANCE _hInst);
+private:
 	HWND m_hWindow;
 	HINSTANCE m_hInstance;
 };
