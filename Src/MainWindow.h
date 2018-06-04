@@ -36,7 +36,7 @@ public:
 	inline HWND GetHWND() { return m_hWindow; };
 	inline HINSTANCE GetHInstance() { return m_hInstance; };
 
-	HRESULT CreateMainWindow(HINSTANCE _hInst);
+	HRESULT CreateMainWindow();
 private:
 	HWND m_hWindow;
 	HINSTANCE m_hInstance;

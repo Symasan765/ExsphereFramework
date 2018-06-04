@@ -11,6 +11,8 @@
 
 cMainWindow::cMainWindow(HINSTANCE _hInst)
 {
+	// アプリケーションのインスタンス ハンドルを保存
+	m_hInstance = _hInst;
 	m_hWindow = nullptr;
 	m_hInstance = nullptr;
 }
@@ -21,18 +23,15 @@ cMainWindow::~cMainWindow()
 	UnregisterClass(WindowOptions::g_szWndClass, m_hInstance);
 }
 
-HRESULT cMainWindow::CreateMainWindow(HINSTANCE _hInst)
+HRESULT cMainWindow::CreateMainWindow()
 {
-	// アプリケーションのインスタンス ハンドルを保存
-	m_hInstance = _hInst;
-
 	// ウインドウ クラスの登録
 	WNDCLASS wc;
 	wc.style = CS_HREDRAW | CS_VREDRAW;
 	wc.lpfnWndProc = (WNDPROC)MainWndProc;
 	wc.cbClsExtra = 0;
 	wc.cbWndExtra = 0;
-	wc.hInstance = _hInst;
+	wc.hInstance = m_hInstance;
 	wc.hIcon = NULL;
 	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
 	wc.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
@@ -54,7 +53,7 @@ HRESULT cMainWindow::CreateMainWindow(HINSTANCE _hInst)
 		WindowOptions::dwStyle,
 		CW_USEDEFAULT, CW_USEDEFAULT,
 		rect.right - rect.left, rect.bottom - rect.top,
-		NULL, NULL, _hInst, NULL);
+		NULL, NULL, m_hInstance, NULL);
 
 	if (m_hWindow == NULL)
 		return DXTRACE_ERR("CreateMainWindow", GetLastError());

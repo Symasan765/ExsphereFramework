@@ -8,16 +8,11 @@
 //									松本 雄之介
 =================================================*/
 #pragma once
-#include "MainWindow.h"
 
-class cMainLoop {
+class cGameLoop {
 public:
-	cMainLoop(HINSTANCE _hInst);
-	~cMainLoop() = default;
-	void ExecuteGameLoop();
+	cGameLoop() = default;
+	~cGameLoop() = default;
+	void ExeMainLoop();
 private:
-	void MainLoop();
-	cMainWindow m_MainWindow;
-
-	MSG m_Msg;				//メッセージ構造体
 };
