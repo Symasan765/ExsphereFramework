@@ -49,9 +49,10 @@ HRESULT cMainWindow::CreateMainWindow()
 	rect.bottom = WindowOptions::g_WindowSizeY;
 	AdjustWindowRect(&rect, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_DLGFRAME, TRUE);
 
+	rect.top = 0.0f;		// これを無くすとバー位置を画面外へ追いやり、フルスクリーンのような状態にできる
 	m_hWindow = CreateWindow(WindowOptions::g_szWndClass, WindowOptions::g_szAppTitle,
 		WindowOptions::dwStyle,
-		CW_USEDEFAULT, CW_USEDEFAULT,
+		rect.left,rect.top,
 		rect.right - rect.left, rect.bottom - rect.top,
 		NULL, NULL, m_hInstance, NULL);
 

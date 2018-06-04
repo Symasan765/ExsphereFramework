@@ -16,7 +16,7 @@ void cGameLoop::ExeMainLoop()
 {
 	// TODO ループの最初で入力処理を行う
 
-
+	// TODO 暫定で書いた描画命令を削除する
 	// 描画ターゲットのクリア
 	const float ClearColor[4] = { 0.1f, 0.2f, 0.6f, 1.0f };
 	//const float ClearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
