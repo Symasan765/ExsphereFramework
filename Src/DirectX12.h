@@ -10,8 +10,9 @@
 
 class cDirectX12 {
 public:
-	cDirectX12(HWND hWnd);
+	cDirectX12();
 	~cDirectX12();
+	void CreateDevice(HWND hWnd);
 private:
 	ID3D12Device * m_Device;
 	Microsoft::WRL::ComPtr<IDXGIFactory2> m_DxgiFactory;

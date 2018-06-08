@@ -1,7 +1,17 @@
 #include "DirectX12.h"
 #include "Utility.h"
 
-cDirectX12::cDirectX12(HWND hWnd)
+cDirectX12::cDirectX12()
+{
+	m_Device = nullptr;
+}
+
+cDirectX12::~cDirectX12()
+{
+	SAFE_RELEASE(m_Device);
+}
+
+void cDirectX12::CreateDevice(HWND hWnd)
 {
 	// DXGIファクトリーを作成する
 #if _DEBUG
@@ -29,9 +39,4 @@ cDirectX12::cDirectX12(HWND hWnd)
 		D3D_FEATURE_LEVEL_11_0,
 		IID_PPV_ARGS(&dev)));
 	m_Device = dev;
-}
-
-cDirectX12::~cDirectX12()
-{
-	SAFE_RELEASE(m_Device);
 }

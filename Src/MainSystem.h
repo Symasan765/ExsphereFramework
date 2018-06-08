@@ -9,6 +9,7 @@
 #pragma once
 #include "MainWindow.h"
 #include "GameLoop.h"
+#include "DirectX12.h"
 
 class cMainSystem {
 public:
@@ -20,6 +21,7 @@ public:
 private:
 	cMainWindow m_MainWindow;
 	cGameLoop m_MainLoop;
+	cDirectX12 m_DirectX12;
 
 	MSG m_Msg;	//メッセージ構造体
 };
