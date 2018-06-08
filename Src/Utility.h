@@ -6,5 +6,8 @@
 //									¼–{ —Y”V‰î
 =================================================*/
 #pragma once
+#include <Windows.h>
 
 #define SAFE_RELEASE(x)  { if(x) { (x)->Release(); (x)=NULL; } }	// ‰ğ•úƒ}ƒNƒ
+
+void CheckHR(HRESULT hr);

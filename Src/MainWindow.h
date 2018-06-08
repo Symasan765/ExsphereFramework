@@ -18,7 +18,7 @@ namespace WindowOptions {
 	constexpr CHAR		g_szAppTitle[] = "ExsphereFramework";
 #endif
 
-	constexpr CHAR		g_szWndClass[] = "ExsphereFramework";
+	constexpr CHAR		g_szWndClass[] = "ExsphereFrameworkClass";
 
 	// ウィンドウスタイル
 	constexpr DWORD dwStyle = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_DLGFRAME;

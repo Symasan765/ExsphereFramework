@@ -2,16 +2,10 @@
 #include <crtdbg.h>
 #include "MainSystem.h"
 
-#pragma comment( lib, "d3d11.lib" )
-#if defined(DEBUG) || defined(_DEBUG)
-#pragma comment( lib, "d3dx11d.lib" )
-#else
-#pragma comment( lib, "d3dx11.lib" )
-#endif
-#pragma comment( lib, "dxerr.lib" )
-#pragma comment( lib, "dxgi.lib" )
+#pragma comment(lib, "dxgi.lib")
+#pragma comment(lib, "d3d12.lib")
+#pragma comment(lib, "d3dcompiler.lib")
 #pragma comment( lib, "winmm.lib" )
-#pragma comment (lib, "DxErr.lib")
 #pragma comment(lib,"xinput.lib")
 #pragma comment( lib, "legacy_stdio_definitions.lib" )
 

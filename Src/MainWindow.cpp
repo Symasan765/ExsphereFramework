@@ -7,14 +7,12 @@
 =================================================*/
 #include "MainWindow.h"
 #include "WindProc.h"
-#include <dxerr.h>
 
 cMainWindow::cMainWindow(HINSTANCE _hInst)
 {
 	// アプリケーションのインスタンス ハンドルを保存
 	m_hInstance = _hInst;
 	m_hWindow = nullptr;
-	m_hInstance = nullptr;
 }
 
 cMainWindow::~cMainWindow()
@@ -28,7 +26,7 @@ HRESULT cMainWindow::CreateMainWindow()
 	// ウインドウ クラスの登録
 	WNDCLASS wc;
 	wc.style = CS_HREDRAW | CS_VREDRAW;
-	wc.lpfnWndProc = (WNDPROC)MainWndProc;
+	wc.lpfnWndProc = MainWndProc;
 	wc.cbClsExtra = 0;
 	wc.cbWndExtra = 0;
 	wc.hInstance = m_hInstance;
@@ -39,7 +37,7 @@ HRESULT cMainWindow::CreateMainWindow()
 	wc.lpszClassName = WindowOptions::g_szWndClass;
 
 	if (!RegisterClass(&wc))
-		return DXTRACE_ERR("CreateMainWindow", GetLastError());
+		return E_FAIL;
 
 	// メイン ウインドウ作成
 	RECT rect;
@@ -57,7 +55,7 @@ HRESULT cMainWindow::CreateMainWindow()
 		NULL, NULL, m_hInstance, NULL);
 
 	if (m_hWindow == NULL)
-		return DXTRACE_ERR("CreateMainWindow", GetLastError());
+		return E_FAIL;
 
 	// ウインドウ表示
 	ShowWindow(m_hWindow, SW_SHOWNORMAL);

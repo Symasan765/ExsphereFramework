@@ -11,7 +11,7 @@
 /*-------------------------------------------
 ウィンドウ処理
 --------------------------------------------*/
-LRESULT CALLBACK MainWndProc(HWND hWnd, UINT msg, UINT wParam, LONG lParam)
+LRESULT CALLBACK MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	HRESULT hr = S_OK;
 
