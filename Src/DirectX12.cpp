@@ -1,14 +1,15 @@
 #include "DirectX12.h"
 #include "Utility.h"
 
+ID3D12Device* cDirectX12::m_Device = nullptr;
+Microsoft::WRL::ComPtr<IDXGIFactory2> cDirectX12::m_DxgiFactory;
+
 cDirectX12::cDirectX12()
 {
-	m_Device = nullptr;
 }
 
 cDirectX12::~cDirectX12()
 {
-	SAFE_RELEASE(m_Device);
 }
 
 void cDirectX12::CreateDevice(HWND hWnd)
@@ -39,4 +40,9 @@ void cDirectX12::CreateDevice(HWND hWnd)
 		D3D_FEATURE_LEVEL_11_0,
 		IID_PPV_ARGS(&dev)));
 	m_Device = dev;
+}
+
+void cDirectX12::Destroy()
+{
+	SAFE_RELEASE(m_Device);
 }

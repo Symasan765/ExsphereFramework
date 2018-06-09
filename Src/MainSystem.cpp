@@ -32,4 +32,5 @@ void cMainSystem::SystemLoop()
 void cMainSystem::Destroy()
 {
 	// システム系の解放処理を行う
+	m_DirectX12.Destroy();
 }

@@ -23,5 +23,7 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR lpCmdLine, in
 	cMainSystem mainSystem(hInst);
 	mainSystem.SystemLoop();
 
+	mainSystem.Destroy();
+
 	return 0;
 }

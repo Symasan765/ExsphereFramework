@@ -10,10 +10,13 @@
 
 class cDirectX12 {
 public:
+	friend class cMainSystem;
 	cDirectX12();
 	~cDirectX12();
-	void CreateDevice(HWND hWnd);
+	inline static ID3D12Device* GetDevice() { return m_Device; };
 private:
-	ID3D12Device * m_Device;
-	Microsoft::WRL::ComPtr<IDXGIFactory2> m_DxgiFactory;
+	void CreateDevice(HWND hWnd);
+	void Destroy();
+	static ID3D12Device * m_Device;
+	static Microsoft::WRL::ComPtr<IDXGIFactory2> m_DxgiFactory;
 };
