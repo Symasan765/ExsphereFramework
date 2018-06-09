@@ -41,6 +41,9 @@ public:
 
 	static inline HWND GetHWND() { return m_hWindow; };
 	static inline HINSTANCE GetHInstance() { return m_hInstance; };
+	static inline Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> GetDescHeapRtv() { return m_DescHeapRtv; };
+	static inline Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> GetDescHeapDsv() { return m_DescHeapDsv; };
+	static Microsoft::WRL::ComPtr<ID3D12Resource> GetBuffer(const int no);
 
 	HRESULT CreateMainWindow();
 	void CreateRenderBuffer();

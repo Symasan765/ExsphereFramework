@@ -29,6 +29,13 @@ private:
 	void CreateCommandLists();
 	void CreateFence();
 	// ==================================//
+
+	// 描画系関数
+	void CommandListBuild();		// 描画命令をコマンドリストに入れていく
+	void CommandQueueExe();		// コマンドリストの命令を実行する
+	void PreDrawingProcess(ID3D12GraphicsCommandList*& cmdListProl,const int& cmdIndex);
+	void SetResourceBarrier(ID3D12GraphicsCommandList* commandList, ID3D12Resource* res, D3D12_RESOURCE_STATES before, D3D12_RESOURCE_STATES after);
+
 	void Destroy();
 
 	static Microsoft::WRL::ComPtr<ID3D12CommandAllocator> m_CommandAllocator[DrawParam::g_MaxFrameLatency][DrawParam::g_ThreadNum];
@@ -39,4 +46,6 @@ private:
 	static Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> m_CommandListEpir;		// 描画後処理用のコマンドリスト
 	static Microsoft::WRL::ComPtr<ID3D12Fence> m_Fence;
 	static HANDLE m_FenceEveneHandle;
+
+	static unsigned m_FrameCount;
 };

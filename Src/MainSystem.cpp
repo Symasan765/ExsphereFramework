@@ -27,6 +27,9 @@ void cMainSystem::SystemLoop()
 		{
 			//ここにメイン処理
 			m_MainLoop.ExeMainLoop();
+			// TODO 今後、上記のアップデートと、ここの描画部分を並列化させる
+			m_DrawCommand.CommandListBuild();
+			m_DrawCommand.CommandQueueExe();
 		}
 	} while (m_Msg.message != WM_QUIT);		//なにかあればそのまま処理を抜ける
 }

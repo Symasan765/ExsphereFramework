@@ -34,6 +34,11 @@ cMainWindow::~cMainWindow()
 	UnregisterClass(WindowOptions::g_szWndClass, m_hInstance);
 }
 
+Microsoft::WRL::ComPtr<ID3D12Resource> cMainWindow::GetBuffer(const int no)
+{
+	return m_D3DBuffer[no];
+}
+
 HRESULT cMainWindow::CreateMainWindow()
 {
 	// ウインドウ クラスの登録
