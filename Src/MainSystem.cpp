@@ -6,6 +6,8 @@ cMainSystem::cMainSystem(HINSTANCE hInst) : m_MainWindow(hInst)
 	ZeroMemory(&m_Msg, sizeof(m_Msg));
 	m_MainWindow.CreateMainWindow();
 	m_DirectX12.CreateDevice(m_MainWindow.GetHWND());
+	m_DrawCommand.Init();
+	m_MainWindow.CreateRenderBuffer();
 }
 
 cMainSystem::~cMainSystem()
@@ -32,5 +34,6 @@ void cMainSystem::SystemLoop()
 void cMainSystem::Destroy()
 {
 	// システム系の解放処理を行う
+	m_DrawCommand.Destroy();
 	m_DirectX12.Destroy();
 }

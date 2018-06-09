@@ -14,6 +14,7 @@ public:
 	cDirectX12();
 	~cDirectX12();
 	inline static ID3D12Device* GetDevice() { return m_Device; };
+	inline static Microsoft::WRL::ComPtr<IDXGIFactory2> GetDxgiFactory() { return m_DxgiFactory; };
 private:
 	void CreateDevice(HWND hWnd);
 	void Destroy();
