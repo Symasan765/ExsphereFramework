@@ -20,6 +20,7 @@ public:
 	~cDrawCommand() = default;
 
 	inline static Microsoft::WRL::ComPtr<IDXGISwapChain1> GetSwapChain() { return m_SwapChain; };
+	inline static ID3D12CommandAllocator* GetStartAllocator() { return m_CommandAllocator[0][0].Get(); };
 private:
 	void Init();		// ‰Šú‰»—pŠÖ”B‚±‚¢‚Â‚ğŒÄ‚×‚Î«‚ÌŠÖ”ŒQ‚ª‡‚ÉŒÄ‚Ño‚³‚ê‚é
 	// ==================================//
