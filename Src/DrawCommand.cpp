@@ -8,6 +8,7 @@
 #include "DrawCommand.h"
 #include "MainWindow.h"
 #include "Utility.h"
+#include "ImGUIManager.h"
 #include <stdexcept>
 
 using namespace DrawParam;
@@ -139,7 +140,12 @@ void cDrawCommand::CommandListBuild()
 	}
 
 	// 描画の前処理
-	PreDrawingProcess(cmdListProl,cmdIndex);
+	PreDrawingProcess(cmdListProl, cmdIndex);
+
+	// ImGUI の処理
+	auto DescriptorHandleForHeap = cMainWindow::GetDescHeapRtv()->GetCPUDescriptorHandleForHeapStart();
+	SIZE_T rtvDescriptorSize = cDirectX12::GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+	DescriptorHandleForHeap.ptr += rtvDescriptorSize * (m_FrameCount % WindowOptions::g_FrameBuuferNum);
 
 	// コマンド実行時に使用する各アドレスをグローバルで保持しておく
 	g_CmdListsProlTmp = cmdListProl;
@@ -152,7 +158,11 @@ void cDrawCommand::CommandQueueExe()
 	ID3D12CommandList* const cmdListsProl = g_CmdListsProlTmp;
 	auto* cmdQueue = g_CommandQueueTmp;
 
+	// 前処理
 	cmdQueue->ExecuteCommandLists(1, &cmdListsProl);
+	// メイン処理
+	// 後処理
+	// ImGUI処理
 	CheckHR(cmdQueue->Signal(m_Fence.Get(), m_FrameCount));
 
 	// Present

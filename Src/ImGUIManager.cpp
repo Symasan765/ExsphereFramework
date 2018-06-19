@@ -17,23 +17,26 @@ Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> cImGUIManager::g_pd3dCommandLi
 
 void cImGUIManager::Create()
 {
-	CreateDescriptorHeap();
+	static bool InitFlag = false;
+	if (InitFlag == false) {
+		CreateDescriptorHeap();
 
-	CreateCommandList();
+		CreateCommandList();
 
-	// Setup Dear ImGui binding
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
-	ImGui_ImplDX12_Init(cMainWindow::GetHWND(), DrawParam::g_MaxFrameLatency, cDirectX12::GetDevice(),
-		DXGI_FORMAT_R8G8B8A8_UNORM,
-		g_pd3dSrvDescHeap->GetCPUDescriptorHandleForHeapStart(),
-		g_pd3dSrvDescHeap->GetGPUDescriptorHandleForHeapStart());
+		// Setup Dear ImGui binding
+		IMGUI_CHECKVERSION();
+		ImGui::CreateContext();
+		ImGuiIO& io = ImGui::GetIO(); (void)io;
+		//io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
+		ImGui_ImplDX12_Init(cMainWindow::GetHWND(), DrawParam::g_MaxFrameLatency, cDirectX12::GetDevice(),
+			DXGI_FORMAT_R8G8B8A8_UNORM,
+			g_pd3dSrvDescHeap->GetCPUDescriptorHandleForHeapStart(),
+			g_pd3dSrvDescHeap->GetGPUDescriptorHandleForHeapStart());
 
-	// Setup style
-	ImGui::StyleColorsDark();
-	//ImGui::StyleColorsClassic();
+		// Setup style
+		ImGui::StyleColorsDark();
+		//ImGui::StyleColorsClassic();
+	}
 }
 
 void cImGUIManager::CreateDescriptorHeap()
@@ -52,12 +55,31 @@ void cImGUIManager::CreateCommandList()
 	CheckHR(g_pd3dCommandList->Close());
 }
 
-void cImGUIManager::DrawCommand()
+void cImGUIManager::DrawCommand(Microsoft::WRL::ComPtr<ID3D12CommandAllocator> allocator, Microsoft::WRL::ComPtr<ID3D12Resource> RenderTargetResource, D3D12_CPU_DESCRIPTOR_HANDLE& descHandleRtv)
 {
+	auto* alloc = allocator.Get();
+	auto* RTResource = RenderTargetResource.Get();
+	// コマンドリストリセット
+	CheckHR(g_pd3dCommandList->Reset(alloc, NULL));
 
+	// レンダーターゲットをセット
+	//g_pd3dCommandList->OMSetRenderTargets(1, &descHandleRtv, FALSE, NULL);
+	g_pd3dCommandList->SetDescriptorHeaps(1, &g_pd3dSrvDescHeap);
+
+	// レンダリング
+	ImGui::Render();
+	ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData());
+
+	g_pd3dCommandList->Close();
 }
 
 void cImGUIManager::Destroy()
 {
+	ImGui_ImplDX12_Shutdown();
+	ImGui::DestroyContext();
+}
 
+void cImGUIManager::NewFrame()
+{
+	ImGui_ImplDX12_NewFrame(g_pd3dCommandList.Get());
 }

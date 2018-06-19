@@ -1,4 +1,5 @@
 #include "MainSystem.h"
+#include "ImGUI/imgui.h"
 
 cMainSystem::cMainSystem(HINSTANCE hInst) : m_MainWindow(hInst)
 {
@@ -27,6 +28,7 @@ void cMainSystem::SystemLoop()
 			//ここにメイン処理
 			m_MainLoop.ExeMainLoop();
 			m_DrawCommand.CommandListBuild();
+			
 			// TODO 今後、上記のアップデートと、ここの描画部分を並列化させる
 			m_DrawCommand.CommandQueueExe();
 		}

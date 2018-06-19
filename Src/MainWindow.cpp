@@ -36,7 +36,7 @@ cMainWindow::~cMainWindow()
 
 Microsoft::WRL::ComPtr<ID3D12Resource> cMainWindow::GetBuffer(const int no)
 {
-	return m_D3DBuffer[no];
+	return m_D3DBuffer[no % g_FrameBuuferNum];		// バッファ枚数を範囲内に収める
 }
 
 HRESULT cMainWindow::CreateMainWindow()
