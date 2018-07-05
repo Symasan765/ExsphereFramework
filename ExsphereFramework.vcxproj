@@ -121,7 +121,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Src\BlendState.cpp" />
     <ClCompile Include="Src\DirectX12.cpp" />
     <ClCompile Include="Src\DrawCommand.cpp" />
     <ClCompile Include="Src\GameLoop.cpp" />
@@ -132,11 +131,11 @@
     <ClCompile Include="Src\ImGUI\imgui_impl_dx12.cpp" />
     <ClCompile Include="Src\MainSystem.cpp" />
     <ClCompile Include="Src\MainWindow.cpp" />
+    <ClCompile Include="Src\RootSignatureTest.cpp" />
     <ClCompile Include="Src\Utility.cpp" />
     <ClCompile Include="Src\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Src\BlendState.h" />
     <ClInclude Include="Src\ConstantBuffer.h" />
     <ClInclude Include="Src\DirectX12.h" />
     <ClInclude Include="Src\DrawCommand.h" />
@@ -151,6 +150,7 @@
     <ClInclude Include="Src\ImGUI\stb_truetype.h" />
     <ClInclude Include="Src\MainSystem.h" />
     <ClInclude Include="Src\MainWindow.h" />
+    <ClInclude Include="Src\RootSignatureTest.h" />
     <ClInclude Include="Src\Utility.h" />
     <ClInclude Include="Src\WindProc.h" />
   </ItemGroup>

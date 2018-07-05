@@ -13,88 +13,64 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="DirectX">
+      <UniqueIdentifier>{cd747836-acd7-4f38-8675-b822e4ed0c7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImGUI">
+      <UniqueIdentifier>{03fd8df2-579e-415d-a59f-25dd4876c90f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pipeline">
+      <UniqueIdentifier>{f6f4a4da-b21e-4fac-a8c9-dd6c366a1d39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Other">
+      <UniqueIdentifier>{db8fe96f-de3c-4940-8e9f-a67d94e6fdb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Struct">
+      <UniqueIdentifier>{4929be7b-8cae-4017-b0e8-6bfafdf5679d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Src\WinMain.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\MainWindow.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\GameLoop.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\MainSystem.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Utility.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\BlendState.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Src\DirectX12.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>DirectX</Filter>
     </ClCompile>
     <ClCompile Include="Src\DrawCommand.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Pipeline</Filter>
     </ClCompile>
-    <ClCompile Include="Src\ImGUIManager.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Src\MainSystem.cpp">
+      <Filter>Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GameLoop.cpp">
+      <Filter>DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\WinMain.cpp">
+      <Filter>DirectX</Filter>
     </ClCompile>
     <ClCompile Include="Src\ImGUI\imgui.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ImGUI</Filter>
     </ClCompile>
     <ClCompile Include="Src\ImGUI\imgui_demo.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ImGUI</Filter>
     </ClCompile>
     <ClCompile Include="Src\ImGUI\imgui_draw.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ImGUI</Filter>
     </ClCompile>
     <ClCompile Include="Src\ImGUI\imgui_impl_dx12.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ImGUIManager.cpp">
+      <Filter>ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MainWindow.cpp">
+      <Filter>Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Utility.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\RootSignatureTest.cpp">
+      <Filter>Pipeline</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Src\MainWindow.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\WindProc.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\GameLoop.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\MainSystem.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Utility.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\BlendState.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\DirectX12.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\DrawCommand.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\ImGUIManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\ImGUI\imconfig.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\ImGUI\imgui.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\ImGUI\imgui_impl_dx12.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\ImGUI\imgui_internal.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Src\ImGUI\stb_rect_pack.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -104,8 +80,47 @@
     <ClInclude Include="Src\ImGUI\stb_truetype.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Src\DirectX12.h">
+      <Filter>DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\DrawCommand.h">
+      <Filter>Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\MainWindow.h">
+      <Filter>Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\GameLoop.h">
+      <Filter>DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\WindProc.h">
+      <Filter>DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ImGUI\imconfig.h">
+      <Filter>ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ImGUI\imgui.h">
+      <Filter>ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ImGUI\imgui_impl_dx12.h">
+      <Filter>ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ImGUI\imgui_internal.h">
+      <Filter>ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ImGUIManager.h">
+      <Filter>ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\MainSystem.h">
+      <Filter>Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\RootSignatureTest.h">
+      <Filter>Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Utility.h">
+      <Filter>Other</Filter>
+    </ClInclude>
     <ClInclude Include="Src\ConstantBuffer.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>Struct</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
