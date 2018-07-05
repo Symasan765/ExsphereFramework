@@ -4,7 +4,7 @@
 #include <wrl/client.h>
 #include <stdexcept>
 #include <ppl.h>
-#include <dxgi1_3.h>
+#include <dxgi1_5.h>
 #include <d3d12.h>
 #include <d3dcompiler.h>
 
@@ -19,5 +19,5 @@ private:
 	void CreateDevice(HWND hWnd);
 	void Destroy();
 	static ID3D12Device * m_Device;
-	static Microsoft::WRL::ComPtr<IDXGIFactory2> m_DxgiFactory;
+	static Microsoft::WRL::ComPtr<IDXGIFactory4> m_DxgiFactory;
 };

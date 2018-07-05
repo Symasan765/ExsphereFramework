@@ -2,7 +2,7 @@
 #include "Utility.h"
 
 ID3D12Device* cDirectX12::m_Device = nullptr;
-Microsoft::WRL::ComPtr<IDXGIFactory2> cDirectX12::m_DxgiFactory;
+Microsoft::WRL::ComPtr<IDXGIFactory4> cDirectX12::m_DxgiFactory;
 
 cDirectX12::cDirectX12()
 {

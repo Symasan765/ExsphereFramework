@@ -10,6 +10,7 @@
 #include "Utility.h"
 #include "ImGUIManager.h"
 #include <stdexcept>
+#include "ConstantBuffer.h"
 
 using namespace DrawParam;
 
@@ -38,6 +39,7 @@ void cDrawCommand::Init()
 	CreateSwapChain();
 	CreateCommandLists();
 	CreateFence();
+	cConstBuf<int> test;
 }
 
 void cDrawCommand::CreateCommandAllocators()
