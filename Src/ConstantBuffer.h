@@ -29,13 +29,11 @@ private:
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_DescHeapCbvSrvUav[DrawParam::g_MaxFrameLatency];
 	Microsoft::WRL::ComPtr<ID3D12Resource> m_ConstantBuffer;
 	unsigned int m_BufferSize;
-	void* m_CBUploadPtr;
 };
 
 template<typename T>
 inline cConstBuf<T>::cConstBuf()
 {
-	m_CBUploadPtr = nullptr;
 	m_BufferSize = 0;
 
 	CreateDescriptorHeapCB();
@@ -89,5 +87,5 @@ inline void cConstBuf<T>::CreateConstantBuffer()
 		auto cbvSrvUavDescHeap = m_DescHeapCbvSrvUav[i]->GetCPUDescriptorHandleForHeapStart();
 		cDirectX12::GetDevice()->CreateConstantBufferView(&cbvDesc, cbvSrvUavDescHeap);
 	}
-	CheckHR(m_ConstantBuffer->Map(0, nullptr, reinterpret_cast<void**>(&m_CBUploadPtr)));
+	CheckHR(m_ConstantBuffer->Map(0, nullptr, reinterpret_cast<void**>(&data)));
 }
