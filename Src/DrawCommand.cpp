@@ -10,7 +10,8 @@
 #include "Utility.h"
 #include "ImGUIManager.h"
 #include <stdexcept>
-#include "ConstantBuffer.h"
+#include "RootSignatureTest.h"		// TODO 暫定処理。後々消す
+// TODO 現在のバッファをあらかじめ取得できるようにしておくこと
 
 using namespace DrawParam;
 
@@ -23,12 +24,29 @@ Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> cDrawCommand::m_CommandListPro
 Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> cDrawCommand::m_CommandListEpir;
 Microsoft::WRL::ComPtr<ID3D12Fence> cDrawCommand::m_Fence;
 HANDLE cDrawCommand::m_FenceEveneHandle = 0;
+D3D12_CPU_DESCRIPTOR_HANDLE cDrawCommand::m_DescHandleRtv;
 unsigned cDrawCommand::m_FrameCount = 0;
+unsigned cDrawCommand::m_DescHandleRtvStep;
 
 namespace {
 	// コマンドの作成と実行の間で処理するアドレスを保持しておく変数
 	ID3D12CommandQueue* g_CommandQueueTmp;
 	ID3D12CommandList* g_CmdListsProlTmp;
+	ID3D12CommandList* g_CmdListsEpirTmp;
+}
+
+unsigned cDrawCommand::GetFrameIndex()
+{
+	return m_FrameCount % g_MaxFrameLatency;
+}
+
+void cDrawCommand::FrameUpdate()
+{
+	// フレームカウントを進める
+	m_FrameCount++;
+	// フレームバッファ情報を更新する
+	m_DescHandleRtv = cMainWindow::GetDescHeapRtv()->GetCPUDescriptorHandleForHeapStart();		// 先頭アドレスを取得
+	m_DescHandleRtv.ptr += ((m_FrameCount - 1) % WindowOptions::g_FrameBuuferNum) * m_DescHandleRtvStep;		// 先頭アドレス += (No * アドレスサイズ)
 }
 
 // この関数を呼び出すことで順に初期化を行う
@@ -39,7 +57,10 @@ void cDrawCommand::Init()
 	CreateSwapChain();
 	CreateCommandLists();
 	CreateFence();
-	cConstBuf<int> test;
+	m_DescHandleRtvStep = cDirectX12::GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);	// RTVのポインタサイズを取得している
+
+	m_RootSig = new cRootSignatureTest();
+	m_RootSig->Init();
 }
 
 void cDrawCommand::CreateCommandAllocators()
@@ -122,8 +143,7 @@ void cDrawCommand::CreateFence()
 
 void cDrawCommand::CommandListBuild()
 {
-	m_FrameCount++;
-	int cmdIndex = m_FrameCount % g_MaxFrameLatency;	// 何番のコマンドアロケーターを利用するか？
+	int cmdIndex = GetFrameIndex();	// 何番のコマンドアロケーターを利用するか？
 	auto* cmdQueue = m_CommandQueue.Get();
 	auto* cmdListProl = m_CommandListProl.Get();
 	auto* cmdListEpir = m_CommandListEpir.Get();
@@ -144,13 +164,27 @@ void cDrawCommand::CommandListBuild()
 	// 描画の前処理
 	PreDrawingProcess(cmdListProl, cmdIndex);
 
+	// TODO ここ見直すこと
+	auto* cmdList = m_CommandList[0].Get();
+	CheckHR(cmdList->Reset(m_CommandAllocator[cmdIndex][0].Get(), nullptr));
+	cmdList->OMSetRenderTargets(1, &m_DescHandleRtv, true, &cMainWindow::GetDescHeapDsv()->GetCPUDescriptorHandleForHeapStart());
+	m_RootSig->Draw(cmdList);
+	// Fix draw command
+	CheckHR(cmdList->Close());
+
 	// ImGUI の処理
 	auto DescriptorHandleForHeap = cMainWindow::GetDescHeapRtv()->GetCPUDescriptorHandleForHeapStart();
 	SIZE_T rtvDescriptorSize = cDirectX12::GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 	DescriptorHandleForHeap.ptr += rtvDescriptorSize * (m_FrameCount % WindowOptions::g_FrameBuuferNum);
 
+	// 後処理
+	CheckHR(cmdListEpir->Reset(m_CommandAllocator[cmdIndex][0].Get(), nullptr));
+	SetResourceBarrier(cmdListEpir, cMainWindow::GetBuffer((m_FrameCount - 1) % WindowOptions::g_FrameBuuferNum).Get(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
+	CheckHR(cmdListEpir->Close());
+
 	// コマンド実行時に使用する各アドレスをグローバルで保持しておく
 	g_CmdListsProlTmp = cmdListProl;
+	g_CmdListsEpirTmp = cmdListEpir;
 	g_CommandQueueTmp = cmdQueue;
 }
 
@@ -158,13 +192,19 @@ void cDrawCommand::CommandQueueExe()
 {
 	// Exec
 	ID3D12CommandList* const cmdListsProl = g_CmdListsProlTmp;
+	ID3D12CommandList* const cmdListsEpir = g_CmdListsEpirTmp;
 	auto* cmdQueue = g_CommandQueueTmp;
 
 	// 前処理
 	cmdQueue->ExecuteCommandLists(1, &cmdListsProl);
 	// メイン処理
+	ID3D12CommandList* data = m_CommandList[0].Get();
+	cmdQueue->ExecuteCommandLists(1, &data);
 	// 後処理
+	cmdQueue->ExecuteCommandLists(1, &cmdListsEpir);
 	// ImGUI処理
+
+
 	CheckHR(cmdQueue->Signal(m_Fence.Get(), m_FrameCount));
 
 	// Present
@@ -175,11 +215,6 @@ void cDrawCommand::PreDrawingProcess(ID3D12GraphicsCommandList*& cmdListProl, co
 {
 	// 前処理スタート
 	CheckHR(cmdListProl->Reset(m_CommandAllocator[cmdIndex][0].Get(), nullptr));
-
-	// 現在のレンダーターゲットデスクリプタを取得する
-	auto descHandleRtvStep = cDirectX12::GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);	// RTVのポインタサイズを取得している
-	D3D12_CPU_DESCRIPTOR_HANDLE descHandleRtv = cMainWindow::GetDescHeapRtv()->GetCPUDescriptorHandleForHeapStart();		// 先頭アドレスを取得
-	descHandleRtv.ptr += ((m_FrameCount - 1) % WindowOptions::g_FrameBuuferNum) * descHandleRtvStep;		// 先頭アドレス += (No * アドレスサイズ)
 
 																											// 現在の描画バッファの取得
 	ID3D12Resource* d3dBuffer = cMainWindow::GetBuffer((m_FrameCount - 1) % WindowOptions::g_FrameBuuferNum).Get();
@@ -196,7 +231,7 @@ void cDrawCommand::PreDrawingProcess(ID3D12GraphicsCommandList*& cmdListProl, co
 	// レンダーターゲットをクリア
 	{
 		const float ClearColor[4] = { 0.1f, 0.2f, 0.6f, 1.0f };
-		cmdListProl->ClearRenderTargetView(descHandleRtv, ClearColor, 0, nullptr);
+		cmdListProl->ClearRenderTargetView(m_DescHandleRtv, ClearColor, 0, nullptr);
 	}
 
 	// 描画前処理の終了

@@ -1,5 +1,4 @@
 #include "MainSystem.h"
-#include "ImGUI/imgui.h"
 
 cMainSystem::cMainSystem(HINSTANCE hInst) : m_MainWindow(hInst)
 {
@@ -25,6 +24,9 @@ void cMainSystem::SystemLoop()
 		}
 		else
 		{
+			// フレームアップデート処理
+			m_DrawCommand.FrameUpdate();
+
 			//ここにメイン処理
 			m_MainLoop.ExeMainLoop();
 			m_DrawCommand.CommandListBuild();

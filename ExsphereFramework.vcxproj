@@ -90,7 +90,11 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>C:\work\ExsphereFramework\packages\directxtk12_desktop_2015.2018.7.3.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>C:\work\ExsphereFramework\packages\directxtk12_desktop_2015.2018.7.3.1\lib\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -140,6 +144,7 @@
     <ClInclude Include="Src\DirectX12.h" />
     <ClInclude Include="Src\DrawCommand.h" />
     <ClInclude Include="Src\GameLoop.h" />
+    <ClInclude Include="Src\Helper\WaveFrontReader.h" />
     <ClInclude Include="Src\ImGUIManager.h" />
     <ClInclude Include="Src\ImGUI\imconfig.h" />
     <ClInclude Include="Src\ImGUI\imgui.h" />
@@ -154,7 +159,17 @@
     <ClInclude Include="Src\Utility.h" />
     <ClInclude Include="Src\WindProc.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\directxtk12_desktop_2015.2018.7.3.1\build\native\directxtk12_desktop_2015.targets" Condition="Exists('packages\directxtk12_desktop_2015.2018.7.3.1\build\native\directxtk12_desktop_2015.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\directxtk12_desktop_2015.2018.7.3.1\build\native\directxtk12_desktop_2015.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\directxtk12_desktop_2015.2018.7.3.1\build\native\directxtk12_desktop_2015.targets'))" />
+  </Target>
 </Project>

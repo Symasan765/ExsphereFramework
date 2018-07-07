@@ -12,6 +12,7 @@ namespace DrawParam{
 	constexpr unsigned g_ThreadNum = 4;		// 並列処理スレッド数
 	constexpr unsigned g_MaxFrameLatency = 2;	// 処理フレーム数
 }
+class cRootSignatureTest;
 
 class cDrawCommand {
 public:
@@ -21,7 +22,9 @@ public:
 
 	inline static Microsoft::WRL::ComPtr<IDXGISwapChain1> GetSwapChain() { return m_SwapChain; };
 	inline static ID3D12CommandAllocator* GetStartAllocator() { return m_CommandAllocator[0][0].Get(); };
+	static unsigned GetFrameIndex();
 private:
+	void FrameUpdate();	// 新しいフレームの最初に呼び出すこと
 	void Init();		// 初期化用関数。こいつを呼べば↓の関数群が順に呼び出される
 	// ==================================//
 	void CreateCommandAllocators();
@@ -46,7 +49,11 @@ private:
 	static Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> m_CommandListProl;		// 描画前処理用コマンドリスト
 	static Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> m_CommandListEpir;		// 描画後処理用のコマンドリスト
 	static Microsoft::WRL::ComPtr<ID3D12Fence> m_Fence;
+	static D3D12_CPU_DESCRIPTOR_HANDLE m_DescHandleRtv;		// 現在のフレームで使用するRTVハンドルを保持
 	static HANDLE m_FenceEveneHandle;
+	static unsigned m_DescHandleRtvStep;
 
+	// TODO 以下はテスト環境なので削除すること
+	cRootSignatureTest* m_RootSig;
 	static unsigned m_FrameCount;
 };

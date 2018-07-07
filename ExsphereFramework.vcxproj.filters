@@ -122,5 +122,11 @@
     <ClInclude Include="Src\ConstantBuffer.h">
       <Filter>Struct</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Helper\WaveFrontReader.h">
+      <Filter>Other</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

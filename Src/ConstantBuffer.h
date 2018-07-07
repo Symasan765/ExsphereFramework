@@ -20,8 +20,10 @@ template <typename T> class cConstBuf {
 public:
 	cConstBuf();				//コンストラクタで定数バッファ作る
 	~cConstBuf();				//デストラクタで解放
+	void Upload();			// 構造体の情報をアップロードする
 
 	T data;				//ここにデータを格納する
+	ID3D12DescriptorHeap* GetDescriptorHeap();
 private:
 	void CreateDescriptorHeapCB();
 	void CreateConstantBuffer();
@@ -29,12 +31,14 @@ private:
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_DescHeapCbvSrvUav[DrawParam::g_MaxFrameLatency];
 	Microsoft::WRL::ComPtr<ID3D12Resource> m_ConstantBuffer;
 	unsigned int m_BufferSize;
+	void* mCBUploadPtr;
 };
 
 template<typename T>
 inline cConstBuf<T>::cConstBuf()
 {
 	m_BufferSize = 0;
+	mCBUploadPtr = nullptr;
 
 	CreateDescriptorHeapCB();
 	CreateConstantBuffer();
@@ -44,6 +48,19 @@ template<typename T>
 inline cConstBuf<T>::~cConstBuf()
 {
 	m_ConstantBuffer->Unmap(0, nullptr);
+}
+
+template<typename T>
+inline void cConstBuf<T>::Upload()
+{
+	char* ptr = reinterpret_cast<char*>(mCBUploadPtr) + m_BufferSize * cDrawCommand::GetFrameIndex();
+	memcpy_s(ptr, sizeof(T), &data, sizeof(T));
+}
+
+template<typename T>
+inline ID3D12DescriptorHeap* cConstBuf<T>::GetDescriptorHeap()
+{
+	return m_DescHeapCbvSrvUav[cDrawCommand::GetFrameIndex()].Get();
 }
 
 template<typename T>
@@ -87,5 +104,5 @@ inline void cConstBuf<T>::CreateConstantBuffer()
 		auto cbvSrvUavDescHeap = m_DescHeapCbvSrvUav[i]->GetCPUDescriptorHandleForHeapStart();
 		cDirectX12::GetDevice()->CreateConstantBufferView(&cbvDesc, cbvSrvUavDescHeap);
 	}
-	CheckHR(m_ConstantBuffer->Map(0, nullptr, reinterpret_cast<void**>(&data)));
+	CheckHR(m_ConstantBuffer->Map(0, nullptr, reinterpret_cast<void**>(&mCBUploadPtr)));
 }
