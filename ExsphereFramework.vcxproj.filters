@@ -28,6 +28,9 @@
     <Filter Include="Struct">
       <UniqueIdentifier>{4929be7b-8cae-4017-b0e8-6bfafdf5679d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sprite">
+      <UniqueIdentifier>{76e59fa5-83ce-42ee-bb20-a8e202a8e0e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DirectX12.cpp">
