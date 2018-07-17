@@ -72,6 +72,15 @@
     <ClCompile Include="Src\RootSignatureTest.cpp">
       <Filter>Pipeline</Filter>
     </ClCompile>
+    <ClCompile Include="Src\TextureLoader.cpp">
+      <Filter>Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Texture.cpp">
+      <Filter>Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\FenceObj.cpp">
+      <Filter>Pipeline</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\ImGUI\stb_rect_pack.h">
@@ -127,6 +136,15 @@
     </ClInclude>
     <ClInclude Include="Src\Helper\WaveFrontReader.h">
       <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\TextureLoader.h">
+      <Filter>Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Texture.h">
+      <Filter>Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\FenceObj.h">
+      <Filter>Pipeline</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
