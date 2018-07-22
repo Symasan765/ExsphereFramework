@@ -1,5 +1,4 @@
 #include "MainSystem.h"
-#include "TextureLoader.h"
 
 cMainSystem::cMainSystem(HINSTANCE hInst) : m_MainWindow(hInst)
 {
@@ -8,7 +7,6 @@ cMainSystem::cMainSystem(HINSTANCE hInst) : m_MainWindow(hInst)
 	m_DirectX12.CreateDevice(m_MainWindow.GetHWND());
 	m_DrawCommand.Init();
 	m_MainWindow.CreateRenderBuffer();
-	cTextureLoader::LoadTextureFromFile("Laser.png", &cTexture());
 }
 
 cMainSystem::~cMainSystem()

@@ -31,6 +31,9 @@
     <Filter Include="Sprite">
       <UniqueIdentifier>{76e59fa5-83ce-42ee-bb20-a8e202a8e0e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HLSL">
+      <UniqueIdentifier>{26f795bb-bf51-4792-af7c-85c5f47afccf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DirectX12.cpp">

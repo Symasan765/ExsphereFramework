@@ -53,7 +53,7 @@ void cTextureLoader::LoadTextureFromFile(std::string fileName, cTexture * textur
 			0,											// リソース内の最初のサブリソースのインデックス
 			subresoucesize,					// リソース内のサブリソースの数
 			&subresouceData);					// 更新に利用するサブリソースデータを含む配列アドレス
-		tex->SetName(L"TextureResource");
+		//tex->SetName(L"TextureResource");
 
 		// バリアの設置
 		m_commandList->ResourceBarrier(1,

@@ -4,6 +4,7 @@
 #include <Windows.h>
 #include <DirectXMath.h>
 #include "ConstantBuffer.h"
+#include "TextureLoader.h"
 
 struct CBuffer {
 	DirectX::XMFLOAT4X4 worldViewProjMatrix;
@@ -30,4 +31,5 @@ public:
 	D3D12_INDEX_BUFFER_VIEW mIBView = {};
 
 	cConstBuf<CBuffer> m_ConstBuf;
+	cTexture m_Tex;
 };

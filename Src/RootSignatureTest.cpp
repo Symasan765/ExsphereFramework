@@ -7,7 +7,7 @@ using namespace DirectX;
 
 cRootSignatureTest::cRootSignatureTest()
 {
-
+	cTextureLoader::LoadTextureFromFile("Laser.png", &m_Tex);
 }
 
 cRootSignatureTest::~cRootSignatureTest()
@@ -16,34 +16,59 @@ cRootSignatureTest::~cRootSignatureTest()
 
 void cRootSignatureTest::Init()
 {
-	CD3DX12_DESCRIPTOR_RANGE descRange1[1];
+	D3D12_STATIC_SAMPLER_DESC sampler = {};
+	sampler.Filter = D3D12_FILTER_MIN_MAG_MIP_POINT;
+	sampler.AddressU = D3D12_TEXTURE_ADDRESS_MODE_BORDER;
+	sampler.AddressV = D3D12_TEXTURE_ADDRESS_MODE_BORDER;
+	sampler.AddressW = D3D12_TEXTURE_ADDRESS_MODE_BORDER;
+	sampler.MipLODBias = 0;
+	sampler.MaxAnisotropy = 0;
+	sampler.ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER;
+	sampler.BorderColor = D3D12_STATIC_BORDER_COLOR_TRANSPARENT_BLACK;
+	sampler.MinLOD = 0.0f;
+	sampler.MaxLOD = D3D12_FLOAT32_MAX;
+	sampler.ShaderRegister = 0;
+	sampler.RegisterSpace = 0;
+	sampler.ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-	descRange1[0].Init(
-		D3D12_DESCRIPTOR_RANGE_TYPE_CBV,		// タイプ
-		1,		// ディスクリプター数
-		0);		// 開始レジスタ番号の指定
+	D3D12_DESCRIPTOR_RANGE ranges[2];
+	D3D12_ROOT_PARAMETER rootParameters[2];
 
-	CD3DX12_ROOT_PARAMETER rootParam[1];
-	rootParam[0].InitAsDescriptorTable(ARRAYSIZE(descRange1), descRange1);
+	ranges[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_CBV;         // このDescriptorRangeは定数バッファ
+	ranges[0].NumDescriptors = 1;               // Descriptorは1つ
+	ranges[0].BaseShaderRegister = 0;              // シェーダ側の開始インデックスは0番
+	ranges[0].RegisterSpace = 0;               // TODO: SM5.1からのspaceだけど、どういうものかよくわからない
+	ranges[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;  // TODO: とりあえず-1を入れておけばOK？
 
-	{
-		ID3D10Blob *sig, *info;
-		auto rootSigDesc = D3D12_ROOT_SIGNATURE_DESC();
-		rootSigDesc.NumParameters = 1;		// ルートパラメータの数
-		rootSigDesc.NumStaticSamplers = 0;	//	静的サンプラーの数
-		rootSigDesc.pParameters = rootParam;	// ルートパラメータ配列の先頭アドレス
-		rootSigDesc.pStaticSamplers = nullptr;
-		rootSigDesc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
-		// ルートシグネチャを作成するためのバッファを作成
-		CheckHR(D3D12SerializeRootSignature(&rootSigDesc, D3D_ROOT_SIGNATURE_VERSION_1, &sig, &info));
-		// ルートシグネチャ作成
-		cDirectX12::GetDevice()->CreateRootSignature(
-			0,
-			sig->GetBufferPointer(),
-			sig->GetBufferSize(),
-			IID_PPV_ARGS(mRootSignature.ReleaseAndGetAddressOf()));
-		sig->Release();
-	}
+	ranges[1].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;         // このDescriptorRangeは定数バッファ
+	ranges[1].NumDescriptors = 1;               // Descriptorは1つ
+	ranges[1].BaseShaderRegister = 0;              // シェーダ側の開始インデックスは0番
+	ranges[1].RegisterSpace = 0;               // TODO: SM5.1からのspaceだけど、どういうものかよくわからない
+	ranges[1].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;  // TODO: とりあえず-1を入れておけばOK？
+
+	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;   // このパラメータはDescriptorTableとして使用する
+	rootParameters[0].DescriptorTable.NumDescriptorRanges = 1;        // DescriptorRangeの数は1つ
+	rootParameters[0].DescriptorTable.pDescriptorRanges = &ranges[0];       // DescriptorRangeの先頭アドレス
+	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;     // このパラメータは頂点シェーダからのみ見える
+																			 // D3D12_SHADER_VISIBILITY_ALL にすればすべてのシェーダからアクセス可能
+
+	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;   // このパラメータはDescriptorTableとして使用する
+	rootParameters[1].DescriptorTable.NumDescriptorRanges = 1;        // DescriptorRangeの数は1つ
+	rootParameters[1].DescriptorTable.pDescriptorRanges = &ranges[1];       // DescriptorRangeの先頭アドレス
+	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;     // このパラメータは頂点シェーダからのみ見える
+	
+
+	D3D12_ROOT_SIGNATURE_DESC desc;
+	desc.NumParameters = _countof(rootParameters);
+	desc.pParameters = rootParameters;
+	desc.NumStaticSamplers = 1;
+	desc.pStaticSamplers = &sampler;
+	desc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
+
+	ID3DBlob* pSignature;
+	CheckHR(D3D12SerializeRootSignature(&desc, D3D_ROOT_SIGNATURE_VERSION_1, &pSignature, nullptr));
+
+	CheckHR(cDirectX12::GetDevice()->CreateRootSignature(0, pSignature->GetBufferPointer(), pSignature->GetBufferSize(), IID_PPV_ARGS(&mRootSignature)));
 
 	{
 		ID3D10Blob *vs, *ps;
@@ -61,6 +86,7 @@ void cRootSignatureTest::Init()
 		{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
 		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 24, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
 		};
+
 		D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc = {};
 		psoDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 		psoDesc.InputLayout.NumElements = 3;
@@ -162,11 +188,19 @@ void cRootSignatureTest::Draw(ID3D12GraphicsCommandList* cmdList)
 
 	// Draw
 	cmdList->SetGraphicsRootSignature(mRootSignature.Get());
-	ID3D12DescriptorHeap* descHeaps[] = { m_ConstBuf.GetDescriptorHeap() };
+
+	ID3D12DescriptorHeap* descHeaps[] = { m_ConstBuf.GetDescriptorHeap()};
 	cmdList->SetDescriptorHeaps(ARRAYSIZE(descHeaps), descHeaps);
+	ID3D12DescriptorHeap* srvHeaps[] = { m_Tex.GetDescriptorHeap().Get() };
+	cmdList->SetDescriptorHeaps(ARRAYSIZE(srvHeaps), srvHeaps);
+	cmdList->SetGraphicsRootDescriptorTable(1, m_Tex.GetDescriptorHeap().Get()->GetGPUDescriptorHandleForHeapStart());
+
 	{
 		auto cbvSrvUavDescHeap = m_ConstBuf.GetDescriptorHeap()->GetGPUDescriptorHandleForHeapStart();
+		cmdList->SetDescriptorHeaps(ARRAYSIZE(descHeaps), descHeaps);
 		cmdList->SetGraphicsRootDescriptorTable(0, cbvSrvUavDescHeap);
+		cmdList->SetDescriptorHeaps(ARRAYSIZE(srvHeaps), srvHeaps);
+		cmdList->SetGraphicsRootDescriptorTable(1, m_Tex.GetDescriptorHeap().Get()->GetGPUDescriptorHandleForHeapStart());
 		cmdList->SetPipelineState(m_Pso.Get());
 		cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		cmdList->IASetVertexBuffers(0, 1, &mVBView);
