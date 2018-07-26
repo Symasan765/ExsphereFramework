@@ -164,6 +164,9 @@
     <ClInclude Include="Src\ShaderByte.h">
       <Filter>Shader</Filter>
     </ClInclude>
+    <ClInclude Include="Src\InputLayout.h">
+      <Filter>Pipeline</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

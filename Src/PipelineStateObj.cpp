@@ -2,6 +2,8 @@
 #include <d3dx12.h>
 #include "Utility.h"
 #include "DirectX12.h"
+#include "InputLayout.h"
+#include "ShaderByte.h"
 
 cPipelineStateObj::cPipelineStateObj()
 {
@@ -59,6 +61,12 @@ void cPipelineStateObj::ShaderBytecodeSetting(ID3D10Blob * vs, ID3D10Blob * ps, 
 	}
 }
 
+void cPipelineStateObj::ShaderBytecodeSetting(cShaderByte * pShaderData)
+{
+	auto& data = pShaderData->GetShaderData();
+	ShaderBytecodeSetting(data.vs, data.ps, data.ds, data.hs, data.gs);
+}
+
 void cPipelineStateObj::RootSignatureSetting(ID3D12RootSignature * rs)
 {
 	psoDesc.pRootSignature = rs;
@@ -68,5 +76,11 @@ void cPipelineStateObj::InputLayoutSetting(D3D12_INPUT_ELEMENT_DESC * inputLayou
 {
 	psoDesc.InputLayout.NumElements = num;
 	psoDesc.InputLayout.pInputElementDescs = inputLayout;
+}
+
+void cPipelineStateObj::InputLayoutSetting(cInputLayout * inputLayout)
+{
+	psoDesc.InputLayout.NumElements = inputLayout->GetSize();
+	psoDesc.InputLayout.pInputElementDescs = inputLayout->GetInputElementDesc();
 }
 

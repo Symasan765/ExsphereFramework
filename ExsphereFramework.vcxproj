@@ -159,6 +159,7 @@
     <ClInclude Include="Src\ImGUI\stb_rect_pack.h" />
     <ClInclude Include="Src\ImGUI\stb_textedit.h" />
     <ClInclude Include="Src\ImGUI\stb_truetype.h" />
+    <ClInclude Include="Src\InputLayout.h" />
     <ClInclude Include="Src\MainSystem.h" />
     <ClInclude Include="Src\MainWindow.h" />
     <ClInclude Include="Src\PipelineStateObj.h" />

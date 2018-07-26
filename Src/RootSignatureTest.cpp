@@ -4,6 +4,7 @@
 #include <d3dx12.h>
 using namespace DirectX;
 #include "Helper/WaveFrontReader.h"
+#include "InputLayout.h"
 
 cRootSignatureTest::cRootSignatureTest()
 {
@@ -85,17 +86,16 @@ void cRootSignatureTest::UseHelperInit()
 	{
 		m_Shader.CompileFromFile("Private/Mesh.hlsl","VSMain","PSMain");
 
-		D3D12_INPUT_ELEMENT_DESC inputLayout[] = {
-		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
-		{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
-		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 24, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
-		};
+		cInputLayout inpLay;
+		inpLay.AddElement<DirectX::XMFLOAT3>("POSITION", DXGI_FORMAT_R32G32B32_FLOAT);
+		inpLay.AddElement<DirectX::XMFLOAT3>("NORMAL", DXGI_FORMAT_R32G32B32_FLOAT);
+		inpLay.AddElement<DirectX::XMFLOAT2>("TEXCOORD", DXGI_FORMAT_R32G32_FLOAT);
 
-		mc_PSO.InputLayoutSetting(inputLayout, _countof(inputLayout));
+		mc_PSO.InputLayoutSetting(&inpLay);
 		DXGI_FORMAT format[] = { DXGI_FORMAT_R8G8B8A8_UNORM };
 		mc_PSO.RenderTargetSetting(format, 1);
 		mc_PSO.RootSignatureSetting(mRootSignature.Get());
-		mc_PSO.ShaderBytecodeSetting(m_Shader.GetShaderData().vs, m_Shader.GetShaderData().ps);
+		mc_PSO.ShaderBytecodeSetting(&m_Shader);
 		mc_PSO.CreatePipelineState();
 	}
 
