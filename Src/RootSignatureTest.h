@@ -6,6 +6,9 @@
 #include "ConstantBuffer.h"
 #include "TextureLoader.h"
 
+#include "PipelineStateObj.h"
+#include "ShaderByte.h"
+
 struct CBuffer {
 	DirectX::XMFLOAT4X4 worldViewProjMatrix;
 	DirectX::XMFLOAT4X4 worldMatrix;
@@ -21,8 +24,11 @@ public:
 	void Init();
 	void MeshLoad();
 	void Draw(ID3D12GraphicsCommandList*);
+
+	void UseHelperInit();
+
+	void DoNotUseHelperDraw(ID3D12GraphicsCommandList*);
 	Microsoft::WRL::ComPtr<ID3D12RootSignature> mRootSignature;
-	Microsoft::WRL::ComPtr<ID3D12PipelineState> m_Pso;
 	Microsoft::WRL::ComPtr<ID3D12Resource> mVB;
 
 	UINT mIndexCount = 0;
@@ -32,4 +38,6 @@ public:
 
 	cConstBuf<CBuffer> m_ConstBuf;
 	cTexture m_Tex;
+	cPipelineStateObj mc_PSO;
+	cShaderByte m_Shader;
 };

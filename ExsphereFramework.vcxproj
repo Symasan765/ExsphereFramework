@@ -136,7 +136,9 @@
     <ClCompile Include="Src\ImGUI\imgui_impl_dx12.cpp" />
     <ClCompile Include="Src\MainSystem.cpp" />
     <ClCompile Include="Src\MainWindow.cpp" />
+    <ClCompile Include="Src\PipelineStateObj.cpp" />
     <ClCompile Include="Src\RootSignatureTest.cpp" />
+    <ClCompile Include="Src\ShaderByte.cpp" />
     <ClCompile Include="Src\Texture.cpp" />
     <ClCompile Include="Src\TextureLoader.cpp" />
     <ClCompile Include="Src\Utility.cpp" />
@@ -159,7 +161,9 @@
     <ClInclude Include="Src\ImGUI\stb_truetype.h" />
     <ClInclude Include="Src\MainSystem.h" />
     <ClInclude Include="Src\MainWindow.h" />
+    <ClInclude Include="Src\PipelineStateObj.h" />
     <ClInclude Include="Src\RootSignatureTest.h" />
+    <ClInclude Include="Src\ShaderByte.h" />
     <ClInclude Include="Src\Texture.h" />
     <ClInclude Include="Src\TextureLoader.h" />
     <ClInclude Include="Src\Utility.h" />
