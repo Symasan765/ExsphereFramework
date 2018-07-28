@@ -41,5 +41,6 @@ float4 PSMain(VSOut vsOut) : SV_TARGET
 	float4 ret = g_ColorTex.Sample(g_samLinear, (float2)(vsOut.Spos.xy));
 	//float4 ret = vsOut.pos / 1000.0f;
 	ret.w = 1.0f;
+	ret.xyz = vsOut.normal.xyz;
 	return ret;
 }

@@ -7,6 +7,7 @@
 #pragma comment(lib, "d3dcompiler.lib")
 #pragma comment( lib, "winmm.lib" )
 #pragma comment(lib,"xinput.lib")
+#pragma comment(lib,"assimp-vc140-mt.lib")
 #pragma comment( lib, "legacy_stdio_definitions.lib" )
 
 /// <summary>

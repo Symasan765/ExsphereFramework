@@ -1,4 +1,6 @@
 #pragma once
+#include "MeshTest.h"
+
 #include <wrl/client.h>
 #include <d3d12.h>
 #include <Windows.h>
@@ -22,12 +24,14 @@ public:
 	cRootSignatureTest();
 	~cRootSignatureTest();
 	void Init();
+	void MeshAssimopLoad();
 	void MeshLoad();
 	void Draw(ID3D12GraphicsCommandList*);
 
 	void UseHelperInit();
 
 	void DoNotUseHelperDraw(ID3D12GraphicsCommandList*);
+	void UseHelperDraw(ID3D12GraphicsCommandList*);
 	Microsoft::WRL::ComPtr<ID3D12RootSignature> mRootSignature;
 	Microsoft::WRL::ComPtr<ID3D12Resource> mVB;
 
@@ -37,7 +41,9 @@ public:
 	D3D12_INDEX_BUFFER_VIEW mIBView = {};
 
 	cConstBuf<CBuffer> m_ConstBuf;
+	cConstBuf<CBuffer> m_ConstHelBuf;
 	cTexture m_Tex;
 	cPipelineStateObj mc_PSO;
 	cShaderByte m_Shader;
+	AssimpTest meshdata;
 };

@@ -37,6 +37,9 @@
     <Filter Include="Shader">
       <UniqueIdentifier>{205c2d06-9771-4789-a61a-4e452def6b21}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mesh">
+      <UniqueIdentifier>{91213cb5-b38f-4985-8b46-13d1036f2e02}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DirectX12.cpp">
@@ -92,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="Src\ShaderByte.cpp">
       <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MeshTest.cpp">
+      <Filter>Mesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +172,12 @@
     </ClInclude>
     <ClInclude Include="Src\InputLayout.h">
       <Filter>Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\MeshTest.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\VertexStruct.h">
+      <Filter>Struct</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
