@@ -35,6 +35,7 @@ VSOut VSMain(VSIn vsIn)
 
 float4 PSMain(VSOut vsOut) : SV_TARGET
 {
+	return g_ColorTex.Sample(g_samLinear, (float2)(vsOut.uv.xy));
 	vsOut.Spos.xyz /= vsOut.Spos.w;
 	vsOut.Spos.xy+=1.0f;
 	vsOut.Spos.xy/=2.0f;

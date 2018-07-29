@@ -83,5 +83,7 @@ void cTextureLoader::LoadTextureFromFile(std::string fileName, cTexture * textur
 	// GPUにアップロードされるのを待つ
 	cFenceObj FenceObj;
 	FenceObj.WaitForPreviousFrame(m_commandQueue);
+
+	texture->SetFilePath(fileName);	// パスを登録しておく
 }
 

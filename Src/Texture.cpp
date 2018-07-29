@@ -14,3 +14,8 @@ cTexture::cTexture(D3D12_DESCRIPTOR_HEAP_FLAGS flag)
 cTexture::~cTexture()
 {
 }
+
+void cTexture::SetFilePath(std::string path)
+{
+	m_FilePath = path;
+}

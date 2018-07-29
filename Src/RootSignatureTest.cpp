@@ -27,7 +27,7 @@ void cRootSignatureTest::Init()
 void cRootSignatureTest::MeshAssimopLoad()
 {
 	
-	meshdata.Load("Private/teapot.obj");
+	meshdata.Load("Private/F15.fbx");
 
 	//void* vbData = mesh.vertices.data();
 	//void* ibData = mesh.indices.data();
@@ -211,7 +211,7 @@ void cRootSignatureTest::UseHelperDraw(ID3D12GraphicsCommandList * cmdList)
 
 		XMMATRIX worldMat, viewMat, projMat;
 		worldMat = XMMatrixIdentity();
-		worldMat *= XMMatrixScaling(0.5f, 0.5f, 0.5f);
+		worldMat *= XMMatrixScaling(0.05f, 0.05f, 0.05f);
 		worldMat *= XMMatrixRotationY(XMConvertToRadians(rot));
 		worldMat *= XMMatrixTranslation(0.3f, 0.0f, 0.0f);
 		viewMat = XMMatrixLookAtLH({ 0, 0.5f, -1.5f }, { 0, 0.5f, 0 }, { 0, 1, 0 });
@@ -241,19 +241,23 @@ void cRootSignatureTest::UseHelperDraw(ID3D12GraphicsCommandList * cmdList)
 	// Draw
 	cmdList->SetGraphicsRootSignature(mRootSignature.Get());
 
-	ID3D12DescriptorHeap* descHeaps[] = { m_ConstHelBuf.GetDescriptorHeap() };
-	cmdList->SetDescriptorHeaps(ARRAYSIZE(descHeaps), descHeaps);
-	ID3D12DescriptorHeap* srvHeaps[] = { m_Tex.GetDescriptorHeap().Get() };
-	cmdList->SetDescriptorHeaps(ARRAYSIZE(srvHeaps), srvHeaps);
-	cmdList->SetGraphicsRootDescriptorTable(1, m_Tex.GetDescriptorHeap().Get()->GetGPUDescriptorHandleForHeapStart());
 
 	{
 		for (int i = 0; i < meshdata.meshes.size(); i++) {
+
+
 			auto cbvSrvUavDescHeap = m_ConstHelBuf.GetDescriptorHeap()->GetGPUDescriptorHandleForHeapStart();
+			ID3D12DescriptorHeap* descHeaps[] = { m_ConstHelBuf.GetDescriptorHeap() };
 			cmdList->SetDescriptorHeaps(ARRAYSIZE(descHeaps), descHeaps);
 			cmdList->SetGraphicsRootDescriptorTable(0, cbvSrvUavDescHeap);
-			cmdList->SetDescriptorHeaps(ARRAYSIZE(srvHeaps), srvHeaps);
-			cmdList->SetGraphicsRootDescriptorTable(1, m_Tex.GetDescriptorHeap().Get()->GetGPUDescriptorHandleForHeapStart());
+
+			if (meshdata.meshes[i].textures.size() != 0) {
+				ID3D12DescriptorHeap* srvHeaps[] = { meshdata.meshes[i].textures[0].GetDescriptorHeap().Get() };
+				cmdList->SetDescriptorHeaps(ARRAYSIZE(srvHeaps), srvHeaps);
+				cmdList->SetGraphicsRootDescriptorTable(1, meshdata.meshes[i].textures[0].GetDescriptorHeap().Get()->GetGPUDescriptorHandleForHeapStart());
+			}
+
+
 			cmdList->SetPipelineState(mc_PSO.GetPipelineState().Get());
 			cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 			cmdList->IASetVertexBuffers(0, 1, &meshdata.meshes[i].mVBView);
