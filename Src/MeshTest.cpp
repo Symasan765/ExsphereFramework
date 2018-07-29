@@ -9,8 +9,7 @@ void AssimpTest::Load(std::string fileName)
 	Assimp::Importer importer;
 
 	const aiScene* pScene = importer.ReadFile(fileName,
-		aiProcess_Triangulate | aiProcess_JoinIdenticalVertices | 
-		aiProcess_ConvertToLeftHanded);
+		aiProcess_Triangulate | aiProcess_JoinIdenticalVertices | aiProcess_MakeLeftHanded);
 
 	if (pScene == NULL)
 		return;
@@ -30,18 +29,18 @@ Mesh AssimpTest::processMesh(aiMesh * mesh, const aiScene * scene)
 
 		vertex.pos.x = mesh->mVertices[i].x;
 		vertex.pos.y = mesh->mVertices[i].y;
-		vertex.pos.z = -mesh->mVertices[i].z;		// ¶èÀ•WŒn‚Ö
+		vertex.pos.z = mesh->mVertices[i].z;		// ¶èÀ•WŒn‚Ö
 
 		if (mesh->mTextureCoords[0])
 		{
 			vertex.texcoord.x = (float)mesh->mTextureCoords[0][i].x;
-			vertex.texcoord.y = (float)mesh->mTextureCoords[0][i].y;
+			vertex.texcoord.y = -(float)mesh->mTextureCoords[0][i].y;	// ¶èÀ•WŒn‚É•ÏX
 		}
 
 		if (mesh->mNormals) {
 			vertex.normal.x = (float)mesh->mNormals[i].x;
 			vertex.normal.y = (float)mesh->mNormals[i].y;
-			vertex.normal.z = (float)-mesh->mNormals[i].z;		//	¶èÀ•WŒn‚Ö
+			vertex.normal.z = (float)mesh->mNormals[i].z;		//	¶èÀ•WŒn‚Ö
 		}
 
 		vertices.push_back(vertex);
