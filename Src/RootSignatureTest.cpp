@@ -27,7 +27,7 @@ void cRootSignatureTest::Init()
 void cRootSignatureTest::MeshAssimopLoad()
 {
 	
-	meshdata.Load("Private/F15.fbx");
+	meshdata.Load("Private/Link.x");
 
 	//void* vbData = mesh.vertices.data();
 	//void* ibData = mesh.indices.data();

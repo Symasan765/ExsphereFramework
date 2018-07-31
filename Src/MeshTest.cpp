@@ -4,6 +4,18 @@
 #include <d3dx12.h>
 using namespace std;
 
+void TestAnime(aiNode* node,std::vector<std::string>& name) {
+	if (node->mNumChildren == 0) {
+		name.push_back(node->mName.C_Str());
+		return;
+	}
+
+	for (int i = 0; i < node->mNumChildren; i++) {
+			TestAnime(node->mChildren[i], name);
+	}
+	name.push_back(node->mName.C_Str());
+}
+
 void AssimpTest::Load(std::string fileName)
 {
 	Assimp::Importer importer;
@@ -63,6 +75,31 @@ Mesh AssimpTest::processMesh(aiMesh * mesh, const aiScene * scene)
 		vector<cTexture> diffuseMaps = this->loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse", scene);
 		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 	}
+
+	int maxVer = 0;
+	std::vector<std::string> boneName;
+	for (int i = 0; i < mesh->mNumBones; i++) {
+		boneName.push_back(mesh->mBones[i]->mName.C_Str());
+		for (int j = 0; j < mesh->mBones[i]->mNumWeights; j++) {
+			if (maxVer < mesh->mBones[i]->mWeights[j].mVertexId)
+				maxVer = mesh->mBones[i]->mWeights[j].mVertexId;
+		}
+	}
+
+	int add = 0;
+	for (int i = 0; i < scene->mNumAnimations; i++) {
+		for (int j = 0; j < scene->mAnimations[i]->mNumChannels; j++) {
+			scene->mAnimations[i]->mChannels[j]->mNodeName;
+			for (int k = 0; k < boneName.size(); k++) {
+				if (boneName[k] == scene->mAnimations[i]->mChannels[j]->mNodeName.C_Str()) {
+					add++;
+				}
+			}
+		}
+	}
+
+	std::vector<std::string> nodeName;
+	TestAnime(scene->mRootNode, nodeName);
 
 	return Mesh(vertices, indices, textures);
 }
