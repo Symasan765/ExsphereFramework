@@ -16,6 +16,10 @@ struct CBuffer {
 	DirectX::XMFLOAT4X4 worldMatrix;
 };
 
+struct cBones {
+	DirectX::XMFLOAT4X4 bones[128];
+};
+
 /// <summary>
 /// あくまで暫定的なテスト用クラス
 /// </summary>
@@ -32,6 +36,8 @@ public:
 
 	void DoNotUseHelperDraw(ID3D12GraphicsCommandList*);
 	void UseHelperDraw(ID3D12GraphicsCommandList*);
+
+	void BoneCalc();
 	Microsoft::WRL::ComPtr<ID3D12RootSignature> mRootSignature;
 	Microsoft::WRL::ComPtr<ID3D12Resource> mVB;
 
@@ -42,6 +48,9 @@ public:
 
 	cConstBuf<CBuffer> m_ConstBuf;
 	cConstBuf<CBuffer> m_ConstHelBuf;
+
+	cConstBuf<cBones> m_Bones;
+
 	cTexture m_Tex;
 	cPipelineStateObj mc_PSO;
 	cShaderByte m_Shader;

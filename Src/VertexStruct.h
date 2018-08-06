@@ -14,7 +14,7 @@ struct DefaultVertex {
 	DirectX::XMFLOAT3 normal = { 0.0f,0.0f,0.0f };
 	DirectX::XMFLOAT2 texcoord = { 0.0f,0.0f };
 	DirectX::XMFLOAT3 tangent = { 0.0f,0.0f,0.0f };
-	DirectX::XMINT4 bindex = { -1,-1,-1,-1 };					// 影響するボーンインデックス
+	DirectX::XMINT4 bindex = { 0,0,0,0 };					// 影響するボーンインデックス
 	DirectX::XMFLOAT4 bweight = { 0.0f,0.0f,0.0f,0.0f };	// 各ボーンの重み情報
 };
 

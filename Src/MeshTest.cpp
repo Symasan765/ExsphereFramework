@@ -4,16 +4,47 @@
 #include <d3dx12.h>
 using namespace std;
 
-void TestAnime(aiNode* node,std::vector<std::string>& name) {
-	if (node->mNumChildren == 0) {
-		name.push_back(node->mName.C_Str());
-		return;
-	}
+void AssimpTest::GetBoneNode(int parentNo, aiNode * node)
+{
+	int myNo = m_Bone.size();		// 自分が収まる配列番号を取得する
+	BoneData data;
+	data.name = node->mName.C_Str();	// ここでは名前だけを格納する
+	data.parent = parentNo;
+	data.Transpose = MatrixTransformation(node->mTransformation);
+	m_Bone.push_back(data);
+
+	// Mapにデータ登録
+	m_Map[data.name] = myNo;
 
 	for (int i = 0; i < node->mNumChildren; i++) {
-			TestAnime(node->mChildren[i], name);
+		GetBoneNode(myNo,node->mChildren[i]);
 	}
-	name.push_back(node->mName.C_Str());
+}
+
+void AssimpTest::GetBoneData(aiMesh * mesh, std::vector<DefaultVertex>& vertices)
+{
+	for (int i = 0; i < mesh->mNumBones; i++) {
+		// まずはマップからボーンのデータを取得してくる
+		int myBoneNo = m_Map[mesh->mBones[i]->mName.C_Str()];
+		m_Bone[myBoneNo].Offset = MatrixTransformation(mesh->mBones[i]->mOffsetMatrix);
+		for (int j = 0; j < mesh->mBones[i]->mNumWeights; j++) {
+			int verID = mesh->mBones[i]->mWeights[j].mVertexId;
+			// 最小のウェイト値を見つける
+			float* weight[4] = { &vertices[verID].bweight.x,&vertices[verID].bweight.y,&vertices[verID].bweight.z,&vertices[verID].bweight.w };
+			int32_t* bonesNo[4] = { &vertices[verID].bindex.x,&vertices[verID].bindex.y,&vertices[verID].bindex.z,&vertices[verID].bindex.w };
+			int min = 0;
+			for (int k = 0; k < 4; k++) {
+				if (*weight[k] < *weight[min]) {
+					min = k;
+				}
+			}
+			// 現在保有する最小のウェイトよりも大きいウェイトを見つけた
+			if (*weight[min] < mesh->mBones[i]->mWeights[j].mWeight) {
+				*bonesNo[min] = myBoneNo;
+				*weight[min] = mesh->mBones[i]->mWeights[j].mWeight;
+			}
+		}
+	}
 }
 
 void AssimpTest::Load(std::string fileName)
@@ -21,23 +52,27 @@ void AssimpTest::Load(std::string fileName)
 	Assimp::Importer importer;
 
 	const aiScene* pScene = importer.ReadFile(fileName,
-		aiProcess_Triangulate | aiProcess_JoinIdenticalVertices | aiProcess_MakeLeftHanded);
+		aiProcessPreset_TargetRealtime_Quality | aiProcess_ConvertToLeftHanded);
 
 	if (pScene == NULL)
 		return;
 
+	// ここでボーンの親子関係を作っている
+	GetBoneNode(-1, pScene->mRootNode);
+
+	// 実データ取得
 	processNode(pScene->mRootNode, pScene);
 }
 
 Mesh AssimpTest::processMesh(aiMesh * mesh, const aiScene * scene)
 {
-	vector<VERTEX_TEST> vertices;
+	vector<DefaultVertex> vertices;
 	vector<UINT> indices;
 	vector<cTexture> textures;
 
 	for (UINT i = 0; i < mesh->mNumVertices; i++)
 	{
-		VERTEX_TEST vertex;
+		DefaultVertex vertex;
 
 		vertex.pos.x = mesh->mVertices[i].x;
 		vertex.pos.y = mesh->mVertices[i].y;
@@ -46,7 +81,7 @@ Mesh AssimpTest::processMesh(aiMesh * mesh, const aiScene * scene)
 		if (mesh->mTextureCoords[0])
 		{
 			vertex.texcoord.x = (float)mesh->mTextureCoords[0][i].x;
-			vertex.texcoord.y = -(float)mesh->mTextureCoords[0][i].y;	// 左手座標系に変更
+			vertex.texcoord.y = (float)mesh->mTextureCoords[0][i].y;	// 左手座標系に変更
 		}
 
 		if (mesh->mNormals) {
@@ -63,7 +98,7 @@ Mesh AssimpTest::processMesh(aiMesh * mesh, const aiScene * scene)
 		aiFace face = mesh->mFaces[i];
 
 		for (UINT j = 0; j < face.mNumIndices; j++) {
-			UINT no = face.mIndices[2 - j];
+			UINT no = face.mIndices[j];
 			indices.push_back(no);
 		}
 	}
@@ -76,30 +111,22 @@ Mesh AssimpTest::processMesh(aiMesh * mesh, const aiScene * scene)
 		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 	}
 
-	int maxVer = 0;
-	std::vector<std::string> boneName;
-	for (int i = 0; i < mesh->mNumBones; i++) {
-		boneName.push_back(mesh->mBones[i]->mName.C_Str());
-		for (int j = 0; j < mesh->mBones[i]->mNumWeights; j++) {
-			if (maxVer < mesh->mBones[i]->mWeights[j].mVertexId)
-				maxVer = mesh->mBones[i]->mWeights[j].mVertexId;
-		}
-	}
-
 	int add = 0;
 	for (int i = 0; i < scene->mNumAnimations; i++) {
 		for (int j = 0; j < scene->mAnimations[i]->mNumChannels; j++) {
 			scene->mAnimations[i]->mChannels[j]->mNodeName;
-			for (int k = 0; k < boneName.size(); k++) {
-				if (boneName[k] == scene->mAnimations[i]->mChannels[j]->mNodeName.C_Str()) {
-					add++;
-				}
-			}
+			
 		}
 	}
 
-	std::vector<std::string> nodeName;
-	TestAnime(scene->mRootNode, nodeName);
+
+	GetBoneData(mesh, vertices);
+
+	int check = 0;
+	for (int i = 0; i < vertices.size(); i++) {
+		if (vertices[i].bweight.x + vertices[i].bweight.y + vertices[i].bweight.z + vertices[i].bweight.w < 0.9f)
+			check++;
+	}
 
 	return Mesh(vertices, indices, textures);
 }
@@ -161,11 +188,37 @@ int AssimpTest::getTextureIndex(aiString * str)
 	return stoi(tistr);
 }
 
+DirectX::XMFLOAT4X4 AssimpTest::MatrixTransformation(const aiMatrix4x4& mat)
+{
+	DirectX::XMFLOAT4X4 ret;
+	ret._11 = mat.a1;
+	ret._12 = mat.b1;
+	ret._13 = mat.c1;
+	ret._14 = mat.d1;
+
+	ret._21 = mat.a2;
+	ret._22 = mat.b2;
+	ret._23 = mat.c2;
+	ret._24 = mat.d2;
+
+	ret._31 = mat.a3;
+	ret._32 = mat.b3;
+	ret._33 = mat.c3;
+	ret._34 = mat.d3;
+
+	ret._41 = mat.a4;
+	ret._42 = mat.b4;
+	ret._43 = mat.c4;
+	ret._44 = mat.d4;
+
+	return ret;
+}
+
 bool Mesh::setupMesh()
 {
 	int size = sizeof(indices[0]);
 	mIndexCount = static_cast<UINT>(indices.size());
-	mVBIndexOffset = static_cast<UINT>(sizeof(vertices[0]) * vertices.size());
+	mVBIndexOffset = static_cast<UINT>(sizeof(DefaultVertex) * vertices.size());
 	UINT IBSize = static_cast<UINT>(sizeof(indices[0]) * mIndexCount);
 
 	void* vbData = (void*)&vertices[0];
@@ -186,7 +239,7 @@ bool Mesh::setupMesh()
 	mVB->Unmap(0, nullptr);
 
 	mVBView.BufferLocation = mVB->GetGPUVirtualAddress();
-	mVBView.StrideInBytes = sizeof(vertices[0]);
+	mVBView.StrideInBytes = sizeof(DefaultVertex);
 	mVBView.SizeInBytes = mVBIndexOffset;
 	mIBView.BufferLocation = mVB->GetGPUVirtualAddress() + mVBIndexOffset;
 	mIBView.Format = DXGI_FORMAT_R32_UINT;
