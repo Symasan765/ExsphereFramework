@@ -7,11 +7,8 @@
 =================================================*/
 #pragma once
 #include "DirectX12.h"
+#include "DrawParam.h"
 
-namespace DrawParam{
-	constexpr unsigned g_ThreadNum = 4;		// 並列処理スレッド数
-	constexpr unsigned g_MaxFrameLatency = 2;	// 処理フレーム数
-}
 class cRootSignatureTest;
 
 class cDrawCommand {

@@ -40,6 +40,12 @@
     <Filter Include="Mesh">
       <UniqueIdentifier>{91213cb5-b38f-4985-8b46-13d1036f2e02}</UniqueIdentifier>
     </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{58cd751f-b71c-4b64-a885-52bdc69e8abb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering">
+      <UniqueIdentifier>{bf4e3068-e8ca-4c1b-893a-8bb0a45a7596}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DirectX12.cpp">
@@ -98,6 +104,21 @@
     </ClCompile>
     <ClCompile Include="Src\MeshTest.cpp">
       <Filter>Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\FrameCnt.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\System.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MainCommandAllocators.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MainCommand.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MainCommandLists.cpp">
+      <Filter>Rendering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +199,24 @@
     </ClInclude>
     <ClInclude Include="Src\VertexStruct.h">
       <Filter>Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\System.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\FrameCnt.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\MainCommandAllocators.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\DrawParam.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\MainCommand.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\MainCommandLists.h">
+      <Filter>Rendering</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
