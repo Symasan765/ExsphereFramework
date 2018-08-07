@@ -11,3 +11,9 @@ void cMainCommandAllocators::Create(ID3D12Device* dev)
 		}
 	}
 }
+
+Microsoft::WRL::ComPtr<ID3D12CommandAllocator> cMainCommandAllocators::GetBeginAlloc()
+{
+	// æ“ª‚ğ•Ô‚·‚Ì‚Å0,0
+	return m_CommandAllocator[0][0];
+}

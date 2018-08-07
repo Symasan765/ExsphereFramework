@@ -14,7 +14,7 @@ class cMainCommand {
 public:
 	cMainCommand();
 	~cMainCommand();
-	void Init();
+	void Init(ID3D12Device * dev);
 private:
 	std::unique_ptr<cMainCommandAllocators> m_Allocators;
 	std::unique_ptr<cMainCommandLists> m_Lists;

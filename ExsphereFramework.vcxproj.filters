@@ -46,6 +46,9 @@
     <Filter Include="Rendering">
       <UniqueIdentifier>{bf4e3068-e8ca-4c1b-893a-8bb0a45a7596}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rendering\Command">
+      <UniqueIdentifier>{b66474d3-5e65-427b-8c26-1be5e02384d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DirectX12.cpp">
@@ -111,14 +114,17 @@
     <ClCompile Include="Src\System.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="Src\MainCommandAllocators.cpp">
-      <Filter>Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="Src\MainCommand.cpp">
-      <Filter>Rendering</Filter>
+      <Filter>Rendering\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MainCommandAllocators.cpp">
+      <Filter>Rendering\Command</Filter>
     </ClCompile>
     <ClCompile Include="Src\MainCommandLists.cpp">
-      <Filter>Rendering</Filter>
+      <Filter>Rendering\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MainCommandQueue.cpp">
+      <Filter>Rendering\Command</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -206,17 +212,20 @@
     <ClInclude Include="Src\FrameCnt.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="Src\MainCommandAllocators.h">
-      <Filter>Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="Src\DrawParam.h">
       <Filter>Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Src\MainCommand.h">
-      <Filter>Rendering</Filter>
+      <Filter>Rendering\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\MainCommandAllocators.h">
+      <Filter>Rendering\Command</Filter>
     </ClInclude>
     <ClInclude Include="Src\MainCommandLists.h">
-      <Filter>Rendering</Filter>
+      <Filter>Rendering\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\MainCommandQueue.h">
+      <Filter>Rendering\Command</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
