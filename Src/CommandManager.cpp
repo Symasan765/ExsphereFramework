@@ -26,7 +26,8 @@ void cCommandManager::CommandBuild(Microsoft::WRL::ComPtr<ID3D12Resource>nowBuff
 	// アプリケーション開始直後にコマンドが溜まり切るまでの間待たせる関数
 	WaitForFence(totalFrame, frameIndex);
 
-
+	// バッファクリアなどの前処理部分
+	m_Command->DrawBegin(m_NowTarget, frameIndex);
 }
 
 void cCommandManager::Init()

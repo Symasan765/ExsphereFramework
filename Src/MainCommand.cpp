@@ -15,7 +15,7 @@ Microsoft::WRL::ComPtr<ID3D12CommandAllocator> cMainCommand::GetSelectAlloc(UINT
 	return m_Allocators->GetSelectAlloc(vertical, Horizontal);
 }
 
-void cMainCommand::DrawBegin(RenderBufferStruct& data,const unsigned totalFrame, const unsigned cmdIndex)
+void cMainCommand::DrawBegin(RenderBufferStruct& data, const unsigned cmdIndex)
 {
 	// 前処理スタート
 	CheckHR(m_Lists->GetBegin()->Reset(m_Allocators->GetSelectAlloc(cmdIndex,0).Get(), nullptr));
