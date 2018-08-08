@@ -49,6 +49,9 @@
     <Filter Include="Rendering\Command">
       <UniqueIdentifier>{b66474d3-5e65-427b-8c26-1be5e02384d6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rendering\SwapChain">
+      <UniqueIdentifier>{ff9ba867-2835-4fb1-a934-51b411a64337}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DirectX12.cpp">
@@ -114,9 +117,6 @@
     <ClCompile Include="Src\System.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="Src\MainCommand.cpp">
-      <Filter>Rendering\Command</Filter>
-    </ClCompile>
     <ClCompile Include="Src\MainCommandAllocators.cpp">
       <Filter>Rendering\Command</Filter>
     </ClCompile>
@@ -125,6 +125,12 @@
     </ClCompile>
     <ClCompile Include="Src\MainCommandQueue.cpp">
       <Filter>Rendering\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MainCommand.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MainSwapChain.cpp">
+      <Filter>Rendering\SwapChain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -215,9 +221,6 @@
     <ClInclude Include="Src\DrawParam.h">
       <Filter>Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="Src\MainCommand.h">
-      <Filter>Rendering\Command</Filter>
-    </ClInclude>
     <ClInclude Include="Src\MainCommandAllocators.h">
       <Filter>Rendering\Command</Filter>
     </ClInclude>
@@ -226,6 +229,12 @@
     </ClInclude>
     <ClInclude Include="Src\MainCommandQueue.h">
       <Filter>Rendering\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\MainCommand.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\MainSwapChain.h">
+      <Filter>Rendering\SwapChain</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

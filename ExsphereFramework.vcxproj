@@ -139,6 +139,7 @@
     <ClCompile Include="Src\MainCommandAllocators.cpp" />
     <ClCompile Include="Src\MainCommandLists.cpp" />
     <ClCompile Include="Src\MainCommandQueue.cpp" />
+    <ClCompile Include="Src\MainSwapChain.cpp" />
     <ClCompile Include="Src\MainSystem.cpp" />
     <ClCompile Include="Src\MainWindow.cpp" />
     <ClCompile Include="Src\MeshTest.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Src\MainCommandAllocators.h" />
     <ClInclude Include="Src\MainCommandLists.h" />
     <ClInclude Include="Src\MainCommandQueue.h" />
+    <ClInclude Include="Src\MainSwapChain.h" />
     <ClInclude Include="Src\MainSystem.h" />
     <ClInclude Include="Src\MainWindow.h" />
     <ClInclude Include="Src\MeshTest.h" />

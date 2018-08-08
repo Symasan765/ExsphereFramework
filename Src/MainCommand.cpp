@@ -2,7 +2,6 @@
 
 cMainCommand::cMainCommand()
 {
-	m_Allocators = nullptr;
 }
 
 cMainCommand::~cMainCommand()
