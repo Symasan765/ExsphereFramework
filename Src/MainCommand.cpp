@@ -8,7 +8,7 @@ cMainCommand::~cMainCommand()
 {
 }
 
-void cMainCommand::Init(ID3D12Device * dev)
+void cMainCommand::Create(ID3D12Device * dev)
 {
 	m_Allocators.reset(new cMainCommandAllocators);
 	m_Lists.reset(new cMainCommandLists);

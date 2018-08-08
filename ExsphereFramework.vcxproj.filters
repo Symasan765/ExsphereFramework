@@ -135,6 +135,9 @@
     <ClCompile Include="Src\MainSwapChain.cpp">
       <Filter>Rendering\SwapChain</Filter>
     </ClCompile>
+    <ClCompile Include="Src\CommandManager.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\ImGUI\stb_rect_pack.h">
@@ -241,6 +244,9 @@
     </ClInclude>
     <ClInclude Include="Src\CommandParamStruct.h">
       <Filter>Rendering\Param</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\CommandManager.h">
+      <Filter>Rendering</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
