@@ -42,3 +42,8 @@ void cFenceObj::WaitForPreviousFrame(UINT value, DWORD MillSecTimeOut)
 	if (wait != WAIT_OBJECT_0)
 		throw std::runtime_error("Failed WaitForSingleObject().");
 }
+
+void cFenceObj::Signal(Microsoft::WRL::ComPtr<ID3D12CommandQueue> queue,unsigned totalFrame)
+{
+	CheckHR(queue.Get()->Signal(m_fence.Get(), totalFrame));
+}

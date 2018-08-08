@@ -60,3 +60,13 @@ void cMainCommand::SetResourceBarrier(ID3D12GraphicsCommandList* commandList,	//
 	desc.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
 	commandList->ResourceBarrier(1, &desc);
 }
+
+Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> cMainCommand::GetPrologueList()
+{
+	return m_Lists->GetBegin();
+}
+
+Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> cMainCommand::GetEpilogueList()
+{
+	return m_Lists->GetEnd();
+}

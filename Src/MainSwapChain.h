@@ -14,6 +14,7 @@ public:
 	cMainSwapChain() = default;
 	~cMainSwapChain() = default;
 	void Create(Microsoft::WRL::ComPtr<ID3D12CommandQueue> queue, Microsoft::WRL::ComPtr<IDXGIFactory2> dxgi,HWND hwnd,const UINT width, const UINT heigit, const UINT bufferNum);
+	void Present();
 private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain1> m_SwapChain;
 };

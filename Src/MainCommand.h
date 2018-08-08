@@ -21,6 +21,9 @@ public:
 	void DrawBegin(RenderBufferStruct& data,const unsigned cmdIndex);
 	void DrawEnd(RenderBufferStruct& data, const unsigned cmdIndex);
 	void SetResourceBarrier(ID3D12GraphicsCommandList* commandList, ID3D12Resource* res, D3D12_RESOURCE_STATES before, D3D12_RESOURCE_STATES after);
+
+	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> GetPrologueList();
+	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> GetEpilogueList();
 private:
 	std::unique_ptr<cMainCommandAllocators> m_Allocators;
 	std::unique_ptr<cMainCommandLists> m_Lists;

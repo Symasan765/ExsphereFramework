@@ -14,3 +14,9 @@ void cMainSwapChain::Create(Microsoft::WRL::ComPtr<ID3D12CommandQueue> queue, Mi
 	scDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL;
 	CheckHR(dxgi->CreateSwapChainForHwnd(queue.Get(), hwnd, &scDesc, nullptr, nullptr, m_SwapChain.ReleaseAndGetAddressOf()));
 }
+
+void cMainSwapChain::Present()
+{
+	// Present
+	CheckHR(m_SwapChain->Present(1, 0));
+}

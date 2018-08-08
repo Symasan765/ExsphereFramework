@@ -30,6 +30,20 @@ void cCommandManager::CommandBuild(Microsoft::WRL::ComPtr<ID3D12Resource>nowBuff
 	m_Command->DrawBegin(m_NowTarget, frameIndex);
 }
 
+void cCommandManager::CommandQueueExe(unsigned totalFrame)
+{
+	ExePrologue();
+
+	// TODO –{ˆ—‚à’Ç‰Á‚·‚é
+
+	ExeEpilogue();
+	
+
+	m_Fence->Signal(m_Queue->GetQueue(), totalFrame);
+
+	m_SwapChain->Present();
+}
+
 void cCommandManager::Init()
 {
 	m_Command.reset(new cMainCommand);
@@ -64,4 +78,18 @@ void cCommandManager::WaitForFence(unsigned totalFrame, unsigned idx)
 
 		CheckHR(m_Command->GetSelectAlloc(idx, 0).Get()->Reset());
 	}
+}
+
+void cCommandManager::ExePrologue()
+{
+	auto const list = m_Command->GetPrologueList().Get();
+
+	m_Queue->Exe(list, 1);
+}
+
+void cCommandManager::ExeEpilogue()
+{
+	auto const list = m_Command->GetEpilogueList().Get();
+
+	m_Queue->Exe(list, 1);
 }

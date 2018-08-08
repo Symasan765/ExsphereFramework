@@ -13,6 +13,7 @@ public:
 	cMainCommandQueue() = default;
 	~cMainCommandQueue() = default;
 	void Create(ID3D12Device* dev);
+	void Exe(ID3D12CommandList* const pLists, unsigned listNum);
 	inline Microsoft::WRL::ComPtr<ID3D12CommandQueue> GetQueue() { return m_CommandQueue; };
 private:
 	Microsoft::WRL::ComPtr<ID3D12CommandQueue> m_CommandQueue;
