@@ -10,8 +10,9 @@
 #include <wrl/client.h>
 #include "DirectX12.h"
 #include <d3dx12.h>
-#include "DrawCommand.h"
+#include "DrawParam.h"
 #include "Utility.h"
+#include "FrameCnt.h"
 
 /// <summary>
 /// 定数バッファを取り扱うテンプレートクラス
@@ -53,14 +54,14 @@ inline cConstBuf<T>::~cConstBuf()
 template<typename T>
 inline void cConstBuf<T>::Upload()
 {
-	char* ptr = reinterpret_cast<char*>(mCBUploadPtr) + m_BufferSize * cDrawCommand::GetFrameIndex();
+	char* ptr = reinterpret_cast<char*>(mCBUploadPtr) + m_BufferSize * cFrameCnt::GetNowIndex();
 	memcpy_s(ptr, sizeof(T), &data, sizeof(T));
 }
 
 template<typename T>
 inline ID3D12DescriptorHeap* cConstBuf<T>::GetDescriptorHeap()
 {
-	return m_DescHeapCbvSrvUav[cDrawCommand::GetFrameIndex()].Get();
+	return m_DescHeapCbvSrvUav[cFrameCnt::GetNowIndex()].Get();
 }
 
 template<typename T>

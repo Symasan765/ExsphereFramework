@@ -6,7 +6,7 @@
 //									¼–{ —Y”V‰î
 =================================================*/
 #include "ImGUIManager.h"
-#include "DrawCommand.h"
+#include "DrawParam.h"
 #include "MainWindow.h"
 #include "Utility.h"
 #include "ImGUI/imgui.h"
@@ -51,8 +51,9 @@ void cImGUIManager::CreateDescriptorHeap()
 
 void cImGUIManager::CreateCommandList()
 {
-	CheckHR(cDirectX12::GetDevice()->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, cDrawCommand::GetStartAllocator(), NULL, IID_PPV_ARGS(&g_pd3dCommandList)));
-	CheckHR(g_pd3dCommandList->Close());
+	// TODO DrawCommand‚ðíœ‚µ‚½‚±‚Æ‚Ì•ÏX‚ðs‚Á‚Ä‚¢‚È‚¢
+	/*CheckHR(cDirectX12::GetDevice()->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, cDrawCommand::GetStartAllocator(), NULL, IID_PPV_ARGS(&g_pd3dCommandList)));
+	CheckHR(g_pd3dCommandList->Close());*/
 }
 
 void cImGUIManager::DrawCommand(Microsoft::WRL::ComPtr<ID3D12CommandAllocator> allocator, Microsoft::WRL::ComPtr<ID3D12Resource> RenderTargetResource, D3D12_CPU_DESCRIPTOR_HANDLE& descHandleRtv)

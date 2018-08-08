@@ -9,7 +9,6 @@
 #include "WindProc.h"
 #include "Utility.h"
 #include "DrawCommand.h"
-#include "DirectX12.h"
 #include <d3dx12.h>
 
 using namespace WindowOptions;
@@ -82,11 +81,11 @@ HRESULT cMainWindow::CreateMainWindow()
 	return S_OK;
 }
 
-void cMainWindow::CreateRenderBuffer()
+void cMainWindow::CreateRenderBuffer(Microsoft::WRL::ComPtr<IDXGISwapChain1> SwapChain)
 {
 	for (int i = 0; i < g_FrameBuuferNum; i++)
 	{
-		CheckHR(cDrawCommand::GetSwapChain()->GetBuffer(i, IID_PPV_ARGS(m_D3DBuffer[i].ReleaseAndGetAddressOf())));
+		CheckHR(SwapChain->GetBuffer(i, IID_PPV_ARGS(m_D3DBuffer[i].ReleaseAndGetAddressOf())));
 		m_D3DBuffer[i]->SetName(L"SwapChain_Buffer");
 	}
 

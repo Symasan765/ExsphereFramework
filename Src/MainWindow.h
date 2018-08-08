@@ -10,7 +10,7 @@
 #include <Windows.h>
 #include <wrl/client.h>
 #include <d3d12.h>
-#include "DrawCommand.h"
+#include "DirectX12.h"
 
 // メインウィンドウの設定項目
 namespace WindowOptions {
@@ -46,7 +46,7 @@ public:
 	static Microsoft::WRL::ComPtr<ID3D12Resource> GetBuffer(const int no);
 
 	HRESULT CreateMainWindow();
-	void CreateRenderBuffer();
+	void CreateRenderBuffer(Microsoft::WRL::ComPtr<IDXGISwapChain1> SwapChain);
 private:
 	void CreateRenderBufferDescriptor();
 

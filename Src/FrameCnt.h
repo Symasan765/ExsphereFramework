@@ -12,10 +12,10 @@ public:
 	cFrameCnt();	// ゲームとして設けているバッファ数
 	~cFrameCnt() = default;
 	void Update();
-	inline unsigned GetNowBufferCnt() { return m_FrameCnt % m_LatencyNum; };
-	inline unsigned GetOldBufferCnt() { return (m_FrameCnt - 1) % m_LatencyNum; };
-	inline unsigned GetFrameNo() { return m_FrameCnt; };
+	static unsigned GetNowIndex() { return (m_FrameCnt - 1) % m_LatencyNum; };
+	static unsigned GetOldBufferCnt() { return (m_FrameCnt - 1) % m_LatencyNum; };
+	static unsigned GetFrameNo() { return m_FrameCnt; };
 private:
-	unsigned m_LatencyNum;
-	unsigned m_FrameCnt;
+	static unsigned m_LatencyNum;
+	static unsigned m_FrameCnt;
 };

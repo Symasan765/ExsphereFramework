@@ -1,9 +1,11 @@
 #include "FrameCnt.h"
-#include "DrawCommand.h"
+#include "DrawParam.h"
 
-cFrameCnt::cFrameCnt() : m_LatencyNum(DrawParam::g_MaxFrameLatency)
+unsigned cFrameCnt::m_LatencyNum = DrawParam::g_MaxFrameLatency;
+unsigned cFrameCnt::m_FrameCnt = 0;
+
+cFrameCnt::cFrameCnt()
 {
-	m_FrameCnt = 0;
 }
 
 void cFrameCnt::Update()

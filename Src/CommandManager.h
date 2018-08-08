@@ -19,10 +19,12 @@ public:
 	cCommandManager() = default;
 	~cCommandManager() = default;
 	void Create(ID3D12Device * dev, Microsoft::WRL::ComPtr<IDXGIFactory2> dxgi, HWND hwnd, const UINT width, const UINT heigit, 
-		const UINT bufferNum, Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> nowRtv, Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> dsv);
+		const UINT bufferNum);
+	void SetNowTarget(Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> rtv, Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> dsv);
 	void CommandBuild(Microsoft::WRL::ComPtr<ID3D12Resource>nowBuffer,unsigned totalFrame, unsigned frameIndex);
 	void CommandQueueExe(unsigned totalFrame);
 
+	Microsoft::WRL::ComPtr<IDXGISwapChain1> GetSwapChain();
 private:
 	void Init();
 	void FrameUpdate(Microsoft::WRL::ComPtr<ID3D12Resource> nowBuffer, unsigned frameIndex);

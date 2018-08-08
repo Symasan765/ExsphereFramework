@@ -55,6 +55,9 @@
     <Filter Include="Rendering\Param">
       <UniqueIdentifier>{30a1a37f-fef7-4eea-8069-9838bd549a73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sprite\Command">
+      <UniqueIdentifier>{dba1e481-6b35-407b-8df7-a46fbe280db3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DirectX12.cpp">
@@ -140,6 +143,9 @@
     </ClCompile>
     <ClCompile Include="Src\DescHandleStep.cpp">
       <Filter>Rendering\Param</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ResourceCreateCommand.cpp">
+      <Filter>Sprite\Command</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -256,6 +262,9 @@
     </ClInclude>
     <ClInclude Include="Src\DescHandleStep.h">
       <Filter>Rendering\Param</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ResourceCreateCommand.h">
+      <Filter>Sprite\Command</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

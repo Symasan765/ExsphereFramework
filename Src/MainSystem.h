@@ -10,7 +10,8 @@
 #include "MainWindow.h"
 #include "GameLoop.h"
 #include "DirectX12.h"
-#include "DrawCommand.h"
+#include "CommandManager.h"
+#include "FrameCnt.h"
 
 class cMainSystem {
 public:
@@ -23,7 +24,8 @@ private:
 	cMainWindow m_MainWindow;
 	cGameLoop m_MainLoop;
 	cDirectX12 m_DirectX12;
-	cDrawCommand m_DrawCommand;
+	cCommandManager m_CommandManager;
+	cFrameCnt m_FrameCnt;
 
 	MSG m_Msg;	//メッセージ構造体
 };

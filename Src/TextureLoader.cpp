@@ -8,13 +8,15 @@
 using namespace Microsoft::WRL;
 using namespace DirectX;
 
+cResourceCreateCommand cTextureLoader::m_Command;
+
 void cTextureLoader::LoadTextureFromFile(std::string fileName, cTexture * texture)
 {
 	ComPtr<ID3D12Resource> textureUploadHeap;		// 一時変数でよし
 	ID3D12DescriptorHeap* srvHeap = texture->GetDescriptorHeap().Get();
 	ID3D12Resource* tex = texture->GetTextureResource().Get();
-	auto m_commandList = cDrawCommand::GetGeneralCommandList();
-	auto m_commandQueue = cDrawCommand::GetCommandQueue();
+	auto m_commandList = m_Command.GetList().Get();
+	auto m_commandQueue = m_Command.GetQueue().Get();
 	// stringをwstringへ変換する
 	std::wstring wStr = std::wstring(fileName.begin(), fileName.end());
 
@@ -43,7 +45,7 @@ void cTextureLoader::LoadTextureFromFile(std::string fileName, cTexture * textur
 			nullptr,
 			IID_PPV_ARGS(&textureUploadHeap)));
 
-		m_commandList->Reset(cDrawCommand::GetStartAllocator(), nullptr);
+		m_commandList->Reset(m_Command.GetAlloc().Get(), nullptr);
 
 		// サブリソースの更新
 		UpdateSubresources(m_commandList,
@@ -85,5 +87,10 @@ void cTextureLoader::LoadTextureFromFile(std::string fileName, cTexture * textur
 	FenceObj.WaitForPreviousFrame(m_commandQueue);
 
 	texture->SetFilePath(fileName);	// パスを登録しておく
+}
+
+void cTextureLoader::Init(ID3D12Device * dev)
+{
+	m_Command.Init(dev);
 }
 
