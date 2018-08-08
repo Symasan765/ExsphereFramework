@@ -17,3 +17,9 @@ Microsoft::WRL::ComPtr<ID3D12CommandAllocator> cMainCommandAllocators::GetBeginA
 	// êÊì™Çï‘Ç∑ÇÃÇ≈0,0
 	return m_CommandAllocator[0][0];
 }
+
+Microsoft::WRL::ComPtr<ID3D12CommandAllocator> cMainCommandAllocators::GetSelectAlloc(UINT vertical, UINT Horizontal)
+{
+
+	return m_CommandAllocator[vertical][Horizontal];
+}

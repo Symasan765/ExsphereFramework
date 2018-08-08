@@ -14,6 +14,7 @@ public:
 	cFenceObj();
 	~cFenceObj();
 	void WaitForPreviousFrame(ID3D12CommandQueue*,DWORD MillSecTimeOut = INFINITE);
+	void WaitForPreviousFrame(UINT value, DWORD MillSecTimeOut = INFINITE);
 private:
 	Microsoft::WRL::ComPtr<ID3D12Fence> m_fence;
 	HANDLE m_fenceEvent;

@@ -32,3 +32,13 @@ void cFenceObj::WaitForPreviousFrame(ID3D12CommandQueue* m_commandQueue, DWORD M
 		WaitForSingleObject(m_fenceEvent, MillSecTimeOut);
 	}
 }
+
+void cFenceObj::WaitForPreviousFrame(UINT value, DWORD MillSecTimeOut)
+{
+	m_fence->SetEventOnCompletion(value, m_fenceEvent);
+	DWORD wait = WaitForSingleObject(m_fenceEvent, MillSecTimeOut);	//シグナル状態になるのをここで待ってくれているっぽい
+
+																	//シグナル状態にならなかった
+	if (wait != WAIT_OBJECT_0)
+		throw std::runtime_error("Failed WaitForSingleObject().");
+}

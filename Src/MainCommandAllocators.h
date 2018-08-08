@@ -16,6 +16,7 @@ public:
 	~cMainCommandAllocators() = default;
 	void Create(ID3D12Device* dev);
 	Microsoft::WRL::ComPtr<ID3D12CommandAllocator> GetBeginAlloc();
+	Microsoft::WRL::ComPtr<ID3D12CommandAllocator> GetSelectAlloc(UINT vertical,UINT Horizontal);
 private:
 	Microsoft::WRL::ComPtr<ID3D12CommandAllocator> m_CommandAllocator[DrawParam::g_MaxFrameLatency][DrawParam::g_ThreadNum];
 };
