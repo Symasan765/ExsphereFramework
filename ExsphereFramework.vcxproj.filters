@@ -58,6 +58,15 @@
     <Filter Include="Sprite\Command">
       <UniqueIdentifier>{dba1e481-6b35-407b-8df7-a46fbe280db3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Window">
+      <UniqueIdentifier>{5fc38b8a-1acb-408d-8d61-13c15c21ae13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window\DefaultRenderTarget">
+      <UniqueIdentifier>{8ce38e98-cb86-4d1a-8b66-3d9be7f1b07e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window\Param">
+      <UniqueIdentifier>{cad4ac05-8cd7-42b5-8f20-50c9e939fa79}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DirectX12.cpp">
@@ -86,9 +95,6 @@
     </ClCompile>
     <ClCompile Include="Src\ImGUIManager.cpp">
       <Filter>ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\MainWindow.cpp">
-      <Filter>Pipeline</Filter>
     </ClCompile>
     <ClCompile Include="Src\Utility.cpp">
       <Filter>Other</Filter>
@@ -144,6 +150,12 @@
     <ClCompile Include="Src\ResourceCreateCommand.cpp">
       <Filter>Sprite\Command</Filter>
     </ClCompile>
+    <ClCompile Include="Src\MainWindow.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\DefaultRenderTarget.cpp">
+      <Filter>Window\DefaultRenderTarget</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\ImGUI\stb_rect_pack.h">
@@ -157,9 +169,6 @@
     </ClInclude>
     <ClInclude Include="Src\DirectX12.h">
       <Filter>DirectX</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\MainWindow.h">
-      <Filter>Pipeline</Filter>
     </ClInclude>
     <ClInclude Include="Src\GameLoop.h">
       <Filter>DirectX</Filter>
@@ -259,6 +268,15 @@
     </ClInclude>
     <ClInclude Include="Src\ResourceCreateCommand.h">
       <Filter>Sprite\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\MainWindow.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\DefaultRenderTarget.h">
+      <Filter>Window\DefaultRenderTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\WindowParam.h">
+      <Filter>Window\Param</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

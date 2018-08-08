@@ -7,32 +7,9 @@
 //									松本 雄之介
 =================================================*/
 #pragma once
-#include <Windows.h>
-#include <wrl/client.h>
-#include <d3d12.h>
+#include "WindowParam.h"
 #include "DirectX12.h"
-
-// メインウィンドウの設定項目
-namespace WindowOptions {
-	// ウィンドウタイトル登録
-#if defined(DEBUG) || defined(_DEBUG)
-	constexpr CHAR		g_szAppTitle[] = "ExsphereFramework";
-#else
-	constexpr CHAR		g_szAppTitle[] = "ExsphereFramework";
-#endif
-
-	constexpr CHAR		g_szWndClass[] = "ExsphereFrameworkClass";
-
-	// ウィンドウスタイル
-	constexpr DWORD dwStyle = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_DLGFRAME;
-
-	// 解像度
-	constexpr int g_WindowSizeX = 1920;
-	constexpr int g_WindowSizeY = 1080;
-
-
-	constexpr unsigned g_FrameBuuferNum = 2;		// 描画バッファ数
-}
+#include "DefaultRenderTarget.h"
 
 class cMainWindow {
 public:
@@ -41,20 +18,15 @@ public:
 
 	static inline HWND GetHWND() { return m_hWindow; };
 	static inline HINSTANCE GetHInstance() { return m_hInstance; };
-	static inline Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> GetDescHeapRtv() { return m_DescHeapRtv; };
-	static inline Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> GetDescHeapDsv() { return m_DescHeapDsv; };
+	static inline Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> GetDescHeapRtv() { return m_RenderTarget.GetDescHeapRtv(); };
+	static inline Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> GetDescHeapDsv() { return m_RenderTarget.GetDescHeapDsv(); };
 	static Microsoft::WRL::ComPtr<ID3D12Resource> GetBuffer(const int no);
 
 	HRESULT CreateMainWindow();
 	void CreateRenderBuffer(Microsoft::WRL::ComPtr<IDXGISwapChain1> SwapChain);
 private:
-	void CreateRenderBufferDescriptor();
 
 	static HWND m_hWindow;
 	static HINSTANCE m_hInstance;
-
-	static Microsoft::WRL::ComPtr<ID3D12Resource> m_D3DBuffer[WindowOptions::g_FrameBuuferNum];
-	static Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_DescHeapRtv;	// レンダーターゲット用
-	static Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> m_DescHeapDsv;	// デプスステンシル用
-	static Microsoft::WRL::ComPtr<ID3D12Resource> mDsvResource;
+	static cDefaultRenderTarget m_RenderTarget;
 };
