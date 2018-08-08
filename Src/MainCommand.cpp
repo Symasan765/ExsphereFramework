@@ -39,6 +39,13 @@ void cMainCommand::DrawBegin(RenderBufferStruct& data, const unsigned cmdIndex)
 	CheckHR(m_Lists->GetBegin()->Close());
 }
 
+void cMainCommand::DrawEnd(RenderBufferStruct & data, const unsigned cmdIndex)
+{
+	CheckHR(m_Lists->GetEnd()->Reset(m_Allocators->GetSelectAlloc(cmdIndex, 0).Get(), nullptr));
+	SetResourceBarrier(m_Lists->GetEnd().Get(), data.buffer.Get(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
+	CheckHR(m_Lists->GetEnd()->Close());
+}
+
 void cMainCommand::SetResourceBarrier(ID3D12GraphicsCommandList* commandList,	// コマンドリスト
 	ID3D12Resource* res,		// 現在のバッファ
 	D3D12_RESOURCE_STATES before,		// 設定しなおす際に以前の状態も入れる必要があるため

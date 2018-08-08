@@ -16,6 +16,7 @@ public:
 	void Create(ID3D12Device* dev,ID3D12CommandAllocator* alloc);
 
 	inline Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> GetBegin() { return m_CommandListProl; };
+	inline Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> GetEnd() { return m_CommandListEpir; };
 private:
 	void MainCreate(ID3D12Device* dev, ID3D12CommandAllocator* alloc);
 	void ProlCreate(ID3D12Device* dev, ID3D12CommandAllocator* alloc);
