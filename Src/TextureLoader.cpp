@@ -1,5 +1,4 @@
 #include "TextureLoader.h"
-#include "DrawCommand.h"
 #include "Utility.h"
 #include <WICTextureLoader.h>
 #include <d3dx12.h>

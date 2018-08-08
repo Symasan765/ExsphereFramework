@@ -8,7 +8,6 @@
 #include "MainWindow.h"
 #include "WindProc.h"
 #include "Utility.h"
-#include "DrawCommand.h"
 #include <d3dx12.h>
 
 using namespace WindowOptions;

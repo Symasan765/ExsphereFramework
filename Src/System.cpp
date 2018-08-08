@@ -1,5 +1,4 @@
 #include "System.h"
-#include "DrawCommand.h"
 
 cFrameCnt cSystem::m_FrameCnt;
 
