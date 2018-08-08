@@ -17,6 +17,7 @@ void cCommandManager::Init()
 	m_Command.reset(new cMainCommand);
 	m_Queue.reset(new cMainCommandQueue);
 	m_SwapChain.reset(new cMainSwapChain);
+	m_Fence.reset(new cFenceObj);
 
 	m_Command->Create(m_Param.dev);
 	m_Queue->Create(m_Param.dev);

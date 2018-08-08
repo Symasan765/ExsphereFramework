@@ -10,6 +10,7 @@
 #include "MainSwapChain.h"
 #include "MainCommandQueue.h"
 #include "CommandParamStruct.h"
+#include "FenceObj.h"
 
 class cCommandManager
 {
@@ -23,6 +24,7 @@ private:
 	std::unique_ptr<cMainCommand> m_Command;
 	std::unique_ptr<cMainCommandQueue> m_Queue;
 	std::unique_ptr<cMainSwapChain> m_SwapChain;
+	std::unique_ptr<cFenceObj> m_Fence;
 
 	CommandParamStruct m_Param;
 };
