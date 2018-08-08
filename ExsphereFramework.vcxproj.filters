@@ -52,6 +52,9 @@
     <Filter Include="Rendering\SwapChain">
       <UniqueIdentifier>{ff9ba867-2835-4fb1-a934-51b411a64337}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rendering\Param">
+      <UniqueIdentifier>{30a1a37f-fef7-4eea-8069-9838bd549a73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DirectX12.cpp">
@@ -218,9 +221,6 @@
     <ClInclude Include="Src\FrameCnt.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="Src\DrawParam.h">
-      <Filter>Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="Src\MainCommandAllocators.h">
       <Filter>Rendering\Command</Filter>
     </ClInclude>
@@ -235,6 +235,12 @@
     </ClInclude>
     <ClInclude Include="Src\MainSwapChain.h">
       <Filter>Rendering\SwapChain</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\DrawParam.h">
+      <Filter>Rendering\Param</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\CommandParamStruct.h">
+      <Filter>Rendering\Param</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

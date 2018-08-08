@@ -153,6 +153,7 @@
     <ClCompile Include="Src\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\CommandParamStruct.h" />
     <ClInclude Include="Src\ConstantBuffer.h" />
     <ClInclude Include="Src\DirectX12.h" />
     <ClInclude Include="Src\DrawCommand.h" />
