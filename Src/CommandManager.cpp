@@ -1,7 +1,9 @@
 #include "CommandManager.h"
 #include "Utility.h"
+#include "DescHandleStep.h"
 
-void cCommandManager::Create(ID3D12Device * dev, Microsoft::WRL::ComPtr<IDXGIFactory2> dxgi, HWND hwnd, const UINT width, const UINT heigit, const UINT bufferNum)
+void cCommandManager::Create(ID3D12Device * dev, Microsoft::WRL::ComPtr<IDXGIFactory2> dxgi, HWND hwnd, const UINT width, const UINT heigit, 
+	const UINT bufferNum, Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> rtv, Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> dsv)
 {
 	m_Param.dev = dev;
 	m_Param.dxgi = dxgi;
@@ -10,11 +12,17 @@ void cCommandManager::Create(ID3D12Device * dev, Microsoft::WRL::ComPtr<IDXGIFac
 	m_Param.heigit = heigit;
 	m_Param.bufferNum = bufferNum;
 
+	m_NowTarget.HeapDsv = dsv;
+	m_NowTarget.HeapRtv = rtv;
+
 	Init();
 }
 
-void cCommandManager::CommandBuild(unsigned totalFrame, unsigned frameIndex)
+void cCommandManager::CommandBuild(Microsoft::WRL::ComPtr<ID3D12Resource>nowBuffer,unsigned totalFrame, unsigned frameIndex)
 {
+	// 描画フレーム更新
+	FrameUpdate(nowBuffer,frameIndex);
+
 	// アプリケーション開始直後にコマンドが溜まり切るまでの間待たせる関数
 	WaitForFence(totalFrame, frameIndex);
 
@@ -30,7 +38,20 @@ void cCommandManager::Init()
 
 	m_Command->Create(m_Param.dev);
 	m_Queue->Create(m_Param.dev);
-	m_SwapChain->Create(m_Param.dev, m_Param.dxgi, m_Param.hwnd, m_Param.width, m_Param.heigit, m_Param.bufferNum);
+	m_SwapChain->Create(m_Queue->GetQueue(), m_Param.dxgi, m_Param.hwnd, m_Param.width, m_Param.heigit, m_Param.bufferNum);
+
+	// ヒープサイズをグローバルとして取得しておく
+	cDescHandleStep descStep;
+	descStep.Init(m_Param.dev);
+}
+
+void cCommandManager::FrameUpdate(Microsoft::WRL::ComPtr<ID3D12Resource> nowBuffer, unsigned frameIndex)
+{
+	m_NowTarget.buffer = nowBuffer;
+	m_NowTarget.descHandleDsv = m_NowTarget.HeapDsv->GetCPUDescriptorHandleForHeapStart();
+	m_NowTarget.descHandleRtv = m_NowTarget.HeapRtv->GetCPUDescriptorHandleForHeapStart();
+
+	m_NowTarget.descHandleRtv.ptr += frameIndex * cDescHandleStep::GetSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);		// 先頭アドレス += (No * アドレスサイズ)
 }
 
 void cCommandManager::WaitForFence(unsigned totalFrame, unsigned idx)
@@ -40,6 +61,6 @@ void cCommandManager::WaitForFence(unsigned totalFrame, unsigned idx)
 	{
 		m_Fence->WaitForPreviousFrame(totalFrame - m_Param.bufferNum);
 
-		CheckHR(m_Command->GetSelectAlloc(idx,0).Get()->Reset());
+		CheckHR(m_Command->GetSelectAlloc(idx, 0).Get()->Reset());
 	}
 }

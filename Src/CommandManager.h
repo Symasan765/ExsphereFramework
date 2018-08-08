@@ -11,16 +11,20 @@
 #include "MainCommandQueue.h"
 #include "CommandParamStruct.h"
 #include "FenceObj.h"
+#include "RenderBufferStruct.h"
 
 class cCommandManager
 {
 public:
 	cCommandManager() = default;
 	~cCommandManager() = default;
-	void Create(ID3D12Device * dev, Microsoft::WRL::ComPtr<IDXGIFactory2> dxgi, HWND hwnd, const UINT width, const UINT heigit, const UINT bufferNum);
-	void CommandBuild(unsigned totalFrame, unsigned frameIndex);
+	void Create(ID3D12Device * dev, Microsoft::WRL::ComPtr<IDXGIFactory2> dxgi, HWND hwnd, const UINT width, const UINT heigit, 
+		const UINT bufferNum, Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> nowRtv, Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> dsv);
+	void CommandBuild(Microsoft::WRL::ComPtr<ID3D12Resource>nowBuffer,unsigned totalFrame, unsigned frameIndex);
+
 private:
 	void Init();
+	void FrameUpdate(Microsoft::WRL::ComPtr<ID3D12Resource> nowBuffer, unsigned frameIndex);
 	void WaitForFence(unsigned totalFrame,unsigned idx);
 
 	std::unique_ptr<cMainCommand> m_Command;
@@ -29,4 +33,5 @@ private:
 	std::unique_ptr<cFenceObj> m_Fence;
 
 	CommandParamStruct m_Param;
+	RenderBufferStruct m_NowTarget;
 };
