@@ -8,6 +8,8 @@ void cCommandManager::Create(ID3D12Device * dev, Microsoft::WRL::ComPtr<IDXGIFac
 	m_Param.width = width;
 	m_Param.heigit = heigit;
 	m_Param.bufferNum = bufferNum;
+
+	Init();
 }
 
 void cCommandManager::Init()
