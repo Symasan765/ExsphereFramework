@@ -6,11 +6,12 @@ cMainSystem::cMainSystem(HINSTANCE hInst) : m_MainWindow(hInst)
 	ZeroMemory(&m_Msg, sizeof(m_Msg));
 	m_MainWindow.CreateMainWindow();
 	m_DirectX12.CreateDevice(m_MainWindow.GetHWND());
+	cTextureLoader::Init(cDirectX12::GetDevice());
+
+
 	m_CommandManager.Create(cDirectX12::GetDevice(),cDirectX12::GetDxgiFactory(),cMainWindow::GetHWND(), WindowOptions::g_WindowSizeX, WindowOptions::g_WindowSizeY,DrawParam::g_MaxFrameLatency);
 	m_MainWindow.CreateRenderBuffer(m_CommandManager.GetSwapChain());
 	m_CommandManager.SetNowTarget(cMainWindow::GetDescHeapRtv(),cMainWindow::GetDescHeapDsv());
-
-	cTextureLoader::Init(cDirectX12::GetDevice());
 }
 
 cMainSystem::~cMainSystem()

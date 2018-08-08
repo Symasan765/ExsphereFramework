@@ -31,6 +31,7 @@ void cCommandManager::CommandBuild(Microsoft::WRL::ComPtr<ID3D12Resource>nowBuff
 
 	// バッファクリアなどの前処理部分
 	m_Command->DrawBegin(m_NowTarget, frameIndex);
+	m_Command->DrawGameScene(m_NowTarget, frameIndex);
 	m_Command->DrawEnd(m_NowTarget, frameIndex);
 }
 
@@ -38,7 +39,8 @@ void cCommandManager::CommandQueueExe(unsigned totalFrame)
 {
 	ExePrologue();
 
-	// TODO 本処理も追加する
+	// TODO 本番用処理に変更する
+	ExeGameScene();
 
 	ExeEpilogue();
 	
@@ -92,6 +94,13 @@ void cCommandManager::WaitForFence(unsigned totalFrame, unsigned idx)
 void cCommandManager::ExePrologue()
 {
 	auto const list = m_Command->GetPrologueList().Get();
+
+	m_Queue->Exe(list, 1);
+}
+
+void cCommandManager::ExeGameScene()
+{
+	auto const list = m_Command->GetMainCommandLists().Get();
 
 	m_Queue->Exe(list, 1);
 }

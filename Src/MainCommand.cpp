@@ -1,5 +1,6 @@
 #include "MainCommand.h"
 #include "Utility.h"
+#include "RootSignatureTest.h"
 
 void cMainCommand::Create(ID3D12Device * dev)
 {
@@ -8,6 +9,9 @@ void cMainCommand::Create(ID3D12Device * dev)
 
 	m_Allocators->Create(dev);
 	m_Lists->Create(dev, m_Allocators->GetBeginAlloc().Get());
+
+	m_RootSig = new cRootSignatureTest;
+	m_RootSig->Init();
 }
 
 Microsoft::WRL::ComPtr<ID3D12CommandAllocator> cMainCommand::GetSelectAlloc(UINT vertical, UINT Horizontal)
@@ -37,6 +41,16 @@ void cMainCommand::DrawBegin(RenderBufferStruct& data, const unsigned cmdIndex)
 
 	// •`‰æ‘Oˆ—‚ÌI—¹
 	CheckHR(m_Lists->GetBegin()->Close());
+}
+
+void cMainCommand::DrawGameScene(RenderBufferStruct & data, const unsigned cmdIndex)
+{
+	auto* cmdList = m_Lists->GetTest().Get();
+	CheckHR(cmdList->Reset(m_Allocators->GetSelectAlloc(cmdIndex,0).Get(), nullptr));
+	cmdList->OMSetRenderTargets(1, &data.descHandleRtv, true, &data.descHandleDsv);
+	m_RootSig->Draw(cmdList);
+	// Fix draw command
+	CheckHR(cmdList->Close());
 }
 
 void cMainCommand::DrawEnd(RenderBufferStruct & data, const unsigned cmdIndex)
@@ -69,4 +83,9 @@ Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> cMainCommand::GetPrologueList(
 Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> cMainCommand::GetEpilogueList()
 {
 	return m_Lists->GetEnd();
+}
+
+Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> cMainCommand::GetMainCommandLists()
+{
+	return m_Lists->GetTest();
 }

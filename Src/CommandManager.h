@@ -30,6 +30,7 @@ private:
 	void FrameUpdate(Microsoft::WRL::ComPtr<ID3D12Resource> nowBuffer, unsigned frameIndex);
 	void WaitForFence(unsigned totalFrame,unsigned idx);
 	void ExePrologue();
+	void ExeGameScene();
 	void ExeEpilogue();
 
 	std::unique_ptr<cMainCommand> m_Command;
