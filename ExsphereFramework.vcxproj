@@ -125,6 +125,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Animation3D.cpp" />
     <ClCompile Include="Src\CommandManager.cpp" />
     <ClCompile Include="Src\DefaultRenderTarget.cpp" />
     <ClCompile Include="Src\DescHandleStep.cpp" />
@@ -160,6 +161,7 @@
     <ClCompile Include="Src\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Animation3D.h" />
     <ClInclude Include="Src\CommandManager.h" />
     <ClInclude Include="Src\CommandParamStruct.h" />
     <ClInclude Include="Src\ConstantBuffer.h" />
