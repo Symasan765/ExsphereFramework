@@ -145,6 +145,7 @@
     <ClCompile Include="Src\MainSwapChain.cpp" />
     <ClCompile Include="Src\MainSystem.cpp" />
     <ClCompile Include="Src\MainWindow.cpp" />
+    <ClCompile Include="Src\Mesh3D.cpp" />
     <ClCompile Include="Src\MeshTest.cpp" />
     <ClCompile Include="Src\PipelineStateObj.cpp" />
     <ClCompile Include="Src\ResourceCreateCommand.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="Src\MainSwapChain.h" />
     <ClInclude Include="Src\MainSystem.h" />
     <ClInclude Include="Src\MainWindow.h" />
+    <ClInclude Include="Src\Mesh3D.h" />
     <ClInclude Include="Src\MeshTest.h" />
     <ClInclude Include="Src\PipelineStateObj.h" />
     <ClInclude Include="Src\RenderBufferStruct.h" />
