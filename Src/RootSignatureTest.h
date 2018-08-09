@@ -11,6 +11,8 @@
 #include "PipelineStateObj.h"
 #include "ShaderByte.h"
 
+#include "RootSignature.h"
+
 struct CBuffer {
 	DirectX::XMFLOAT4X4 worldViewProjMatrix;
 	DirectX::XMFLOAT4X4 worldMatrix;
@@ -55,4 +57,5 @@ public:
 	cPipelineStateObj mc_PSO;
 	cShaderByte m_Shader;
 	AssimpTest meshdata;
+	cRootSignature m_RootSignature;
 };

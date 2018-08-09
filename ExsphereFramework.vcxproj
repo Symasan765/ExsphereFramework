@@ -147,6 +147,7 @@
     <ClCompile Include="Src\MeshTest.cpp" />
     <ClCompile Include="Src\PipelineStateObj.cpp" />
     <ClCompile Include="Src\ResourceCreateCommand.cpp" />
+    <ClCompile Include="Src\RootSignature.cpp" />
     <ClCompile Include="Src\RootSignatureTest.cpp" />
     <ClCompile Include="Src\ShaderByte.cpp" />
     <ClCompile Include="Src\System.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="Src\PipelineStateObj.h" />
     <ClInclude Include="Src\RenderBufferStruct.h" />
     <ClInclude Include="Src\ResourceCreateCommand.h" />
+    <ClInclude Include="Src\RootSignature.h" />
     <ClInclude Include="Src\RootSignatureTest.h" />
     <ClInclude Include="Src\ShaderByte.h" />
     <ClInclude Include="Src\System.h" />

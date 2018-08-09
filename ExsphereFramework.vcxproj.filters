@@ -67,6 +67,9 @@
     <Filter Include="Window\Param">
       <UniqueIdentifier>{cad4ac05-8cd7-42b5-8f20-50c9e939fa79}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pipeline\RootSignature">
+      <UniqueIdentifier>{726d4622-50fa-4d7c-9e9a-a406dbd65bbd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DirectX12.cpp">
@@ -155,6 +158,9 @@
     </ClCompile>
     <ClCompile Include="Src\DefaultRenderTarget.cpp">
       <Filter>Window\DefaultRenderTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\RootSignature.cpp">
+      <Filter>Pipeline\RootSignature</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +283,9 @@
     </ClInclude>
     <ClInclude Include="Src\WindowParam.h">
       <Filter>Window\Param</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\RootSignature.h">
+      <Filter>Pipeline\RootSignature</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
