@@ -126,6 +126,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Src\Animation3D.cpp" />
+    <ClCompile Include="Src\AssimpLoader.cpp" />
     <ClCompile Include="Src\CommandManager.cpp" />
     <ClCompile Include="Src\DefaultRenderTarget.cpp" />
     <ClCompile Include="Src\DescHandleStep.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="Src\Material.cpp" />
     <ClCompile Include="Src\Mesh3D.cpp" />
     <ClCompile Include="Src\MeshTest.cpp" />
+    <ClCompile Include="Src\ModelResource.cpp" />
     <ClCompile Include="Src\PipelineStateObj.cpp" />
     <ClCompile Include="Src\ResourceCreateCommand.cpp" />
     <ClCompile Include="Src\RootSignature.cpp" />
@@ -162,6 +164,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Animation3D.h" />
+    <ClInclude Include="Src\AssimpLoader.h" />
+    <ClInclude Include="Src\BoneStruct.h" />
     <ClInclude Include="Src\CommandManager.h" />
     <ClInclude Include="Src\CommandParamStruct.h" />
     <ClInclude Include="Src\ConstantBuffer.h" />
@@ -169,6 +173,7 @@
     <ClInclude Include="Src\DescHandleStep.h" />
     <ClInclude Include="Src\DirectX12.h" />
     <ClInclude Include="Src\DrawParam.h" />
+    <ClInclude Include="Src\DXMath.h" />
     <ClInclude Include="Src\FenceObj.h" />
     <ClInclude Include="Src\FrameCnt.h" />
     <ClInclude Include="Src\GameLoop.h" />
@@ -193,6 +198,7 @@
     <ClInclude Include="Src\Material.h" />
     <ClInclude Include="Src\Mesh3D.h" />
     <ClInclude Include="Src\MeshTest.h" />
+    <ClInclude Include="Src\ModelResource.h" />
     <ClInclude Include="Src\PipelineStateObj.h" />
     <ClInclude Include="Src\RenderBufferStruct.h" />
     <ClInclude Include="Src\ResourceCreateCommand.h" />

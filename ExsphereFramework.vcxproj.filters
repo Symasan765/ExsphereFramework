@@ -70,6 +70,12 @@
     <Filter Include="Pipeline\RootSignature">
       <UniqueIdentifier>{726d4622-50fa-4d7c-9e9a-a406dbd65bbd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mesh\Data">
+      <UniqueIdentifier>{c0d5d055-c71b-4c4c-a3cb-9f2c5680caeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mesh\Loader">
+      <UniqueIdentifier>{0fc29f6e-57ed-483c-8c39-b2d4cd1dce33}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DirectX12.cpp">
@@ -162,17 +168,23 @@
     <ClCompile Include="Src\RootSignature.cpp">
       <Filter>Pipeline\RootSignature</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Graphic3D.cpp">
-      <Filter>Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Mesh3D.cpp">
-      <Filter>Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Material.cpp">
-      <Filter>Mesh</Filter>
+    <ClCompile Include="Src\AssimpLoader.cpp">
+      <Filter>Mesh\Loader</Filter>
     </ClCompile>
     <ClCompile Include="Src\Animation3D.cpp">
-      <Filter>Mesh</Filter>
+      <Filter>Mesh\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphic3D.cpp">
+      <Filter>Mesh\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Material.cpp">
+      <Filter>Mesh\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Mesh3D.cpp">
+      <Filter>Mesh\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ModelResource.cpp">
+      <Filter>Mesh\Data</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -299,17 +311,29 @@
     <ClInclude Include="Src\RootSignature.h">
       <Filter>Pipeline\RootSignature</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Graphic3D.h">
-      <Filter>Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Mesh3D.h">
-      <Filter>Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Material.h">
-      <Filter>Mesh</Filter>
+    <ClInclude Include="Src\AssimpLoader.h">
+      <Filter>Mesh\Loader</Filter>
     </ClInclude>
     <ClInclude Include="Src\Animation3D.h">
-      <Filter>Mesh</Filter>
+      <Filter>Mesh\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphic3D.h">
+      <Filter>Mesh\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Material.h">
+      <Filter>Mesh\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Mesh3D.h">
+      <Filter>Mesh\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\BoneStruct.h">
+      <Filter>Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\DXMath.h">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ModelResource.h">
+      <Filter>Mesh\Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

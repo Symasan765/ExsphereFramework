@@ -6,13 +6,17 @@
 //									èºñ{ óYîVâÓ
 =================================================*/
 #pragma once
+#include "Mesh3D.h"
+#include "Material.h"
+#include "Animation3D.h"
 
 class cGraphic3D
 {
 public:
-	cGraphic3D() = default;
+	cGraphic3D(cMesh3D mesh,cMaterial material, cAnimation3D anim);
 	~cGraphic3D() = default;
 
-private:
-
+	cMesh3D m_Mesh;
+	cMaterial m_Material;
+	cAnimation3D m_Animation3D;
 };

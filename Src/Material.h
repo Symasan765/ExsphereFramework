@@ -6,13 +6,15 @@
 //									¼–{ —Y”V‰î
 =================================================*/
 #pragma once
+#include <vector>
+#include "Texture.h"
 
 class cMaterial
 {
 public:
-	cMaterial();
-	~cMaterial();
+	cMaterial(const std::vector<cTexture>& textures);
+	~cMaterial() = default;
 
 private:
-
+	std::vector<cTexture> m_Tex;
 };
