@@ -1,6 +1,6 @@
 #include "Material.h"
 
-cMaterial::cMaterial(const std::vector<cTexture>& textures)
+void cMaterial::DataSet(const std::vector<cTexture>& textures)
 {
 	m_Tex = textures;
 }

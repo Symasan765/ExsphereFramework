@@ -12,9 +12,10 @@
 class cMaterial
 {
 public:
-	cMaterial(const std::vector<cTexture>& textures);
+	cMaterial() = default;
 	~cMaterial() = default;
 
+	void DataSet(const std::vector<cTexture>& textures);
 private:
 	std::vector<cTexture> m_Tex;
 };

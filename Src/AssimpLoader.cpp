@@ -14,7 +14,7 @@ std::unique_ptr<cModelResource> cAssimpLoader::Load(std::string filePath)
 		aiProcessPreset_TargetRealtime_Quality | aiProcess_ConvertToLeftHanded);
 
 	if (pScene == NULL)
-		return;
+		return nullptr;
 
 	// ここでボーンの親子関係を作っている
 	GetBoneNode(-1, pScene->mRootNode);
@@ -110,8 +110,10 @@ cGraphic3D cAssimpLoader::processMesh(aiMesh * mesh, const aiScene * scene)
 
 	GetBoneData(mesh, vertices);
 
-	cMesh3D meshdata(vertices, indices);
-	cMaterial materialdata(textures);
+	cMesh3D meshdata;
+	meshdata.DataSet(vertices, indices);
+	cMaterial materialdata;
+	materialdata.DataSet(textures);
 	cAnimation3D animeData;		// TODO アニメーション読み込みを実装すること
 
 	return cGraphic3D(meshdata, materialdata, animeData);

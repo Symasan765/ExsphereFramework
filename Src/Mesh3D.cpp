@@ -2,7 +2,7 @@
 #include "Utility.h"
 #include <d3dx12.h>
 
-cMesh3D::cMesh3D(const std::vector<DefaultVertex>& vertices, const std::vector<UINT>& indices)
+void cMesh3D::DataSet(const std::vector<DefaultVertex>& vertices, const std::vector<UINT>& indices)
 {
 	int size = sizeof(indices[0]);
 	mIndexCount = static_cast<UINT>(indices.size());

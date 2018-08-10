@@ -1,6 +1,6 @@
 #include "Graphic3D.h"
 
-cGraphic3D::cGraphic3D(cMesh3D mesh, cMaterial material, cAnimation3D anim)
+cGraphic3D::cGraphic3D(const cMesh3D& mesh, const cMaterial& material, const cAnimation3D& anim)
 {
 	m_Mesh = mesh;
 	m_Material = material;

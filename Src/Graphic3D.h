@@ -13,10 +13,12 @@
 class cGraphic3D
 {
 public:
-	cGraphic3D(cMesh3D mesh,cMaterial material, cAnimation3D anim);
+	cGraphic3D(const cMesh3D& mesh,const cMaterial& material, const cAnimation3D& anim);
 	~cGraphic3D() = default;
 
 	cMesh3D m_Mesh;
 	cMaterial m_Material;
 	cAnimation3D m_Animation3D;
+private:
+	cGraphic3D() = default;
 };

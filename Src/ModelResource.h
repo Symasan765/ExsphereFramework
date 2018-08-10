@@ -7,6 +7,7 @@
 =================================================*/
 #pragma once
 #include "Graphic3D.h"
+#include "BoneStruct.h"
 
 class cModelResource
 {

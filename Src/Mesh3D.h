@@ -13,17 +13,12 @@
 class cMesh3D
 {
 public:
-	cMesh3D(const std::vector<DefaultVertex>& vertices,
-	const std::vector<UINT>& indices);
-
+	cMesh3D() = default;
 	~cMesh3D() = default;
 
+	void DataSet(const std::vector<DefaultVertex>& vertices,
+		const std::vector<UINT>& indices);
 private:
-	std::vector<DefaultVertex> vertices;
-	std::vector<UINT> indices;
-
-
-
 	Microsoft::WRL::ComPtr<ID3D12Resource> mVB;
 	UINT mIndexCount = 0;
 	UINT mVBIndexOffset = 0;
