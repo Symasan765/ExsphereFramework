@@ -16,6 +16,7 @@ public:
 	~cMaterial() = default;
 
 	void DataSet(const std::vector<cTexture>& textures);
+	void SetTexture(ID3D12GraphicsCommandList * cmdList, UINT RootParameterIndex);
 private:
 	std::vector<cTexture> m_Tex;
 };

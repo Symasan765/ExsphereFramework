@@ -12,6 +12,7 @@
 #include "ShaderByte.h"
 
 #include "RootSignature.h"
+#include "ModelResource.h"
 
 struct CBuffer {
 	DirectX::XMFLOAT4X4 worldViewProjMatrix;
@@ -58,4 +59,5 @@ public:
 	cShaderByte m_Shader;
 	AssimpTest meshdata;
 	cRootSignature m_RootSignature;
+	std::unique_ptr<cModelResource> m_pModel;
 };

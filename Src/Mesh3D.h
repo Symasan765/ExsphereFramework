@@ -18,6 +18,8 @@ public:
 
 	void DataSet(const std::vector<DefaultVertex>& vertices,
 		const std::vector<UINT>& indices);
+
+	void MeshDraw(ID3D12GraphicsCommandList * cmdList, UINT InstanceCount);
 private:
 	Microsoft::WRL::ComPtr<ID3D12Resource> mVB;
 	UINT mIndexCount = 0;

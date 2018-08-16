@@ -33,3 +33,10 @@ void cMesh3D::DataSet(const std::vector<DefaultVertex>& vertices, const std::vec
 	mIBView.Format = DXGI_FORMAT_R32_UINT;
 	mIBView.SizeInBytes = IBSize;
 }
+
+void cMesh3D::MeshDraw(ID3D12GraphicsCommandList * cmdList, UINT InstanceCount)
+{
+	cmdList->IASetVertexBuffers(0, 1, &mVBView);
+	cmdList->IASetIndexBuffer(&mIBView);
+	cmdList->DrawIndexedInstanced(mIndexCount, InstanceCount, 0, 0, 0);
+}
