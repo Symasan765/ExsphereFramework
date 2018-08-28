@@ -153,6 +153,7 @@
     <ClCompile Include="Src\ModelManager.cpp" />
     <ClCompile Include="Src\ModelResource.cpp" />
     <ClCompile Include="Src\PipelineStateObj.cpp" />
+    <ClCompile Include="Src\RenderingFramework.cpp" />
     <ClCompile Include="Src\ResourceCreateCommand.cpp" />
     <ClCompile Include="Src\RootSignature.cpp" />
     <ClCompile Include="Src\RootSignatureTest.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="Src\ModelResource.h" />
     <ClInclude Include="Src\PipelineStateObj.h" />
     <ClInclude Include="Src\RenderBufferStruct.h" />
+    <ClInclude Include="Src\RenderingFramework.h" />
     <ClInclude Include="Src\ResourceCreateCommand.h" />
     <ClInclude Include="Src\RootSignature.h" />
     <ClInclude Include="Src\RootSignatureTest.h" />

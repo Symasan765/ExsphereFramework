@@ -17,12 +17,7 @@ public:
 	cModelManager() = default;
 	~cModelManager() = default;
 
-	/// <summary>
-	/// ファイル名を元にリソースIDを取得する
-	/// </summary>
-	/// <param name="fileName">読み込むファイル名。パスは自動的に付与する</param>
-	UINT GetID(std::string fileName);
+	static UINT Load(std::string fileName);
 private:
-	std::unordered_map<std::string, UINT> m_IDMap;
-	std::unordered_map<UINT, std::unique_ptr<cModelResource>> m_ResourceMap;
+	static std::unordered_map<UINT, std::unique_ptr<cModelResource>> m_ResourceMap;
 };
