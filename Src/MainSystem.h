@@ -22,7 +22,6 @@ public:
 	void SystemLoop();
 	void Destroy();
 private:
-	void JobExe();
 	void Update(float delta_time);
 
 	cMainWindow m_MainWindow;

@@ -85,6 +85,9 @@
     <Filter Include="Actor">
       <UniqueIdentifier>{70a10032-bfbc-4895-8a99-c325ccdebd5b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Component">
+      <UniqueIdentifier>{c4d18db4-9134-4b37-9770-decb6c74ed9a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DirectX12.cpp">
@@ -216,14 +219,17 @@
     <ClCompile Include="Src\Level.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
-    <ClCompile Include="Src\MoveComponent.cpp">
-      <Filter>Actor</Filter>
-    </ClCompile>
     <ClCompile Include="Src\AsynceJobManager.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
     <ClCompile Include="Src\TimeCheck.cpp">
       <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MoveComponent.cpp">
+      <Filter>Actor\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\RenderComponent.cpp">
+      <Filter>Actor\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -404,14 +410,17 @@
     <ClInclude Include="Src\Level.h">
       <Filter>Actor</Filter>
     </ClInclude>
-    <ClInclude Include="Src\MoveComponent.h">
-      <Filter>Actor</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Actor.h">
       <Filter>Actor</Filter>
     </ClInclude>
     <ClInclude Include="Src\TimeCheck.h">
       <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\MoveComponent.h">
+      <Filter>Actor\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\RenderComponent.h">
+      <Filter>Actor\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -4,5 +4,6 @@ enum ComponentID : unsigned {
 	kActor,
 	kMove,			// ˆÚ“®
 	kLevelUpdate,
+	kRender,
 	kEnd,
 };

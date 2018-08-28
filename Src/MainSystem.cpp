@@ -44,19 +44,13 @@ void cMainSystem::Destroy()
 	m_DirectX12.Destroy();
 }
 
-void cMainSystem::JobExe()
-{
-	auto JobScheduler = JobScheduler::Instance();
-	JobScheduler->Execute(0U);
-}
-
 void cMainSystem::Update(float delta_time)
 {
 	// フレームアップデート処理
 	m_FrameCnt.Update();
 
 	//ここにメイン処理
-	m_MainLoop.ExeMainLoop();
+	m_MainLoop.ExeMainLoop(delta_time);
 	m_CommandManager.CommandBuild(cMainWindow::GetBuffer(cFrameCnt::GetNowIndex()), cFrameCnt::GetFrameNo(), cFrameCnt::GetNowIndex());
 
 	// TODO 今後、上記のアップデートと、ここの描画部分を並列化させる

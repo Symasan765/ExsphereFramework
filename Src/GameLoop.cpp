@@ -14,13 +14,11 @@
 /// </summary>
 void cGameLoop::ExeMainLoop(float delta_time)
 {
-	// TODO ループの最初で入力処理を行う
-
-	// TODO マネージャー系の解放処理確認を行う
+	JobExe(delta_time);
 }
 
 void cGameLoop::JobExe(float delta_time)
 {
 	auto JobScheduler = JobScheduler::Instance();
-	JobScheduler->Execute(0U);
+	JobScheduler->Execute(delta_time);
 }
