@@ -1,5 +1,6 @@
 #include "MainSystem.h"
 #include "TextureLoader.h"
+#include "JobScheduler.h"
 
 cMainSystem::cMainSystem(HINSTANCE hInst) : m_MainWindow(hInst)
 {
@@ -46,4 +47,10 @@ void cMainSystem::Destroy()
 {
 	// システム系の解放処理を行う
 	m_DirectX12.Destroy();
+}
+
+void cMainSystem::JobExe()
+{
+	auto JobScheduler = JobScheduler::Instance();
+	JobScheduler->Execute(0U);
 }

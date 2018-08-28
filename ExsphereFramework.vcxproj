@@ -168,6 +168,7 @@
     <ClCompile Include="Src\System.cpp" />
     <ClCompile Include="Src\Texture.cpp" />
     <ClCompile Include="Src\TextureLoader.cpp" />
+    <ClCompile Include="Src\TimeCheck.cpp" />
     <ClCompile Include="Src\Utility.cpp" />
     <ClCompile Include="Src\WinMain.cpp" />
   </ItemGroup>
@@ -229,6 +230,7 @@
     <ClInclude Include="Src\System.h" />
     <ClInclude Include="Src\Texture.h" />
     <ClInclude Include="Src\TextureLoader.h" />
+    <ClInclude Include="Src\TimeCheck.h" />
     <ClInclude Include="Src\Utility.h" />
     <ClInclude Include="Src\VertexStruct.h" />
     <ClInclude Include="Src\WindowParam.h" />

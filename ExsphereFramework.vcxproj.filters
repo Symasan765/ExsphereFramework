@@ -222,6 +222,9 @@
     <ClCompile Include="Src\AsynceJobManager.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
+    <ClCompile Include="Src\TimeCheck.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\ImGUI\stb_rect_pack.h">
@@ -406,6 +409,9 @@
     </ClInclude>
     <ClInclude Include="Src\Actor.h">
       <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\TimeCheck.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

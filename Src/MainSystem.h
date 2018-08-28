@@ -21,6 +21,8 @@ public:
 	void SystemLoop();
 	void Destroy();
 private:
+	void JobExe();
+
 	cMainWindow m_MainWindow;
 	cGameLoop m_MainLoop;
 	cDirectX12 m_DirectX12;
