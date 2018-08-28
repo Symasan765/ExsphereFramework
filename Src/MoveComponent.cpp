@@ -1,0 +1,31 @@
+#include "Component.h"
+#include "Actor.h"
+#include "MoveComponent.h"
+
+using namespace DirectX;
+
+MoveComponent::MoveComponent(Actor * owner) : Component(owner)
+{
+}
+
+bool MoveComponent::Create()
+{
+	m_Job.SetFunction(this, &MoveComponent::Update);
+	JobScheduler* jobScheduler = JobScheduler::Instance();
+
+	jobScheduler->Register(&m_Job, ComponentID::kMove);
+
+	return true;
+}
+
+void MoveComponent::Destroy()
+{
+}
+
+void MoveComponent::Update(uint64_t delta_time)
+{
+	XMVECTOR vector = XMLoadFloat4(&m_Velocity) * m_Speed;
+
+	XMVECTOR pos = XMLoadFloat3(&m_Owner->GetPos());
+	m_Owner->SetPos(pos + vector);
+}

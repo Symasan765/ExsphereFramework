@@ -127,6 +127,8 @@
   <ItemGroup>
     <ClCompile Include="Src\Animation3D.cpp" />
     <ClCompile Include="Src\AssimpLoader.cpp" />
+    <ClCompile Include="Src\AsynceJobManager.cpp" />
+    <ClCompile Include="Src\AsyncJob.cpp" />
     <ClCompile Include="Src\CommandManager.cpp" />
     <ClCompile Include="Src\DefaultRenderTarget.cpp" />
     <ClCompile Include="Src\DescHandleStep.cpp" />
@@ -140,6 +142,10 @@
     <ClCompile Include="Src\ImGUI\imgui_demo.cpp" />
     <ClCompile Include="Src\ImGUI\imgui_draw.cpp" />
     <ClCompile Include="Src\ImGUI\imgui_impl_dx12.cpp" />
+    <ClCompile Include="Src\Job.cpp" />
+    <ClCompile Include="Src\JobContainer.cpp" />
+    <ClCompile Include="Src\JobScheduler.cpp" />
+    <ClCompile Include="Src\Level.cpp" />
     <ClCompile Include="Src\MainCommand.cpp" />
     <ClCompile Include="Src\MainCommandAllocators.cpp" />
     <ClCompile Include="Src\MainCommandLists.cpp" />
@@ -152,6 +158,7 @@
     <ClCompile Include="Src\MeshTest.cpp" />
     <ClCompile Include="Src\ModelManager.cpp" />
     <ClCompile Include="Src\ModelResource.cpp" />
+    <ClCompile Include="Src\MoveComponent.cpp" />
     <ClCompile Include="Src\PipelineStateObj.cpp" />
     <ClCompile Include="Src\RenderingFramework.cpp" />
     <ClCompile Include="Src\ResourceCreateCommand.cpp" />
@@ -165,11 +172,16 @@
     <ClCompile Include="Src\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Actor.h" />
     <ClInclude Include="Src\Animation3D.h" />
     <ClInclude Include="Src\AssimpLoader.h" />
+    <ClInclude Include="Src\AsynceJobManager.h" />
+    <ClInclude Include="Src\AsyncJob.h" />
     <ClInclude Include="Src\BoneStruct.h" />
     <ClInclude Include="Src\CommandManager.h" />
     <ClInclude Include="Src\CommandParamStruct.h" />
+    <ClInclude Include="Src\Component.h" />
+    <ClInclude Include="Src\ComponentType.h" />
     <ClInclude Include="Src\ConstantBuffer.h" />
     <ClInclude Include="Src\DefaultRenderTarget.h" />
     <ClInclude Include="Src\DescHandleStep.h" />
@@ -190,6 +202,10 @@
     <ClInclude Include="Src\ImGUI\stb_textedit.h" />
     <ClInclude Include="Src\ImGUI\stb_truetype.h" />
     <ClInclude Include="Src\InputLayout.h" />
+    <ClInclude Include="Src\Job.h" />
+    <ClInclude Include="Src\JobContainer.h" />
+    <ClInclude Include="Src\JobScheduler.h" />
+    <ClInclude Include="Src\Level.h" />
     <ClInclude Include="Src\MainCommand.h" />
     <ClInclude Include="Src\MainCommandAllocators.h" />
     <ClInclude Include="Src\MainCommandLists.h" />
@@ -202,6 +218,7 @@
     <ClInclude Include="Src\MeshTest.h" />
     <ClInclude Include="Src\ModelManager.h" />
     <ClInclude Include="Src\ModelResource.h" />
+    <ClInclude Include="Src\MoveComponent.h" />
     <ClInclude Include="Src\PipelineStateObj.h" />
     <ClInclude Include="Src\RenderBufferStruct.h" />
     <ClInclude Include="Src\RenderingFramework.h" />

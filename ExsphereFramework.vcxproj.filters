@@ -82,6 +82,9 @@
     <Filter Include="Rendering\Framework">
       <UniqueIdentifier>{4bdd60a0-6317-4d1c-8f0e-b72682e41d53}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor">
+      <UniqueIdentifier>{70a10032-bfbc-4895-8a99-c325ccdebd5b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DirectX12.cpp">
@@ -197,6 +200,27 @@
     </ClCompile>
     <ClCompile Include="Src\RenderingFramework.cpp">
       <Filter>Rendering\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\AsyncJob.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Job.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\JobContainer.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\JobScheduler.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Level.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MoveComponent.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\AsynceJobManager.cpp">
+      <Filter>Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -352,6 +376,36 @@
     </ClInclude>
     <ClInclude Include="Src\RenderingFramework.h">
       <Filter>Rendering\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\AsynceJobManager.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\AsyncJob.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Component.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ComponentType.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Job.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\JobContainer.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\JobScheduler.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Level.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\MoveComponent.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Actor.h">
+      <Filter>Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
