@@ -22,7 +22,7 @@ void MoveComponent::Destroy()
 {
 }
 
-void MoveComponent::Update(uint64_t delta_time)
+void MoveComponent::Update(float delta_time)
 {
 	XMVECTOR vector = XMLoadFloat4(&m_Velocity) * m_Speed;
 

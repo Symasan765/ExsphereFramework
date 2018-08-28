@@ -35,7 +35,7 @@ void JobScheduler::Unregister(Job * job)
 {
 }
 
-void JobScheduler::Execute(uint64_t delta_time)
+void JobScheduler::Execute(float delta_time)
 {
 	for (JobContainer& container : m_Containers) {
 		container.MakeReady();

@@ -24,7 +24,7 @@ public:
 	void Destroy() {};
 
 	// フレーム毎の更新処理
-	void Update(uint64_t delta_time) { printf("%f\n", m_Pos.x); };
+	void Update(float delta_time) { printf("%f\n", m_Pos.x); };
 	void SetID(uint64_t id) { m_ID = id; };
 
 	void SetPos(DirectX::XMFLOAT3 pos) { m_Pos = pos; };
@@ -75,7 +75,6 @@ inline T * Actor::GetComponent()
 {
 	std::map<unsigned, Component*>::iterator it = m_Components.find(T::GetID());
 	if (it != m_Components.end()) {
-		it->second->Destroy();		// TODO これあってる？？
 		return static_cast<T*>(it->second);
 	}
 

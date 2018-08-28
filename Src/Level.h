@@ -13,7 +13,7 @@ public:
 	~Level();
 
 	bool Create();
-	void Execute(uint64_t delta_time);
+	void Execute(float delta_time);
 	void Destroy();
 private:
 	void AsycExecute();

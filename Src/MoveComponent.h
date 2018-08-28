@@ -17,7 +17,7 @@ public:
 	virtual bool Create()override;
 	virtual void Destroy()override;
 
-	void Update(uint64_t delta_time);
+	void Update(float delta_time);
 
 	void SetVelocity(DirectX::XMFLOAT4 velocity) {
 		m_Velocity = velocity;

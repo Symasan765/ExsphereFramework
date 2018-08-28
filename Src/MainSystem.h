@@ -12,6 +12,7 @@
 #include "DirectX12.h"
 #include "CommandManager.h"
 #include "FrameCnt.h"
+#include "TimeCheck.h"
 
 class cMainSystem {
 public:
@@ -22,12 +23,14 @@ public:
 	void Destroy();
 private:
 	void JobExe();
+	void Update(float delta_time);
 
 	cMainWindow m_MainWindow;
 	cGameLoop m_MainLoop;
 	cDirectX12 m_DirectX12;
 	cCommandManager m_CommandManager;
 	cFrameCnt m_FrameCnt;
+	cTimeCheck m_TimeCheck;
 
 	MSG m_Msg;	//メッセージ構造体
 };

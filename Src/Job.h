@@ -11,18 +11,18 @@ public:
 	~Job() = default;
 
 	// ジョブとして登録された関数を実行
-	void Execute(uint64_t delta_time);
+	void Execute(float delta_time);
 
 	template<typename T>
 	// ジョブとして実行するファンクションを設定
-	void SetFunction(T* ptr, void (T::* func)(uint64_t));
+	void SetFunction(T* ptr, void (T::* func)(float));
 
 	void SetContainer(JobContainer* container) {
 		m_Container = container;
 	}
 private:
 	// ジョブとして実行するファンクション変数
-	std::function<void(uint64_t)> m_Function;
+	std::function<void(float)> m_Function;
 	// 登録したコンテナのポインタ
 	JobContainer* m_Container = nullptr;
 
@@ -31,7 +31,7 @@ private:
 };
 
 template<typename T>
-inline void Job::SetFunction(T * ptr, void(T::* func)(uint64_t))
+inline void Job::SetFunction(T * ptr, void(T::* func)(float))
 {
 	// bind　…　指定の関数をラップしてfunctionを作成する
 	// mem_fn　…　与えられたメンバ関数を呼び出す Callable オブジェクトを生成して返す

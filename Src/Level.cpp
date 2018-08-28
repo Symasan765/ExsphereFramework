@@ -24,7 +24,7 @@ bool Level::Create()
 	return true;
 }
 
-void Level::Execute(uint64_t delta_time)
+void Level::Execute(float delta_time)
 {
 	if (!m_Initialized && m_AsyncJob.IsFinished()) {
 		if (m_pActor) {

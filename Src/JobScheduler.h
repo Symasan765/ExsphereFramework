@@ -19,7 +19,7 @@ public:
 	void Register(Job * job, ComponentID type);
 	void Unregister(Job* job);
 
-	void Execute(uint64_t delta_time);
+	void Execute(float delta_time);
 
 private:
 	static JobScheduler* m_Instance;

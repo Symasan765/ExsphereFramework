@@ -13,6 +13,7 @@ class cGameLoop {
 public:
 	cGameLoop() = default;
 	~cGameLoop() = default;
-	void ExeMainLoop();
+	void ExeMainLoop(float delta_time);
 private:
+	void JobExe(float delta_time);
 };
