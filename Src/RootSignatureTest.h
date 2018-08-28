@@ -57,7 +57,6 @@ public:
 	cTexture m_Tex;
 	cPipelineStateObj mc_PSO;
 	cShaderByte m_Shader;
-	AssimpTest meshdata;
 	cRootSignature m_RootSignature;
 	std::unique_ptr<cModelResource> m_pModel;
 };

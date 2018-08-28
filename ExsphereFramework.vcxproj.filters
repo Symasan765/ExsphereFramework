@@ -76,6 +76,9 @@
     <Filter Include="Mesh\Loader">
       <UniqueIdentifier>{0fc29f6e-57ed-483c-8c39-b2d4cd1dce33}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mesh\Manager">
+      <UniqueIdentifier>{c105898c-2132-4cb8-8a6d-fd0e2bc1be65}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DirectX12.cpp">
@@ -185,6 +188,9 @@
     </ClCompile>
     <ClCompile Include="Src\ModelResource.cpp">
       <Filter>Mesh\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ModelManager.cpp">
+      <Filter>Mesh\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -334,6 +340,9 @@
     </ClInclude>
     <ClInclude Include="Src\ModelResource.h">
       <Filter>Mesh\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ModelManager.h">
+      <Filter>Mesh\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

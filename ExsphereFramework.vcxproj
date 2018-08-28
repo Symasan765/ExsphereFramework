@@ -150,6 +150,7 @@
     <ClCompile Include="Src\Material.cpp" />
     <ClCompile Include="Src\Mesh3D.cpp" />
     <ClCompile Include="Src\MeshTest.cpp" />
+    <ClCompile Include="Src\ModelManager.cpp" />
     <ClCompile Include="Src\ModelResource.cpp" />
     <ClCompile Include="Src\PipelineStateObj.cpp" />
     <ClCompile Include="Src\ResourceCreateCommand.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Src\Material.h" />
     <ClInclude Include="Src\Mesh3D.h" />
     <ClInclude Include="Src\MeshTest.h" />
+    <ClInclude Include="Src\ModelManager.h" />
     <ClInclude Include="Src\ModelResource.h" />
     <ClInclude Include="Src\PipelineStateObj.h" />
     <ClInclude Include="Src\RenderBufferStruct.h" />

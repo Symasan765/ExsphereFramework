@@ -30,7 +30,6 @@ void cRootSignatureTest::MeshAssimopLoad()
 	
 	cAssimpLoader Loader;
 	m_pModel = Loader.Load("Private/Link.x");
-	meshdata.Load("Private/Link.x");
 }
 
 void cRootSignatureTest::MeshLoad()
@@ -224,37 +223,12 @@ void cRootSignatureTest::UseHelperDraw(ID3D12GraphicsCommandList * cmdList)
 
 		m_pModel->Draw(cmdList, true, 2, 1);
 
-
-		/*for (int i = 0; i < meshdata.meshes.size(); i++) {
-			auto cbvSrvUavDescHeap = m_ConstHelBuf.GetDescriptorHeap()->GetGPUDescriptorHandleForHeapStart();
-			ID3D12DescriptorHeap* descHeaps[] = { m_ConstHelBuf.GetDescriptorHeap() };
-			cmdList->SetDescriptorHeaps(ARRAYSIZE(descHeaps), descHeaps);
-			cmdList->SetGraphicsRootDescriptorTable(0, cbvSrvUavDescHeap);
-
-			if (meshdata.meshes[i].textures.size() != 0) {
-				ID3D12DescriptorHeap* srvHeaps[] = { meshdata.meshes[i].textures[0].GetDescriptorHeap().Get() };
-				cmdList->SetDescriptorHeaps(ARRAYSIZE(srvHeaps), srvHeaps);
-				cmdList->SetGraphicsRootDescriptorTable(2, meshdata.meshes[i].textures[0].GetDescriptorHeap().Get()->GetGPUDescriptorHandleForHeapStart());
-			}
-
-			auto cbvbonecHeap = m_Bones.GetDescriptorHeap()->GetGPUDescriptorHandleForHeapStart();
-			ID3D12DescriptorHeap* boneHeaps[] = { m_Bones.GetDescriptorHeap() };
-			cmdList->SetDescriptorHeaps(ARRAYSIZE(boneHeaps), boneHeaps);
-			cmdList->SetGraphicsRootDescriptorTable(1, cbvbonecHeap);
-
-
-			cmdList->SetPipelineState(mc_PSO.GetPipelineState().Get());
-			cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-			cmdList->IASetVertexBuffers(0, 1, &meshdata.meshes[i].mVBView);
-			cmdList->IASetIndexBuffer(&meshdata.meshes[i].mIBView);
-			cmdList->DrawIndexedInstanced(meshdata.meshes[i].mIndexCount, 1, 0, 0, 0);
-		}*/
 	}
 }
 
 void cRootSignatureTest::BoneCalc()
 {
-	auto& bones = meshdata.m_Bone;
+	auto& bones = m_pModel->m_Bone;
 	XMMATRIX data[100];
 	for (int i = 0; i < 100; i++) {
 		data[i] = XMMatrixIdentity();
