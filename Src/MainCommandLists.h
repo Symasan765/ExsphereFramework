@@ -17,7 +17,6 @@ public:
 
 	inline Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> GetBegin() { return m_CommandListProl; };
 	inline Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> GetEnd() { return m_CommandListEpir; };
-	inline Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> GetTest() { return m_CommandList[0]; };		// TODO かならず添え字指定して取得できるように本実装に切り替えろ！！
 	inline Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>* GetListPtr() { return m_CommandList; };
 
 private:

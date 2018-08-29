@@ -46,16 +46,22 @@ void cMainCommand::DrawBegin(RenderBufferStruct& data, const unsigned cmdIndex)
 
 void cMainCommand::DrawGameScene(RenderBufferStruct & data, const unsigned cmdIndex)
 {
-	auto* cmdList = m_Lists->GetTest().Get();
-	CheckHR(cmdList->Reset(m_Allocators->GetSelectAlloc(cmdIndex,0).Get(), nullptr));
-	cmdList->OMSetRenderTargets(1, &data.descHandleRtv, true, &data.descHandleDsv);
+	auto cmdList = m_Lists->GetListPtr();
+
+	for (int i = 0; i < DrawParam::g_ThreadNum; i++) {
+		CheckHR(cmdList[i]->Reset(m_Allocators->GetSelectAlloc(cmdIndex, 0).Get(), nullptr));
+		cmdList[i]->OMSetRenderTargets(1, &data.descHandleRtv, true, &data.descHandleDsv);
+	}
 
 	// TODO 各コマンドリストの初期化、などなど行う
-	m_RootSig->Draw(cmdList);
+	m_RootSig->Draw(cmdList[0].Get());
 	cRenderingFramework rf;
 	rf.CommandIssue(GetMainCommandListPtr(), DrawParam::g_ThreadNum);
+
 	// Fix draw command
-	CheckHR(cmdList->Close());
+	for (int i = 0; i < DrawParam::g_ThreadNum; i++) {
+		CheckHR(cmdList[i]->Close());
+	}
 }
 
 void cMainCommand::DrawEnd(RenderBufferStruct & data, const unsigned cmdIndex)

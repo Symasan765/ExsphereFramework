@@ -99,7 +99,6 @@ void cRootSignatureTest::UseHelperInit()
 		mc_PSO.CreatePipelineState();
 	}
 
-	MeshLoad();
 	MeshAssimopLoad();
 }
 
