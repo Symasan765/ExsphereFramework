@@ -14,3 +14,8 @@ UINT cModelManager::Load(std::string fileName)
 
 	return ID;
 }
+
+void cModelManager::Draw(UINT ResourceID, ID3D12GraphicsCommandList * cmdList, bool texDrawFlag, UINT RootParameterIndex, UINT InstanceCount)
+{
+	m_ResourceMap[ResourceID]->Draw(cmdList, texDrawFlag, RootParameterIndex, InstanceCount);
+}

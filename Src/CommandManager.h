@@ -25,6 +25,10 @@ public:
 	void CommandQueueExe(unsigned totalFrame);
 
 	Microsoft::WRL::ComPtr<IDXGISwapChain1> GetSwapChain();
+
+	// コマンドリストの先頭アドレスと受け取る
+	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>* GetCommandListPtr();
+
 private:
 	void Init();
 	void FrameUpdate(Microsoft::WRL::ComPtr<ID3D12Resource> nowBuffer, unsigned frameIndex);

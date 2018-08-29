@@ -221,7 +221,7 @@ void cRootSignatureTest::UseHelperDraw(ID3D12GraphicsCommandList * cmdList)
 		cmdList->SetDescriptorHeaps(ARRAYSIZE(boneHeaps), boneHeaps);
 		cmdList->SetGraphicsRootDescriptorTable(1, cbvbonecHeap);
 
-		m_pModel->Draw(cmdList, true, 2, 1);
+		//m_pModel->Draw(cmdList, true, 2, 1);
 
 	}
 }

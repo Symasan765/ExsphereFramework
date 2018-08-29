@@ -29,6 +29,8 @@ public:
 	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> GetPrologueList();
 	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> GetEpilogueList();
 	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> GetMainCommandLists();	// TODO テスト実装！現在は複数のリストを取得できないようになっている
+
+	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>* GetMainCommandListPtr();
 private:
 	std::unique_ptr<cMainCommandAllocators> m_Allocators;
 	std::unique_ptr<cMainCommandLists> m_Lists;

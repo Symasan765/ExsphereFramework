@@ -1,6 +1,7 @@
 #include "MainCommand.h"
 #include "Utility.h"
 #include "RootSignatureTest.h"
+#include "RenderingFramework.h"
 
 void cMainCommand::Create(ID3D12Device * dev)
 {
@@ -48,7 +49,11 @@ void cMainCommand::DrawGameScene(RenderBufferStruct & data, const unsigned cmdIn
 	auto* cmdList = m_Lists->GetTest().Get();
 	CheckHR(cmdList->Reset(m_Allocators->GetSelectAlloc(cmdIndex,0).Get(), nullptr));
 	cmdList->OMSetRenderTargets(1, &data.descHandleRtv, true, &data.descHandleDsv);
+
+	// TODO 各コマンドリストの初期化、などなど行う
 	m_RootSig->Draw(cmdList);
+	cRenderingFramework rf;
+	rf.CommandIssue(GetMainCommandListPtr(), DrawParam::g_ThreadNum);
 	// Fix draw command
 	CheckHR(cmdList->Close());
 }
@@ -88,4 +93,9 @@ Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> cMainCommand::GetEpilogueList(
 Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> cMainCommand::GetMainCommandLists()
 {
 	return m_Lists->GetTest();
+}
+
+Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>* cMainCommand::GetMainCommandListPtr()
+{
+	return m_Lists->GetListPtr();
 }

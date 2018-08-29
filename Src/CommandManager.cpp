@@ -55,6 +55,11 @@ Microsoft::WRL::ComPtr<IDXGISwapChain1> cCommandManager::GetSwapChain()
 	return m_SwapChain->Get();
 }
 
+Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>* cCommandManager::GetCommandListPtr()
+{
+	return m_Command->GetMainCommandListPtr();
+}
+
 void cCommandManager::Init()
 {
 	m_Command.reset(new cMainCommand);

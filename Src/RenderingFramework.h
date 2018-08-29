@@ -14,6 +14,10 @@
 
 class cRenderComponent;
 
+struct DrawObjMap {
+	std::unordered_map<UINT, std::vector<cRenderComponent*>> m_Map;		//リソースIDにレンダリング対象を配列で紐づける
+};
+
 // アクセス権をstaticの有無でコントロールする
 class cRenderingFramework
 {
@@ -37,8 +41,8 @@ public:
 	/// <summary>
 	/// コマンドリストへコマンドの発行を行う関数。
 	/// </summary>
-	void CommandIssue();
+	void CommandIssue(Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>* cmdLists,int listNum);
 private:
 	static std::unordered_map<std::string, UINT> m_IDMap;
-	static std::unordered_map<UINT, std::vector<cRenderComponent*>> m_DrawObjMap[DrawParam::g_ThreadNum];		//リソースIDにレンダリング対象を配列で紐づける
+	static DrawObjMap m_DrawObjMap[DrawParam::g_ThreadNum];		//リソースIDにレンダリング対象を配列で紐づける
 };

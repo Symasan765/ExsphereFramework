@@ -15,6 +15,7 @@
 void cGameLoop::ExeMainLoop(float delta_time)
 {
 	JobExe(delta_time);
+	m_MainScene.Rendering();
 }
 
 void cGameLoop::Create()
