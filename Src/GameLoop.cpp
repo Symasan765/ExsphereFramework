@@ -17,6 +17,11 @@ void cGameLoop::ExeMainLoop(float delta_time)
 	JobExe(delta_time);
 }
 
+void cGameLoop::Create()
+{
+	m_MainScene.Create();
+}
+
 void cGameLoop::JobExe(float delta_time)
 {
 	auto JobScheduler = JobScheduler::Instance();

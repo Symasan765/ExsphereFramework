@@ -88,6 +88,9 @@
     <Filter Include="Actor\Component">
       <UniqueIdentifier>{c4d18db4-9134-4b37-9770-decb6c74ed9a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{9d21ebc7-83cd-467b-a19c-7cc5ff93391a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DirectX12.cpp">
@@ -230,6 +233,9 @@
     </ClCompile>
     <ClCompile Include="Src\RenderComponent.cpp">
       <Filter>Actor\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MainScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -421,6 +427,9 @@
     </ClInclude>
     <ClInclude Include="Src\RenderComponent.h">
       <Filter>Actor\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\MainScene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

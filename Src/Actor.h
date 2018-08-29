@@ -65,7 +65,7 @@ inline T * Actor::AddComponent()
 
 	T* component = new T(this);
 	component->Create();
-	m_Components.insert(std::pair<uint16_t, Component*>(T::GetID(), component));
+	m_Components.insert(std::pair<unsigned, Component*>(T::GetID(), component));
 
 	return component;
 }

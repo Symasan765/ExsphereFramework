@@ -6,9 +6,11 @@
 //									¼–{ —Y”V‰î
 =================================================*/
 #pragma once
+#include <Windows.h>
 #include "Component.h"
+#include <string>
 
-class cRenderComponent : Component
+class cRenderComponent : public Component
 {
 public:
 	cRenderComponent(Actor* owner);
@@ -21,7 +23,9 @@ public:
 	virtual bool Create();
 	virtual void Destroy();
 
+	void LoadResource(std::string);
+
 	void DrawRegistr();		// ƒŒƒ“ƒ_ƒŠƒ“ƒOƒtƒŒ[ƒ€ƒ[ƒN‚É•`‰æ–½—ß‚ğ“o˜^‚·‚é
 private:
-
+	UINT m_ResourceID = 0;
 };

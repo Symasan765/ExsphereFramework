@@ -21,6 +21,7 @@ cMainSystem::~cMainSystem()
 void cMainSystem::SystemLoop()
 {
 	m_TimeCheck.TimerStart();
+	m_MainLoop.Create();
 
 	do
 	{

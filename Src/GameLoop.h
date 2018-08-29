@@ -8,12 +8,16 @@
 //									èºñ{ óYîVâÓ
 =================================================*/
 #pragma once
+#include "MainScene.h"
 
 class cGameLoop {
 public:
 	cGameLoop() = default;
 	~cGameLoop() = default;
 	void ExeMainLoop(float delta_time);
+	void Create();
 private:
 	void JobExe(float delta_time);
+
+	cMainScene m_MainScene;
 };
