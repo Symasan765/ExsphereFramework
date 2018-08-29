@@ -98,21 +98,27 @@ void cCommandManager::WaitForFence(unsigned totalFrame, unsigned idx)
 
 void cCommandManager::ExePrologue()
 {
-	auto const list = m_Command->GetPrologueList().Get();
+	ID3D12CommandList* list = m_Command->GetPrologueList().Get();
 
-	m_Queue->Exe(list, 1);
+	m_Queue->Exe(&list, 1);
 }
 
 void cCommandManager::ExeGameScene()
 {
-	auto const list = m_Command->GetMainCommandLists().Get();
+	ID3D12CommandList* list[DrawParam::g_ThreadNum] = {};
+	auto ptr = m_Command->GetMainCommandListPtr();
 
-	m_Queue->Exe(list, 1);
+	for (int i = 0; i < DrawParam::g_ThreadNum; i++) {
+		list[i] = ptr[i].Get();
+	}
+
+
+	m_Queue->Exe(list, DrawParam::g_ThreadNum);
 }
 
 void cCommandManager::ExeEpilogue()
 {
-	auto const list = m_Command->GetEpilogueList().Get();
+	ID3D12CommandList* list = m_Command->GetEpilogueList().Get();
 
-	m_Queue->Exe(list, 1);
+	m_Queue->Exe(&list, 1);
 }

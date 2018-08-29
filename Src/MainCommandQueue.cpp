@@ -8,7 +8,7 @@ void cMainCommandQueue::Create(ID3D12Device * dev)
 	CheckHR(dev->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(m_CommandQueue.ReleaseAndGetAddressOf())));
 }
 
-void cMainCommandQueue::Exe(ID3D12CommandList * const pLists, unsigned listNum)
+void cMainCommandQueue::Exe(ID3D12CommandList** pLists, unsigned listNum)
 {
-	m_CommandQueue->ExecuteCommandLists(listNum, &pLists);
+	m_CommandQueue->ExecuteCommandLists(listNum, pLists);
 }

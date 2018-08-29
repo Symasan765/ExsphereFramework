@@ -49,7 +49,7 @@ void cMainCommand::DrawGameScene(RenderBufferStruct & data, const unsigned cmdIn
 	auto cmdList = m_Lists->GetListPtr();
 
 	for (int i = 0; i < DrawParam::g_ThreadNum; i++) {
-		CheckHR(cmdList[i]->Reset(m_Allocators->GetSelectAlloc(cmdIndex, 0).Get(), nullptr));
+		CheckHR(cmdList[i]->Reset(m_Allocators->GetSelectAlloc(cmdIndex, i).Get(), nullptr));
 		cmdList[i]->OMSetRenderTargets(1, &data.descHandleRtv, true, &data.descHandleDsv);
 	}
 
@@ -94,11 +94,6 @@ Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> cMainCommand::GetPrologueList(
 Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> cMainCommand::GetEpilogueList()
 {
 	return m_Lists->GetEnd();
-}
-
-Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> cMainCommand::GetMainCommandLists()
-{
-	return m_Lists->GetTest();
 }
 
 Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>* cMainCommand::GetMainCommandListPtr()
