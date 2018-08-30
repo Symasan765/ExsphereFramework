@@ -55,6 +55,7 @@ void cMainCommand::DrawGameScene(RenderBufferStruct & data, const unsigned cmdIn
 
 	// TODO 各コマンドリストの初期化、などなど行う
 	m_RootSig->Draw(cmdList[0].Get());
+	m_RootSig->Draw(cmdList[1].Get());
 	cRenderingFramework rf;
 	rf.CommandIssue(GetMainCommandListPtr(), DrawParam::g_ThreadNum);
 

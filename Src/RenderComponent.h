@@ -6,7 +6,7 @@
 //									松本 雄之介
 =================================================*/
 #pragma once
-#include <Windows.h>
+#include "DirectX12.h"
 #include "Component.h"
 #include <string>
 
@@ -26,6 +26,8 @@ public:
 	void LoadResource(std::string);
 
 	void DrawRegistr();		// レンダリングフレームワークに描画命令を登録する
+
+	DirectX::XMFLOAT4X4 GetMatrix();
 private:
 	UINT m_ResourceID = 0;
 };

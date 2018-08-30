@@ -81,9 +81,11 @@ VSOut VSMain(VSIn vsIn)
 	float4 normal = 0.0f;
 	pos.xyz = vsIn.pos;
 	normal.xyz = vsIn.normal;
-    Skin skinPos = SkinVert(pos, normal, vsIn.bindex, vsIn.bweight);
-    vsIn.pos = skinPos.Pos.xyz;
-    vsIn.normal = skinPos.Normal;
+	if(vsIn.bweight.x > 0.0f){
+		Skin skinPos = SkinVert(pos, normal, vsIn.bindex, vsIn.bweight);
+		vsIn.pos = skinPos.Pos.xyz;
+		vsIn.normal = skinPos.Normal;
+	}
 	
 	output.pos = mul(float4(vsIn.pos.xyz, 1.0f), worldViewProjMatrix);
 	

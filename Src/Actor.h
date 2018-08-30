@@ -28,16 +28,17 @@ public:
 	void SetID(uint64_t id) { m_ID = id; };
 
 	void SetPos(DirectX::XMFLOAT3 pos) { m_Pos = pos; };
-	void SetRot(DirectX::XMFLOAT4 rot) { m_Rot = rot; };
+	void SetRot(DirectX::XMFLOAT3 rot) { m_Rot = rot; };
 
 	void SetPos(DirectX::XMVECTOR pos) {
 		DirectX::XMStoreFloat3(&m_Pos, pos);
 	}
 	void SetRot(DirectX::XMVECTOR rot) {
-		DirectX::XMStoreFloat4(&m_Rot, rot);
+		DirectX::XMStoreFloat3(&m_Rot, rot);
 	}
 
 	DirectX::XMFLOAT3 GetPos() { return m_Pos; };
+	DirectX::XMFLOAT3 GetRot() { return m_Rot; };
 
 	unsigned GetID()const { return m_ID; };
 
@@ -53,7 +54,7 @@ private:
 	Job m_Job;
 	std::map<unsigned, Component*> m_Components;
 	DirectX::XMFLOAT3 m_Pos = { 0.0f,0.0f,0.0f };
-	DirectX::XMFLOAT4 m_Rot = { 0.0f,0.0f,0.0f,0.0f };		// クォータニオンとして使用
+	DirectX::XMFLOAT3 m_Rot = { 0.0f,0.0f,0.0f };
 };
 
 template<typename T>

@@ -172,7 +172,7 @@ void cRootSignatureTest::UseHelperDraw(ID3D12GraphicsCommandList * cmdList)
 		static float rot = 0.0f;
 		rot += 1.0f;
 		if (rot >= 360.0f) rot = 0.0f;
-		float rate = 1.0f;
+		float rate = 0.1;
 		XMMATRIX worldMat, viewMat, projMat;
 		worldMat = XMMatrixIdentity();
 		worldMat *= XMMatrixScaling(rate, rate, rate);
@@ -248,6 +248,7 @@ void cRootSignatureTest::BoneCalc()
 
 	for (int i = 0; i < bones.size(); i++) {
 		data[i] = XMLoadFloat4x4(&bones[i].Offset) * data[i];
+		data[i] *= XMMatrixScaling(10.0f, 10.0f, 10.0f);
 		data[i] = XMMatrixTranspose(data[i]);
 		XMStoreFloat4x4(&m_Bones.data.bones[i], data[i]);
 	}
