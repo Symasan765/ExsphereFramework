@@ -30,7 +30,7 @@ void cRenderComponent::DrawRegistr()
 	cRenderingFramework::RnederingRegister(m_ResourceID, this);
 }
 
-DirectX::XMFLOAT4X4 cRenderComponent::GetMatrix()
+DirectX::XMFLOAT4X4 cRenderComponent::GetWorldMatrix()
 {
 	XMFLOAT3 pos = m_Owner->GetPos();
 	XMFLOAT3 rot = m_Owner->GetRot();

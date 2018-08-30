@@ -56,7 +56,7 @@ void cRootSignatureTest::MeshLoad()
 	CheckHR(mVB->Map(0, nullptr, reinterpret_cast<void**>(&vbUploadPtr)));
 	memcpy_s(vbUploadPtr, mVBIndexOffset, vbData, mVBIndexOffset);
 	memcpy_s(vbUploadPtr + mVBIndexOffset, IBSize, ibData, IBSize);
-	mVB->Unmap(0, nullptr);
+	//mVB->Unmap(0, nullptr);
 
 	mVBView.BufferLocation = mVB->GetGPUVirtualAddress();
 	mVBView.StrideInBytes = sizeof(mesh.vertices[0]);

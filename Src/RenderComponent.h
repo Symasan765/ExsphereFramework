@@ -6,9 +6,10 @@
 //									松本 雄之介
 =================================================*/
 #pragma once
-#include "DirectX12.h"
 #include "Component.h"
 #include <string>
+#include "DXMath.h"
+#include "DirectX12.h"
 
 class cRenderComponent : public Component
 {
@@ -27,7 +28,7 @@ public:
 
 	void DrawRegistr();		// レンダリングフレームワークに描画命令を登録する
 
-	DirectX::XMFLOAT4X4 GetMatrix();
+	DirectX::XMFLOAT4X4 GetWorldMatrix();
 private:
 	UINT m_ResourceID = 0;
 };
