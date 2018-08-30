@@ -7,6 +7,8 @@ struct VSIn
 	float3 tangent : TANGENT;
 	int4 bindex : BONEINDEX;
 	float4 bweight : WEIGHT;
+	float4x4 WorldMat  : MATRIX;    // ワールド変換行列
+    uint InstID : SV_InstanceID; // インスタンスID
 };
 
 struct VSOut
@@ -87,9 +89,9 @@ VSOut VSMain(VSIn vsIn)
 		vsIn.normal = skinPos.Normal;
 	}
 	
-	output.pos = mul(float4(vsIn.pos.xyz, 1.0f), worldViewProjMatrix);
+	output.pos = mul(float4(vsIn.pos.xyz, 1.0f), (vsIn.WorldMat * worldViewProjMatrix));		// ここのワールドマトリクス追加してる
 	
-	output.normal = mul(vsIn.normal.xyz, (float3x3)(worldMatrix));
+	output.normal = mul(vsIn.normal.xyz, (float3x3)(vsIn.WorldMat));
 	output.uv = vsIn.uv;
 	output.Spos = vsIn.bweight;
 	return output;

@@ -90,6 +90,10 @@ void cRootSignatureTest::UseHelperInit()
 		inpLay.AddElement<DirectX::XMFLOAT3>("TANGENT", DXGI_FORMAT_R32G32B32_FLOAT);
 		inpLay.AddElement<DirectX::XMINT4>("BONEINDEX", DXGI_FORMAT_R32G32B32A32_SINT);
 		inpLay.AddElement<DirectX::XMFLOAT4>("WEIGHT", DXGI_FORMAT_R32G32B32A32_FLOAT);
+		inpLay.AddElement<DirectX::XMFLOAT4>("MATRIX", DXGI_FORMAT_R32G32B32A32_FLOAT, D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA, 0, 1, 1);
+		inpLay.AddElement<DirectX::XMFLOAT4>("MATRIX", DXGI_FORMAT_R32G32B32A32_FLOAT, D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA, 1, 1, 1);
+		inpLay.AddElement<DirectX::XMFLOAT4>("MATRIX", DXGI_FORMAT_R32G32B32A32_FLOAT, D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA, 2, 1, 1);
+		inpLay.AddElement<DirectX::XMFLOAT4>("MATRIX", DXGI_FORMAT_R32G32B32A32_FLOAT, D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA, 3, 1, 1);
 
 		mc_PSO.InputLayoutSetting(&inpLay);
 		DXGI_FORMAT format[] = { DXGI_FORMAT_R8G8B8A8_UNORM };
@@ -180,7 +184,8 @@ void cRootSignatureTest::UseHelperDraw(ID3D12GraphicsCommandList * cmdList)
 		worldMat *= XMMatrixTranslation(0.7f, 0.0f, 0.0f);
 		viewMat = XMMatrixLookAtLH({ 0, 0.5f, -1.5f }, { 0, 0.5f, 0 }, { 0, 1, 0 });
 		projMat = XMMatrixPerspectiveFovLH(45, (float)1920 / 1080, 0.01f, 50.0f);
-		auto mvpMat = XMMatrixTranspose(worldMat * viewMat * projMat);
+		//auto mvpMat = XMMatrixTranspose(worldMat * viewMat * projMat);
+		auto mvpMat = XMMatrixTranspose(viewMat * projMat);	// インスタンシング描画のテストでワールドを除外
 
 		auto worldTransMat = XMMatrixTranspose(worldMat);
 

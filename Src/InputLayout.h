@@ -21,12 +21,12 @@ public:
 	inline size_t GetSize() { return m_InputLayout.size(); };
 private:
 	std::vector<D3D12_INPUT_ELEMENT_DESC> m_InputLayout;
-	UINT m_AlignedByteOffset = 0;
+	UINT m_AlignedByteOffset[15] = { 0 };
 };
 
 template<typename T>
 inline void cInputLayout::AddElement(const char* SemanticName, DXGI_FORMAT Format, D3D12_INPUT_CLASSIFICATION InputSlotClass, UINT SemanticIndex, UINT InputSlot, UINT InstanceDataStepRate)
 {
-	m_InputLayout.push_back({ SemanticName, SemanticIndex, Format, InputSlot, m_AlignedByteOffset, InputSlotClass, InstanceDataStepRate });
-	m_AlignedByteOffset += sizeof(T);		// アライメントサイズを増加する
+	m_InputLayout.push_back({ SemanticName, SemanticIndex, Format, InputSlot, m_AlignedByteOffset[InputSlot], InputSlotClass, InstanceDataStepRate });
+	m_AlignedByteOffset[InputSlot] += sizeof(T);		// アライメントサイズを増加する
 }
