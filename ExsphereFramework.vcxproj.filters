@@ -91,6 +91,9 @@
     <Filter Include="Scene">
       <UniqueIdentifier>{9d21ebc7-83cd-467b-a19c-7cc5ff93391a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Buffer">
+      <UniqueIdentifier>{ac9f2989-55f8-4a46-bd20-cdbab994959e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DirectX12.cpp">
@@ -236,6 +239,9 @@
     </ClCompile>
     <ClCompile Include="Src\MainScene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\InstVertexBuffer.cpp">
+      <Filter>Buffer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -430,6 +436,9 @@
     </ClInclude>
     <ClInclude Include="Src\MainScene.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\InstVertexBuffer.h">
+      <Filter>Buffer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

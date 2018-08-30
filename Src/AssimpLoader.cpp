@@ -22,6 +22,9 @@ std::unique_ptr<cModelResource> cAssimpLoader::Load(std::string filePath)
 	// 実データ取得
 	processNode(pScene->mRootNode, pScene);
 
+	// インスタンシング描画用バッファ作成
+	m_ModelResource->m_InstBuffer.Create();
+
 	// 所有権を呼び出し元へ移動
 	return std::move(m_ModelResource);
 }

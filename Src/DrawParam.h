@@ -10,4 +10,6 @@
 namespace DrawParam {
 	constexpr unsigned g_ThreadNum = 4;		// 並列処理スレッド数
 	constexpr unsigned g_MaxFrameLatency = 2;	// 処理フレーム数
+
+	constexpr unsigned g_MaxInstNum = 256;		// インスタンシング描画出来る最大オブジェクト数
 }

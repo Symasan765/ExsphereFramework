@@ -1,5 +1,7 @@
 #include "ModelManager.h"
 #include "AssimpLoader.h"
+#include "DXMath.h"
+#include "DrawParam.h"
 
 std::unordered_map<UINT, std::unique_ptr<cModelResource>> cModelManager::m_ResourceMap;
 
