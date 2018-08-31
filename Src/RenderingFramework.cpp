@@ -31,26 +31,22 @@ void cRenderingFramework::RnederingRegister(UINT ResourceID, cRenderComponent * 
 
 void cRenderingFramework::CommandIssue(Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>* cmdLists, int listNum)
 {
-	// 全体のスレッドを並列処理
-	for (auto tid = 0u; tid < DrawParam::g_ThreadNum; tid++) {
-		// スレッド毎に登録されているリソースをすべて処理
-		for (auto& itr : m_DrawObjMap[tid].m_Map) {
-			// 一つのリソースの合計インスタンス数を取得
-			UINT InstanceCount = itr.second.size();
-
-			// 一つのリソースの処理を行う
-			for (auto& vect : itr.second) {
-				cModelManager manager;
-				manager.Draw(itr.first, cmdLists[tid].Get(), true, 2, InstanceCount);		// TODO 仮実装
-			}
-		}
-	}
-
-	// TODO 上述のテストがうまくいったら並列処理に対応させること
+	// コマンドの発行をparallel_forを使用して並列化させる
 	//for (auto tid = 0u; tid < MaxThreadCount; tid++)
-	/*parallel_for(0u, DrawParam::g_ThreadNum, [&](auto tid) {
+	parallel_for(0u, DrawParam::g_ThreadNum, [&](auto tid) {
+		for (auto& itr : m_DrawObjMap[tid].m_Map) {
+			UINT InstanceCount = itr.second.size();
+			DirectX::XMFLOAT4X4 mats[DrawParam::g_MaxInstNum];
 
-	});*/
+			auto& vector = itr.second;
+
+			for (int i = 0; i < vector.size(); i++) {
+				mats[i] = vector[i]->GetWorldMatrix();
+			}
+			cModelManager manager;
+			manager.Draw(mats, itr.first, cmdLists[tid].Get(), true, 2, InstanceCount);		// TODO 仮実装
+		}
+	});
 
 	// 描画コマンドを消す
 	for (int i = 0; i < DrawParam::g_ThreadNum; i++)

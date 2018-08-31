@@ -125,6 +125,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Actor.cpp" />
     <ClCompile Include="Src\Animation3D.cpp" />
     <ClCompile Include="Src\AssimpLoader.cpp" />
     <ClCompile Include="Src\AsynceJobManager.cpp" />

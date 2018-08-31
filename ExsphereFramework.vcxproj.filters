@@ -243,6 +243,9 @@
     <ClCompile Include="Src\InstVertexBuffer.cpp">
       <Filter>Buffer</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Actor.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\ImGUI\stb_rect_pack.h">

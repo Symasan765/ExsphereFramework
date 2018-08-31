@@ -32,12 +32,13 @@ void cRenderComponent::DrawRegistr()
 
 DirectX::XMFLOAT4X4 cRenderComponent::GetWorldMatrix()
 {
+	static float rotY = 0.0f;
 	XMFLOAT3 pos = m_Owner->GetPos();
 	XMFLOAT3 rot = m_Owner->GetRot();
-	DirectX::XMMATRIX mat = XMMatrixRotationRollPitchYaw(rot.x, rot.y, rot.z);
+	XMFLOAT3 scale = m_Owner->GetScale();
+	DirectX::XMMATRIX mat = XMMatrixScaling(scale.x, scale.y, scale.z) * XMMatrixRotationRollPitchYaw(rot.x, rotY, rot.z);
 	mat *= XMMatrixTranslation(pos.x, pos.y, pos.z);
-
 	XMFLOAT4X4 ret;
-	XMStoreFloat4x4(&ret, mat);
+	XMStoreFloat4x4(&ret, XMMatrixTranspose(mat));
 	return ret;
 }

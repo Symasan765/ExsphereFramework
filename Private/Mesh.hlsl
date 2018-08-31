@@ -89,7 +89,8 @@ VSOut VSMain(VSIn vsIn)
 		vsIn.normal = skinPos.Normal;
 	}
 	
-	output.pos = mul(float4(vsIn.pos.xyz, 1.0f), (vsIn.WorldMat * worldViewProjMatrix));		// ここのワールドマトリクス追加してる
+	output.pos = mul(float4(vsIn.pos.xyz, 1.0f), (vsIn.WorldMat));		// ここのワールドマトリクス追加してる
+	output.pos = mul(output.pos, (worldViewProjMatrix));
 	
 	output.normal = mul(vsIn.normal.xyz, (float3x3)(vsIn.WorldMat));
 	output.uv = vsIn.uv;

@@ -27,5 +27,8 @@ void MoveComponent::Update(float delta_time)
 	XMVECTOR vector = XMLoadFloat4(&m_Velocity) * m_Speed;
 
 	XMVECTOR pos = XMLoadFloat3(&m_Owner->GetPos());
-	m_Owner->SetPos(pos + vector);
+
+	XMFLOAT3 move;
+	XMStoreFloat3(&move, pos + vector);
+	m_Owner->SetPos(move);
 }

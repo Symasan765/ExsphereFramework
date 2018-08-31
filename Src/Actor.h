@@ -21,7 +21,7 @@ public:
 		JobScheduler::Instance()->Register(&m_Job, ComponentID::kActor);
 		return true;
 	};
-	void Destroy() {};
+	void Destroy();
 
 	// フレーム毎の更新処理
 	void Update(float delta_time) { printf("%f\n", m_Pos.x); };
@@ -29,16 +29,15 @@ public:
 
 	void SetPos(DirectX::XMFLOAT3 pos) { m_Pos = pos; };
 	void SetRot(DirectX::XMFLOAT3 rot) { m_Rot = rot; };
+	void SetScale(DirectX::XMFLOAT3 scale) { m_Scale = scale; };
 
-	void SetPos(DirectX::XMVECTOR pos) {
-		DirectX::XMStoreFloat3(&m_Pos, pos);
-	}
-	void SetRot(DirectX::XMVECTOR rot) {
-		DirectX::XMStoreFloat3(&m_Rot, rot);
-	}
+	void AddPos(DirectX::XMFLOAT3 pos);
+	void AddRot(DirectX::XMFLOAT3 rot);
+	void AddScale(DirectX::XMFLOAT3 scale);
 
 	DirectX::XMFLOAT3 GetPos() { return m_Pos; };
 	DirectX::XMFLOAT3 GetRot() { return m_Rot; };
+	DirectX::XMFLOAT3 GetScale() { return m_Scale; };
 
 	unsigned GetID()const { return m_ID; };
 
@@ -54,6 +53,7 @@ private:
 	Job m_Job;
 	std::map<unsigned, Component*> m_Components;
 	DirectX::XMFLOAT3 m_Pos = { 0.0f,0.0f,0.0f };
+	DirectX::XMFLOAT3 m_Scale = { 1.0f,1.0f,1.0f };
 	DirectX::XMFLOAT3 m_Rot = { 0.0f,0.0f,0.0f };
 };
 
