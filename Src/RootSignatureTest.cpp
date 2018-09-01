@@ -29,7 +29,7 @@ void cRootSignatureTest::MeshAssimopLoad()
 {
 	
 	cAssimpLoader Loader;
-	m_pModel = Loader.Load("Private/Link.x");
+	m_pModel = Loader.Load("Link.x");
 }
 
 void cRootSignatureTest::MeshLoad()

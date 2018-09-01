@@ -3,14 +3,22 @@
 
 using namespace std;
 
+namespace {
+	string g_AllPath;
+}
+
 std::unique_ptr<cModelResource> cAssimpLoader::Load(std::string filePath)
 {
+	int point = (int)filePath.find(".");					//.を探索して位置を調べる
+	std::string name = filePath.substr(0, point);	//拡張子抜きのファイル名
+	g_AllPath = std::string(MODEL_STORAGE_DIRECTORY) + "/" + name + "/";		// TODO Assetフォルダへのパスを設定する
+
 	// 実体を作成
 	m_ModelResource.reset(new cModelResource());
 
 	Assimp::Importer importer;
 
-	const aiScene* pScene = importer.ReadFile(filePath,
+	const aiScene* pScene = importer.ReadFile(g_AllPath + filePath,
 		aiProcessPreset_TargetRealtime_Quality | aiProcess_ConvertToLeftHanded);
 
 	if (pScene == NULL)
@@ -146,7 +154,7 @@ std::vector<cTexture> cAssimpLoader::loadMaterialTextures(aiMaterial * mat, aiTe
 			cTexture texture;
 			{
 				string filename = string(str.C_Str());
-				filename = std::string("Private") + std::string("/") + filename;
+				filename = g_AllPath + filename;
 				cTextureLoader::LoadTextureFromFile(filename, &texture);
 			}
 			texture.SetFilePath(str.C_Str());

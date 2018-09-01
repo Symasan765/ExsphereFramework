@@ -15,6 +15,8 @@
 #include "ModelResource.h"
 #include "TextureLoader.h"
 
+#define MODEL_STORAGE_DIRECTORY "Assets/Mesh"
+
 class cAssimpLoader
 {
 public:

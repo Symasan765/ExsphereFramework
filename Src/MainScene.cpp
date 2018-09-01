@@ -19,10 +19,10 @@ void cMainScene::Create()
 
 
 	auto render = m_Actor[0].AddComponent<cRenderComponent>();
-	render->LoadResource("Private/Link.x");
+	render->LoadResource("Link.x");
 
 	auto render1 = m_Actor[1].AddComponent<cRenderComponent>();
-	render1->LoadResource("Private/Link.x");
+	render1->LoadResource("Link.x");
 
 	m_Actor[1].SetPos(DirectX::XMFLOAT3{ 0.0f,0.0f,0.0f });
 }
@@ -32,6 +32,7 @@ void cMainScene::Rendering()
 	static float moveX = 0.01f;
 
 	auto render = m_Actor[0].GetComponent<cRenderComponent>();
+	m_Actor[0].AddPos(DirectX::XMFLOAT3{ -moveX,0.0f,0.0f });
 	render->DrawRegistr();
 
 	auto render1 = m_Actor[1].GetComponent<cRenderComponent>();
