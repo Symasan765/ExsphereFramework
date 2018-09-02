@@ -29,7 +29,7 @@ void cRootSignatureTest::MeshAssimopLoad()
 {
 	
 	cAssimpLoader Loader;
-	m_pModel = Loader.Load("Link.x");
+	m_pModel = Loader.Load("Pac1.fbx");
 }
 
 void cRootSignatureTest::MeshLoad()
@@ -182,7 +182,7 @@ void cRootSignatureTest::UseHelperDraw(ID3D12GraphicsCommandList * cmdList)
 		worldMat *= XMMatrixScaling(rate, rate, rate);
 		worldMat *= XMMatrixRotationY(XMConvertToRadians(rot));
 		worldMat *= XMMatrixTranslation(0.7f, 0.0f, 0.0f);
-		viewMat = XMMatrixLookAtLH({ 0, 0.5f, -1.5f }, { 0, 0.5f, 0 }, { 0, 1, 0 });
+		viewMat = XMMatrixLookAtLH({ 0, -1.5f, -8.5f }, { 0, 4.5f, 0 }, { 0, 1, 0 });
 		projMat = XMMatrixPerspectiveFovLH(45, (float)1920 / 1080, 0.01f, 50.0f);
 		//auto mvpMat = XMMatrixTranspose(worldMat * viewMat * projMat);
 		auto mvpMat = XMMatrixTranspose(viewMat * projMat);	// インスタンシング描画のテストでワールドを除外

@@ -8,34 +8,43 @@ cMainScene::cMainScene()
 
 cMainScene::~cMainScene()
 {
-	for (int i = 0; i < 2; i++)
-		m_Actor[i].Destroy();
+	for (int i = 0; i < 3; i++)
+		m_Pac[i].Destroy();
 }
 
 void cMainScene::Create()
 {
-	for (int i = 0; i < 2; i++)
-		m_Actor[i].SetScale({ 0.1f,0.1f,0.1f });
+	for (int i = 0; i < 3; i++)
+		m_Pac[i].SetScale({ 0.1f,0.1f,0.1f });
+	m_Stage.SetScale({ 0.1f,0.1f,0.1f });
 
 
-	auto render = m_Actor[0].AddComponent<cRenderComponent>();
-	render->LoadResource("Link.x");
 
-	auto render1 = m_Actor[1].AddComponent<cRenderComponent>();
-	render1->LoadResource("Link.x");
+	auto render = m_Stage.AddComponent<cRenderComponent>();
+	m_Stage.SetScale({ 0.12f,0.12f,0.12f });
+	m_Stage.SetPos({ 0.0f,-0.25f,0.0f });
+	render->LoadResource("Stage.fbx");
 
-	m_Actor[1].SetPos(DirectX::XMFLOAT3{ 0.0f,0.0f,0.0f });
+	for (int i = 0; i < 3; i++) {
+		std::string name = "Pac" + std::to_string(i + 1) + ".fbx";
+
+		auto render1 = m_Pac[i].AddComponent<cRenderComponent>();
+		render1->LoadResource(name);
+	}
+
+
+
 }
 
 void cMainScene::Rendering()
 {
-	static float moveX = 0.01f;
+	static int PacNo = 0;
 
-	auto render = m_Actor[0].GetComponent<cRenderComponent>();
-	m_Actor[0].AddPos(DirectX::XMFLOAT3{ -moveX,0.0f,0.0f });
-	render->DrawRegistr();
+	auto StageRender = m_Stage.GetComponent<cRenderComponent>();
+	StageRender->DrawRegistr();
 
-	auto render1 = m_Actor[1].GetComponent<cRenderComponent>();
-	m_Actor[1].AddPos(DirectX::XMFLOAT3{ moveX,0.0f,0.0f });
+	int anmNo[] = { 1,0,2,0 };
+	auto render1 = m_Pac[anmNo[(PacNo / 7) % 4]].GetComponent<cRenderComponent>();
 	render1->DrawRegistr();
+	PacNo++;
 }

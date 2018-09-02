@@ -23,7 +23,7 @@ Microsoft::WRL::ComPtr<ID3D12CommandAllocator> cMainCommand::GetSelectAlloc(UINT
 void cMainCommand::DrawBegin(RenderBufferStruct& data, const unsigned cmdIndex)
 {
 	// 前処理スタート
-	CheckHR(m_Lists->GetBegin()->Reset(m_Allocators->GetSelectAlloc(cmdIndex,0).Get(), nullptr));
+	CheckHR(m_Lists->GetBegin()->Reset(m_Allocators->GetSelectAlloc(cmdIndex, 0).Get(), nullptr));
 
 	// 現在の描画バッファの取得
 	ID3D12Resource* d3dBuffer = data.buffer.Get();
@@ -54,8 +54,8 @@ void cMainCommand::DrawGameScene(RenderBufferStruct & data, const unsigned cmdIn
 	}
 
 	// TODO 各コマンドリストの初期化、などなど行う
-	m_RootSig->Draw(cmdList[0].Get());
-	m_RootSig->Draw(cmdList[1].Get());
+	for (int i = 0; i < DrawParam::g_ThreadNum; i++)
+		m_RootSig->Draw(cmdList[i].Get());
 	cRenderingFramework rf;
 	rf.CommandIssue(GetMainCommandListPtr(), DrawParam::g_ThreadNum);
 

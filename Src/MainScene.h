@@ -16,5 +16,6 @@ public:
 	void Create();
 	void Rendering();
 private:
-	Actor m_Actor[2];
+	Actor m_Pac[3];
+	Actor m_Stage;
 };
