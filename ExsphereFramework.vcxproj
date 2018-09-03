@@ -137,6 +137,8 @@
     <ClCompile Include="Src\FenceObj.cpp" />
     <ClCompile Include="Src\FrameCnt.cpp" />
     <ClCompile Include="Src\GameLoop.cpp" />
+    <ClCompile Include="Src\Game\Pacman.cpp" />
+    <ClCompile Include="Src\Game\StageStruct.cpp" />
     <ClCompile Include="Src\Graphic3D.cpp" />
     <ClCompile Include="Src\ImGUIManager.cpp" />
     <ClCompile Include="Src\ImGUI\imgui.cpp" />
@@ -196,6 +198,8 @@
     <ClInclude Include="Src\FenceObj.h" />
     <ClInclude Include="Src\FrameCnt.h" />
     <ClInclude Include="Src\GameLoop.h" />
+    <ClInclude Include="Src\Game\Pacman.h" />
+    <ClInclude Include="Src\Game\StageStruct.h" />
     <ClInclude Include="Src\Graphic3D.h" />
     <ClInclude Include="Src\Helper\WaveFrontReader.h" />
     <ClInclude Include="Src\ImGUIManager.h" />

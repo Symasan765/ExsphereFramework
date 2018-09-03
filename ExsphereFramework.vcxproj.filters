@@ -94,6 +94,9 @@
     <Filter Include="Buffer">
       <UniqueIdentifier>{ac9f2989-55f8-4a46-bd20-cdbab994959e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameData">
+      <UniqueIdentifier>{10124386-4e04-413f-9918-073f1c9d14bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DirectX12.cpp">
@@ -245,6 +248,12 @@
     </ClCompile>
     <ClCompile Include="Src\Actor.cpp">
       <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Game\StageStruct.cpp">
+      <Filter>GameData</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Game\Pacman.cpp">
+      <Filter>GameData</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -442,6 +451,12 @@
     </ClInclude>
     <ClInclude Include="Src\InstVertexBuffer.h">
       <Filter>Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Game\StageStruct.h">
+      <Filter>GameData</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Game\Pacman.h">
+      <Filter>GameData</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
