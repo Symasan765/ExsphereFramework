@@ -23,6 +23,7 @@ public:
 	void Destroy();
 private:
 	void Update(float delta_time);
+	void InputDataUpdate();
 
 	cMainWindow m_MainWindow;
 	cGameLoop m_MainLoop;
