@@ -1,4 +1,5 @@
 #pragma once
+#include "../DXMath.h"
 
 class cPacman
 {

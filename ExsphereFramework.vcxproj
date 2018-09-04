@@ -145,6 +145,7 @@
     <ClCompile Include="Src\ImGUI\imgui_demo.cpp" />
     <ClCompile Include="Src\ImGUI\imgui_draw.cpp" />
     <ClCompile Include="Src\ImGUI\imgui_impl_dx12.cpp" />
+    <ClCompile Include="Src\Input.cpp" />
     <ClCompile Include="Src\InstVertexBuffer.cpp" />
     <ClCompile Include="Src\Job.cpp" />
     <ClCompile Include="Src\JobContainer.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="Src\ImGUI\stb_rect_pack.h" />
     <ClInclude Include="Src\ImGUI\stb_textedit.h" />
     <ClInclude Include="Src\ImGUI\stb_truetype.h" />
+    <ClInclude Include="Src\Input.h" />
     <ClInclude Include="Src\InputLayout.h" />
     <ClInclude Include="Src\InstVertexBuffer.h" />
     <ClInclude Include="Src\Job.h" />

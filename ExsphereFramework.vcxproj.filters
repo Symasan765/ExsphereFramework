@@ -97,6 +97,9 @@
     <Filter Include="GameData">
       <UniqueIdentifier>{10124386-4e04-413f-9918-073f1c9d14bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{29832a6f-6af5-4eff-88a0-b638c1d7a89e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DirectX12.cpp">
@@ -254,6 +257,9 @@
     </ClCompile>
     <ClCompile Include="Src\Game\Pacman.cpp">
       <Filter>GameData</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Input.cpp">
+      <Filter>Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -457,6 +463,9 @@
     </ClInclude>
     <ClInclude Include="Src\Game\Pacman.h">
       <Filter>GameData</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Input.h">
+      <Filter>Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
