@@ -26,8 +26,8 @@ namespace Input {
 	//キーボードクラス(シングルトン)
 	class cKeyboard {
 	public:
-		//更新処理や解放処理を行うためにcDirectXクラスをフレンド化しておく
-		friend class cDirectX11;
+		//更新処理や解放処理を行うためにcMainSystemクラスをフレンド化しておく
+		friend class cMainSystem;
 		bool Press(int key);
 		bool Trigger(int key);
 		bool Repeat(int key);
@@ -55,8 +55,8 @@ namespace Input {
 	//XInputクラス(シングルトン)
 	class XInput {
 	public:
-		//更新処理や解放処理を行うためにcDirectXクラスをフレンド化しておく
-		friend class cDirectX11;
+		//更新処理や解放処理を行うためにcMainSystemクラスをフレンド化しておく
+		friend class cMainSystem;
 		bool Press(const int key, const DWORD no = 0)const;
 		bool Trigger(const int key, const DWORD no = 0)const;
 		bool Repeat(const int key, const DWORD no = 0)const;
