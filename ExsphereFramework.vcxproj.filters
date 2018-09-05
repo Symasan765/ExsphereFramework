@@ -470,6 +470,9 @@
     <ClInclude Include="Src\ParameterPBR.h">
       <Filter>Struct</Filter>
     </ClInclude>
+    <ClInclude Include="Src\LightParameter.h">
+      <Filter>Struct</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

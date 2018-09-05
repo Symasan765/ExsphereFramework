@@ -218,6 +218,7 @@
     <ClInclude Include="Src\JobContainer.h" />
     <ClInclude Include="Src\JobScheduler.h" />
     <ClInclude Include="Src\Level.h" />
+    <ClInclude Include="Src\LightParameter.h" />
     <ClInclude Include="Src\MainCommand.h" />
     <ClInclude Include="Src\MainCommandAllocators.h" />
     <ClInclude Include="Src\MainCommandLists.h" />
