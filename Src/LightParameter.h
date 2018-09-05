@@ -9,8 +9,8 @@
 #include "DXMath.h"
 
 struct DirectionalLight {
-	DirectX::XMFLOAT3 direction;
-	DirectX::XMFLOAT3 color;
+	DirectX::XMFLOAT4 direction;
+	DirectX::XMFLOAT4 color;
 };
 
 struct PointLight {

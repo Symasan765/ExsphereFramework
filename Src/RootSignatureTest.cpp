@@ -22,6 +22,37 @@ void cRootSignatureTest::Init()
 {
 	//DoNotUseHelperInit();
 	UseHelperInit();
+
+	{
+		m_Dir.data.color = { 1.0f,1.0f,1.0f,1.0f };
+		auto dir = XMVector4Normalize({ 0.0f,-1.0f,-1.0f,1.0f });
+		XMStoreFloat4(&m_Dir.data.direction, dir);
+	}
+	{
+		DirectX::XMFLOAT4 color[4] = {
+			{1.0f,0.0f,0.0f,1.0f},{0.0f,1.0f,0.0f,1.0f},{0.0f,0.0f,1.0f,1.0f},{1.0f,1.0f,0.0f,1.0f}
+		};
+
+		for (int i = 0; i < 48; i++) {
+			m_Lights.data.PointLightColor[i] = { (float)(rand() % 255) / 255.0f,(float)(rand() % 255) / 255.0f ,(float)(rand() % 255) / 255.0f,1.0f };
+			m_Lights.data.PointLightColor[i] = color[i % 4];
+			m_Lights.data.PointLightDistance[i] = 20.0f;
+			m_Lights.data.PointLightDecay[i] = 0.4f;
+
+			const float troutSize = 1.8f;		// マス自体のワールド上のサイズ
+			const float startX = -4.5f;
+			const float startY = 12.6f;
+
+			int x = (i % 6);
+			int y = (i / 6);
+			m_Lights.data.PointLightPosition[i] = { startX + (float)x * troutSize ,startY - (float)y * troutSize ,-1.0f ,1.0f};
+		}
+	}
+	m_Lights.Upload();
+
+	m_PbrParam.data.metallic = 1.0f;
+	m_PbrParam.data.roughness = 0.4f;
+	m_PbrParam.Upload();
 }
 
 
@@ -77,11 +108,13 @@ void cRootSignatureTest::UseHelperInit()
 	m_RootSignature.AddSamplers(0);
 	m_RootSignature.AddCBV(0);
 	m_RootSignature.AddCBV(1);
+	m_RootSignature.AddCBV(2);
+	m_RootSignature.AddCBV(3);
 	m_RootSignature.AddSRV(0);
 	m_RootSignature.CreateCommit();
 
 	{
-		m_Shader.CompileFromFile("Private/Mesh.hlsl","VSMain","PSMain");
+		m_Shader.CompileFromFile("HLSL/PBR.hlsl","VSMain","PSMain");
 
 		cInputLayout inpLay;
 		inpLay.AddElement<DirectX::XMFLOAT3>("POSITION", DXGI_FORMAT_R32G32B32_FLOAT);
@@ -187,7 +220,7 @@ void cRootSignatureTest::UseHelperDraw(ID3D12GraphicsCommandList * cmdList)
 		//auto mvpMat = XMMatrixTranspose(worldMat * viewMat * projMat);
 		auto mvpMat = XMMatrixTranspose(viewMat * projMat);	// インスタンシング描画のテストでワールドを除外
 
-		auto worldTransMat = XMMatrixTranspose(worldMat);
+		auto worldTransMat = XMMatrixTranspose(viewMat);
 
 		XMStoreFloat4x4(&m_ConstHelBuf.data.worldViewProjMatrix, mvpMat);
 		XMStoreFloat4x4(&m_ConstHelBuf.data.worldMatrix, worldTransMat);
@@ -212,19 +245,37 @@ void cRootSignatureTest::UseHelperDraw(ID3D12GraphicsCommandList * cmdList)
 
 	BoneCalc();
 	{
+		m_Lights.Upload();
+		m_PbrParam.Upload();
+		m_Dir.Upload();
 
 		cmdList->SetPipelineState(mc_PSO.GetPipelineState().Get());
 
-		auto cbvSrvUavDescHeap = m_ConstHelBuf.GetDescriptorHeap()->GetGPUDescriptorHandleForHeapStart();
-		ID3D12DescriptorHeap* descHeaps[] = { m_ConstHelBuf.GetDescriptorHeap() };
-		cmdList->SetDescriptorHeaps(ARRAYSIZE(descHeaps), descHeaps);
-		cmdList->SetGraphicsRootDescriptorTable(0, cbvSrvUavDescHeap);
-
-		auto cbvbonecHeap = m_Bones.GetDescriptorHeap()->GetGPUDescriptorHandleForHeapStart();
-		ID3D12DescriptorHeap* boneHeaps[] = { m_Bones.GetDescriptorHeap() };
-		cmdList->SetDescriptorHeaps(ARRAYSIZE(boneHeaps), boneHeaps);
-		cmdList->SetGraphicsRootDescriptorTable(1, cbvbonecHeap);
-
+		{
+			auto cbvSrvUavDescHeap = m_ConstHelBuf.GetDescriptorHeap()->GetGPUDescriptorHandleForHeapStart();
+			ID3D12DescriptorHeap* descHeaps[] = { m_ConstHelBuf.GetDescriptorHeap() };
+			cmdList->SetDescriptorHeaps(ARRAYSIZE(descHeaps), descHeaps);
+			cmdList->SetGraphicsRootDescriptorTable(0, cbvSrvUavDescHeap);
+		}
+		{
+			auto cbvLightHeap = m_Dir.GetDescriptorHeap()->GetGPUDescriptorHandleForHeapStart();
+			ID3D12DescriptorHeap* lightHeaps[] = { m_Dir.GetDescriptorHeap() };
+			cmdList->SetDescriptorHeaps(ARRAYSIZE(lightHeaps), lightHeaps);
+			cmdList->SetGraphicsRootDescriptorTable(1, cbvLightHeap);
+		}
+		{
+			auto cbvLightHeap = m_Lights.GetDescriptorHeap()->GetGPUDescriptorHandleForHeapStart();
+			ID3D12DescriptorHeap* lightHeaps[] = { m_Lights.GetDescriptorHeap() };
+			cmdList->SetDescriptorHeaps(ARRAYSIZE(lightHeaps), lightHeaps);
+			cmdList->SetGraphicsRootDescriptorTable(2, cbvLightHeap);
+		}
+		{
+			auto cbvPbrHeap = m_PbrParam.GetDescriptorHeap()->GetGPUDescriptorHandleForHeapStart();
+			ID3D12DescriptorHeap* pbrHeaps[] = { m_PbrParam.GetDescriptorHeap() };
+			cmdList->SetDescriptorHeaps(ARRAYSIZE(pbrHeaps), pbrHeaps);
+			cmdList->SetGraphicsRootDescriptorTable(3, cbvPbrHeap);
+		}
+		
 		//m_pModel->Draw(cmdList, true, 2, 1);
 
 	}

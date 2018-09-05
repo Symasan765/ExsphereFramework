@@ -44,7 +44,7 @@ void cRenderingFramework::CommandIssue(Microsoft::WRL::ComPtr<ID3D12GraphicsComm
 				mats[i] = vector[i]->GetWorldMatrix();
 			}
 			cModelManager manager;
-			manager.Draw(mats, itr.first, cmdLists[tid].Get(), true, 2, InstanceCount);		// TODO ‰¼ŽÀ‘•
+			manager.Draw(mats, itr.first, cmdLists[tid].Get(), true, 4, InstanceCount);		// TODO ‰¼ŽÀ‘•
 		}
 	});
 

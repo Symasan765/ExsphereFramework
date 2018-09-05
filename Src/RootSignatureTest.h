@@ -14,6 +14,9 @@
 #include "RootSignature.h"
 #include "ModelResource.h"
 
+#include "LightParameter.h"
+#include "ParameterPBR.h"
+
 struct CBuffer {
 	DirectX::XMFLOAT4X4 worldViewProjMatrix;
 	DirectX::XMFLOAT4X4 worldMatrix;
@@ -21,6 +24,14 @@ struct CBuffer {
 
 struct cBones {
 	DirectX::XMFLOAT4X4 bones[128];
+};
+
+struct PBRLight
+{
+	DirectX::XMFLOAT4 PointLightPosition[48];
+	DirectX::XMFLOAT4 PointLightColor[48];
+	float PointLightDistance[48];
+	float PointLightDecay[48];
 };
 
 /// <summary>
@@ -53,6 +64,10 @@ public:
 	cConstBuf<CBuffer> m_ConstHelBuf;
 
 	cConstBuf<cBones> m_Bones;
+
+	cConstBuf<ParameterPBR> m_PbrParam;
+	cConstBuf<PBRLight> m_Lights;
+	cConstBuf<DirectionalLight> m_Dir;
 
 	cTexture m_Tex;
 	cPipelineStateObj mc_PSO;
