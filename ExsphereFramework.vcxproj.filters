@@ -467,6 +467,9 @@
     <ClInclude Include="Src\Input.h">
       <Filter>Input</Filter>
     </ClInclude>
+    <ClInclude Include="Src\ParameterPBR.h">
+      <Filter>Struct</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

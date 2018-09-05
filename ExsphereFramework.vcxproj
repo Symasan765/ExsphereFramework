@@ -232,6 +232,7 @@
     <ClInclude Include="Src\ModelManager.h" />
     <ClInclude Include="Src\ModelResource.h" />
     <ClInclude Include="Src\MoveComponent.h" />
+    <ClInclude Include="Src\ParameterPBR.h" />
     <ClInclude Include="Src\PipelineStateObj.h" />
     <ClInclude Include="Src\RenderBufferStruct.h" />
     <ClInclude Include="Src\RenderComponent.h" />
