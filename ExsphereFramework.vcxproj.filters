@@ -264,6 +264,9 @@
     <ClCompile Include="Src\Wave.cpp">
       <Filter>GameData</Filter>
     </ClCompile>
+    <ClCompile Include="Src\DescriptorBase.cpp">
+      <Filter>DirectX</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\ImGUI\stb_rect_pack.h">
@@ -478,6 +481,9 @@
     </ClInclude>
     <ClInclude Include="Src\Wave.h">
       <Filter>GameData</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\DescriptorBase.h">
+      <Filter>DirectX</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

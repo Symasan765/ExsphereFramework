@@ -133,6 +133,7 @@
     <ClCompile Include="Src\CommandManager.cpp" />
     <ClCompile Include="Src\DefaultRenderTarget.cpp" />
     <ClCompile Include="Src\DescHandleStep.cpp" />
+    <ClCompile Include="Src\DescriptorBase.cpp" />
     <ClCompile Include="Src\DirectX12.cpp" />
     <ClCompile Include="Src\FenceObj.cpp" />
     <ClCompile Include="Src\FrameCnt.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="Src\ConstantBuffer.h" />
     <ClInclude Include="Src\DefaultRenderTarget.h" />
     <ClInclude Include="Src\DescHandleStep.h" />
+    <ClInclude Include="Src\DescriptorBase.h" />
     <ClInclude Include="Src\DirectX12.h" />
     <ClInclude Include="Src\DrawParam.h" />
     <ClInclude Include="Src\DXMath.h" />
