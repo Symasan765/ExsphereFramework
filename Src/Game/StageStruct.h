@@ -21,5 +21,8 @@ public:
 	~StageData();
 
 	bool MoveJudge(const int width, const int height, StageMoveDir dir);
+	bool LightJudge(const int width, const int height);		// êFîªíË
+	void PacmanPos(const int width, const int height);
+	void Clear();
 private:
 };

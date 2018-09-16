@@ -11,6 +11,7 @@ void cPacman::Update()
 		m_NowPos = m_NextPos;
 
 		StageData stage;
+		stage.PacmanPos(m_NowPos.x,m_NowPos.y);
 		auto moveDir = MoveDirJudg();
 		bool moveFlag = stage.MoveJudge(m_NowPos.x,m_NowPos.y, moveDir);
 

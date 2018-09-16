@@ -8,10 +8,11 @@ using namespace DirectX;
 #include "Helper/WaveFrontReader.h"
 #include "InputLayout.h"
 #include "AssimpLoader.h"
+#include "Game/StageStruct.h"
+#include "Wave.h"
 
 cRootSignatureTest::cRootSignatureTest()
 {
-	cTextureLoader::LoadTextureFromFile("Laser.png", &m_Tex);
 }
 
 cRootSignatureTest::~cRootSignatureTest()
@@ -29,14 +30,15 @@ void cRootSignatureTest::Init()
 		XMStoreFloat4(&m_Dir.data.direction, dir);
 	}
 	{
-		DirectX::XMFLOAT4 color[4] = {
-			{1.0f,0.0f,0.0f,1.0f},{0.0f,1.0f,0.0f,1.0f},{0.0f,0.0f,1.0f,1.0f},{1.0f,1.0f,0.0f,1.0f}
+		DirectX::XMFLOAT4 color[] = {
+			{1.0f,0.0f,0.0f,1.0f},{0.0f,1.0f,0.0f,1.0f},{0.2f,0.2f,1.0f,1.0f},{1.0f,1.0f,1.0f,1.0f}
 		};
 
 		for (int i = 0; i < 48; i++) {
-			m_Lights.data.PointLightColor[i] = { (float)(rand() % 255) / 255.0f,(float)(rand() % 255) / 255.0f ,(float)(rand() % 255) / 255.0f,1.0f };
+			m_Lights.data.PointLightColor[i] = { (float)(rand() % 255) / 255.0f,(float)(rand() % 255) / 255.0f ,(float)(rand() % 255) / 255.0f,10.0f };
 			m_Lights.data.PointLightColor[i] = color[i % 4];
-			m_Lights.data.PointLightDistance[i] = 20.0f;
+			m_Lights.data.PointLightColor[i].w = 2.0f;
+			m_Lights.data.PointLightDistance[i] = 1.0f;
 			m_Lights.data.PointLightDecay[i] = 0.4f;
 
 			const float troutSize = 1.8f;		// マス自体のワールド上のサイズ
@@ -50,8 +52,8 @@ void cRootSignatureTest::Init()
 	}
 	m_Lights.Upload();
 
-	m_PbrParam.data.metallic = 1.0f;
-	m_PbrParam.data.roughness = 0.4f;
+	m_PbrParam.data.metallic = 0.4;
+	m_PbrParam.data.roughness = 1.0f;
 	m_PbrParam.Upload();
 }
 
@@ -165,7 +167,6 @@ void cRootSignatureTest::DoNotUseHelperDraw(ID3D12GraphicsCommandList* cmdList)
 		m_ConstBuf.Upload();
 	}
 
-
 	// Viewport & Scissor
 	D3D12_VIEWPORT viewport = {};
 	viewport.Width = (float)1920;
@@ -225,6 +226,20 @@ void cRootSignatureTest::UseHelperDraw(ID3D12GraphicsCommandList * cmdList)
 		XMStoreFloat4x4(&m_ConstHelBuf.data.worldViewProjMatrix, mvpMat);
 		XMStoreFloat4x4(&m_ConstHelBuf.data.worldMatrix, worldTransMat);
 		m_ConstHelBuf.Upload();
+	}
+	{
+		StageData stage;
+		for (int i = 0; i < 48; i++) {
+			if (!stage.LightJudge(i % 6, i / 6)) {
+				m_Lights.data.PointLightColor[i] = { 0.0f,0.0f,0.0f,0.0f };
+			}
+			else {
+				DirectX::XMFLOAT4 color[] = {
+			{1.0f,0.0f,0.0f,2.0f},{0.0f,1.0f,0.0f,2.0f},{0.2f,0.2f,1.0f,2.0f},{1.0f,1.0f,1.0f,2.0f}
+				};
+				m_Lights.data.PointLightColor[i] = color[i % 4];
+			}
+		}
 	}
 
 

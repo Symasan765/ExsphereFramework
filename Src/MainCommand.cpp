@@ -36,7 +36,8 @@ void cMainCommand::DrawBegin(RenderBufferStruct& data, const unsigned cmdIndex)
 
 	// レンダーターゲットをクリア
 	{
-		const float ClearColor[4] = { 0.1f, 0.2f, 0.6f, 1.0f };
+		//const float ClearColor[4] = { 0.1f, 0.2f, 0.6f, 1.0f };
+		const float ClearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
 		m_Lists->GetBegin()->ClearRenderTargetView(data.descHandleRtv, ClearColor, 0, nullptr);
 	}
 

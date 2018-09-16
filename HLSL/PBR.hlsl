@@ -24,7 +24,7 @@ struct VSOut
 	float4 pos : SV_POSITION;
 	float3 normal : NORMAL;
 	float2 uv : TEXCOORD;
-	float3 worldPos : POSITION;
+	float4 worldPos : POSITION;
 };
 
 struct GeometricContext {
@@ -161,10 +161,10 @@ VSOut VSMain(VSIn vsIn)
 	output.pos = mul(pos, (vsIn.WorldMat));	
 	output.pos = mul(output.pos, (worldViewProjMatrix));
 	
-	output.normal = mul(vsIn.normal.xyz, ((float3x3)transpose(inverse(worldViewMatrix * vsIn.WorldMat))));
+	output.normal = mul(vsIn.normal.xyz, ((float3x3)(vsIn.WorldMat)));
 	output.uv = vsIn.uv;
-	output.worldPos = mul(pos, worldViewMatrix);
-	output.worldPos = -output.worldPos;
+	output.worldPos = mul(pos, vsIn.WorldMat);
+	output.worldPos = output.worldPos;
 	return output;
 }
 
@@ -281,15 +281,16 @@ void RE_Direct(const in IncidentLight directLight, const in GeometricContext geo
 
 float4 PSMain(VSOut vsOut) : SV_TARGET
 {
-	float3 vViewPosition = vsOut.worldPos;
+	float3 vViewPosition = vsOut.worldPos.xyz;
 	float3 vNormal = vsOut.normal;
+	vNormal = (float3)(0.0f,0.0f,-1.0f);
 	float4 albedoMap = g_AlbedoTex.Sample(g_samLinear, (float2)(vsOut.uv));
 	float3 albedo = albedoMap.rgb;
 	
   GeometricContext geometry;
-  geometry.position = -vViewPosition;
+  geometry.position = vViewPosition;
   geometry.normal = normalize(vNormal);
-  geometry.viewDir = normalize(vViewPosition);
+  geometry.viewDir = normalize((float3)(0, -1.5f, -8.5f) + vViewPosition);
   
   Material material;
   material.diffuseColor = lerp(albedo, (float3)(0.0,0.0,0.0), metallic);
@@ -309,7 +310,7 @@ float4 PSMain(VSOut vsOut) : SV_TARGET
   for (int i=0; i<MAX_POINT_LIGHT; ++i) {
 		PointLight pointLights = (PointLight)(0);
 		pointLights.color = PointLightColor[i].xyz;
-		pointLights.distance = PointLightDistance[i];
+		pointLights.distance = PointLightColor[i].w;
 		pointLights.decay = PointLightDecay[i];
 		pointLights.position  = PointLightPosition[i].xyz;
     getPointDirectLightIrradiance(pointLights, geometry, directLight);
@@ -329,5 +330,16 @@ float4 PSMain(VSOut vsOut) : SV_TARGET
 	float3 outgoingLight = emissive + reflectedLight.directDiffuse + reflectedLight.directSpecular + reflectedLight.indirectDiffuse + reflectedLight.indirectSpecular;
   
 	albedoMap.xyz = outgoingLight;
+
+/*
+	for (int i=0; i<MAX_POINT_LIGHT; ++i){
+		float3 rPos = PointLightPosition[i].xyz - geometry.position;
+    rPos = rPos * rPos;
+    if(rPos.x + rPos.y + rPos.z <= PointLightDistance[i] * PointLightDistance[i])
+      return (float4)(i + 48) * 0.5f;
+	}
+  
+	return (float4)(0.0f);
+  */
 	return albedoMap;
 }

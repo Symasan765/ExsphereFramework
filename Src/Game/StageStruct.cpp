@@ -1,9 +1,10 @@
 #include "StageStruct.h"
+#include "../Input.h"
 
 namespace {
 	constexpr int g_Width = 6;
 	constexpr int g_Height = 8;
-
+	bool StageFlagData[g_Height][g_Width] = { true };
 	/*StageMoveDir g_Stage[height][width] = {
 		{}
 	}*/
@@ -11,6 +12,15 @@ namespace {
 
 StageData::StageData()
 {
+	static bool InitFlag = false;
+	if (!InitFlag) {
+		for (int i = 0; i < g_Height; i++) {
+			for (int j = 0; j < g_Width; j++) {
+				StageFlagData[i][j] = true;
+			}
+		}
+		InitFlag = true;
+	}
 }
 
 StageData::~StageData()
@@ -36,4 +46,25 @@ bool StageData::MoveJudge(const int width, const int height, StageMoveDir dir)
 
 	// s‚¯‚È‚©‚Á‚½
 	return false;
+}
+
+bool StageData::LightJudge(const int width, const int height)
+{
+	return StageFlagData[height][width];
+}
+
+void StageData::PacmanPos(const int width, const int height)
+{
+	StageFlagData[height][width] = false;
+}
+
+void StageData::Clear()
+{
+	if (Input::cKeyboard::getInstance()->Trigger(DIK_SPACE)) {
+		for (int i = 0; i < g_Height; i++) {
+			for (int j = 0; j < g_Width; j++) {
+				StageFlagData[i][j] = true;
+			}
+		}
+	}
 }

@@ -177,6 +177,7 @@
     <ClCompile Include="Src\TextureLoader.cpp" />
     <ClCompile Include="Src\TimeCheck.cpp" />
     <ClCompile Include="Src\Utility.cpp" />
+    <ClCompile Include="Src\Wave.cpp" />
     <ClCompile Include="Src\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -248,6 +249,7 @@
     <ClInclude Include="Src\TimeCheck.h" />
     <ClInclude Include="Src\Utility.h" />
     <ClInclude Include="Src\VertexStruct.h" />
+    <ClInclude Include="Src\Wave.h" />
     <ClInclude Include="Src\WindowParam.h" />
     <ClInclude Include="Src\WindProc.h" />
   </ItemGroup>

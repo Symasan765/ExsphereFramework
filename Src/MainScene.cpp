@@ -1,6 +1,7 @@
 #include "MainScene.h"
 #include "RenderComponent.h"
 #include "MoveComponent.h"
+#include "Wave.h"
 
 cMainScene::cMainScene()
 {
@@ -49,7 +50,8 @@ void cMainScene::Create()
 void cMainScene::Rendering()
 {
 	m_Pacman.Update();
-
+	Wave wave;
+	wave.Update();
 
 	static int PacNo = 0;
 
@@ -64,8 +66,9 @@ void cMainScene::Rendering()
 	auto render1 = m_Pac[anmNo[(PacNo / anmSpeed) % 4]].GetComponent<cRenderComponent>();
 	render1->DrawRegistr();
 	PacNo++;
-
-
+	
+	StageData stage;
+	stage.Clear();
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 6; j++) {
 
@@ -73,9 +76,11 @@ void cMainScene::Rendering()
 			const float startX = -4.5f;
 			const float startY = 12.6f;
 
-			m_Bait[i][j].SetPos({ startX + (float)j * troutSize ,startY - (float)i * troutSize ,0.0f});
-			auto render = m_Bait[i][j].GetComponent<cRenderComponent>();
-			render->DrawRegistr();
+			if (stage.LightJudge(j, i)) {
+				m_Bait[i][j].SetPos({ startX + (float)j * troutSize ,startY - (float)i * troutSize ,wave.m_WavePos[i][j].y });
+				auto render = m_Bait[i][j].GetComponent<cRenderComponent>();
+				render->DrawRegistr();
+			}
 		}
 	}
 }
